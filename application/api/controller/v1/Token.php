@@ -21,7 +21,7 @@ class Token
 	/**
 	 * 第三方应用获取令牌
 	 * @url /app_token?
-	 * @POST ac=:ac se=:secret
+	 * @POST ac=:ac用户名 se=:secret密码
 	 */
 	public function getAppToken($ac='', $se='')
 	{
