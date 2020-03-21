@@ -61,5 +61,5 @@
 
 
     /*cms内容管理开始*/
-    Route::get('admin/login', 'admin/Login/index');
+//    Route::get('admin/login', 'admin/Login/index');
     /*cms内容管理结束*/
