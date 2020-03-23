@@ -32,4 +32,8 @@ return [
     'taglib_begin' => '{',
     // 标签库标签结束标记
     'taglib_end'   => '}',
+    // 定义模板替换字符串
+    'tpl_replace_string' => [
+        '__ROOT__' => rtrim(dirname(Request::basefile()), '\\/'),
+    ],
 ];

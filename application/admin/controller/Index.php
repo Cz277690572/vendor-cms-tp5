@@ -13,6 +13,10 @@ class Index extends BaseController
 {
     public function index(){
         $this->title = 'vendor系统管理后台';
-        $this->fetch();
+        return $this->fetch();
+    }
+
+    public function home(){
+        return $this->fetch();
     }
 }
