@@ -30,15 +30,16 @@
     <!-- 头部区域 开始 -->
     <div class="layui-header notselect">
         <a href="#"
-           class="layui-logo layui-elip">ThinkAdmin<sup
-                class="padding-left-5">v6.0</sup></a>
+           class="layui-logo layui-elip">Vendor<sup
+                class="padding-left-5">v1.0</sup></a>
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
-                <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+            <li class="layui-nav-item" lay-unselect>
+                <a class="text-center" title="侧边伸缩" data-target-menu-type>
+                    <i class="layui-icon layui-icon-spread-left"></i>
                 </a>
             </li>
-            <span class="layui-nav-bar" style="left: 48px; top: 45px; width: 0px; opacity: 0;"></span></ul>
+        </ul>
+
         <ul class="layui-nav layui-layout-right">
             <li lay-unselect="" class="layui-nav-item"><a data-reload=""><i class="layui-icon layui-icon-refresh-3"></i></a>
             </li>
@@ -64,85 +65,80 @@
     <!-- 左则菜单 开始 -->
     <div class="layui-side layui-bg-black notselect">
         <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-56">
+            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-1">
                 <li class="layui-nav-item layui-this">
-                    <a data-menu-node="m-1" data-open="admin/index/home.html"><span>后台首页</span></a>
+                    <a data-menu-node="m-1-1" data-open="admin/index/home.html"><span>后台首页</span></a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-56-57">
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-10">
                     <a data-target-tips="C端数据" style="background:#393D49"><span
                             class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span
                             class="nav-text padding-left-5">C端数据</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-target-tips="订单列表" data-open="/wechat/config/options.html"
-                               data-menu-node="m-56-57-58"><span
+                        <dd><a data-target-tips="订单列表" data-open="admin/order/index.html"
+                               data-menu-node="m-1-10-1"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
                                 class="nav-text padding-left-5">订单列表</span></a></dd>
-                        <dd><a data-target-tips="C端用户列表" data-open="/wechat/config/payment.html"
-                               data-menu-node="m-56-57-59"><span
+                        <dd><a data-target-tips="C端用户列表" data-open="admin/user/index.html"
+                               data-menu-node="m-1-10-2"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-link"></span><span
                                 class="nav-text padding-left-5">C端用户列表</span></a></dd>
                     </dl>
                 </li>
-                <span class="layui-nav-bar"></span></ul>
-            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-56">
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-56-57">
+
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-20">
                     <a data-target-tips="Banner管理" style="background:#393D49"><span
                             class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span
                             class="nav-text padding-left-5">Banner管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-target-tips="Banner列表" data-open="#"
-                               data-menu-node="m-56-57-58"><span
+                        <dd><a data-target-tips="Banner列表" data-open="admin/banner/index"
+                               data-menu-node="m-1-20-1"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
                                 class="nav-text padding-left-5">Banner列表</span></a></dd>
                     </dl>
                 </li>
-                <span class="layui-nav-bar"></span></ul>
-            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-56">
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-56-57">
+
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-30">
                     <a data-target-tips="分类管理" style="background:#393D49"><span
                             class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span
                             class="nav-text padding-left-5">分类管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-target-tips="分类列表" data-open="#"
-                               data-menu-node="m-56-57-58"><span
+                        <dd><a data-target-tips="分类列表" data-open="admin/category/index"
+                               data-menu-node="m-1-30-1"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
                                 class="nav-text padding-left-5">分类列表</span></a></dd>
                     </dl>
                 </li>
-                <span class="layui-nav-bar"></span></ul>
-            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-56">
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-56-57">
+
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-40">
                     <a data-target-tips="商品管理" style="background:#393D49"><span
                             class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span
                             class="nav-text padding-left-5">商品管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="商品列表" data-open="#"
-                               data-menu-node="m-56-57-58"><span
+                               data-menu-node="m-1-40-1"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
                                 class="nav-text padding-left-5">商品列表</span></a></dd>
                     </dl>
                 </li>
-                <span class="layui-nav-bar"></span></ul>
-            <ul class="layui-nav layui-nav-tree" data-menu-layout="m-56">
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-56-57">
+
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-50">
                     <a data-target-tips="主题管理" style="background:#393D49"><span
                             class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span><span
                             class="nav-text padding-left-5">主题管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="主题列表" data-open="#"
-                               data-menu-node="m-56-57-58"><span
+                               data-menu-node="m-1-50-1"><span
                                 class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
                                 class="nav-text padding-left-5">主题列表</span></a></dd>
                     </dl>
                 </li>
-                <span class="layui-nav-bar"></span></ul>
-            <ul class="layui-nav layui-nav-tree layui-hide" data-menu-layout="m-2">
-                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-2-12">
+
+                <li class="layui-nav-item layui-nav-itemed" data-submenu-layout="m-1-60">
                     <a data-target-tips="系统管理" style="background:#393D49">
                         <span class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span>
                         <span class="nav-text padding-left-5">系统管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-target-tips="系统用户管理" data-open="/admin/user/index.html" data-menu-node="m-2-12-5">
+                        <dd><a data-target-tips="系统用户管理" data-open="admin/user/index.html" data-menu-node="m-1-60-1">
                             <span class="nav-icon padding-left-5 layui-icon layui-icon-username"></span>
                             <span class="nav-text padding-left-5">系统用户管理</span></a></dd>
                     </dl>

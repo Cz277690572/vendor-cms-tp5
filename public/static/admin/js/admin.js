@@ -173,8 +173,13 @@ $(function () {
         // 以HASH打开新网页
         this.href = function (url, obj) {
             if (url !== '#') {
+                // window.location.href = #admin/order/index.html?spm=m-56-57-58
                 window.location.href = '#' + $.menu.parseUri(url, obj);
             } else if (obj && obj.getAttribute('data-menu-node')) {
+                // URL 的锚部未改变，不会触发onhashchange事件
+                // eg: [data-menu-node^="m-56-57-58-"][data-open!="#"]:first
+                // 选取所有带有以"obj.getAttribute('data-menu-node')-"开头的data-menu-node属性 && data-open属性!="#"的第一个元素
+                // trigger() 方法触发被选元素的指定事件类型
                 $('[data-menu-node^="' + obj.getAttribute('data-menu-node') + '-"][data-open!="#"]:first').trigger('click');
             }
         };
@@ -304,6 +309,7 @@ $(function () {
                     } else {
                         $menu.addClass(miniClass);
                     }
+                    //初始化时自动触发resize事件
                 }).trigger('resize');
                 //  Mini 菜单模式时TIPS文字显示
                 $('[data-target-tips]').mouseenter(function () {
@@ -326,9 +332,11 @@ $(function () {
                     else if ((layui.data('menu')[node] || 2) === 2) $(this).addClass('layui-nav-itemed');
                 });
             };
+            //onhashchange 事件在当前 URL 的锚部分(以 '#' 号为开始) 发生改变时触发 。
             window.onhashchange = function (hash, node) {
                 hash = window.location.hash || '';
                 if (hash.length < 1) return $('[data-menu-node][data-open!="#"]:first').trigger('click');
+
                 $.form.load(hash), that.syncOpenStatus(2);
                 // 菜单选择切换
                 node = that.queryNode(that.getUri());
@@ -588,6 +596,8 @@ $(function () {
 
     /*! 注册 data-open 事件行为 */
     $body.on('click', '[data-open]', function () {
+        // url  => $(this).attr('data-open')
+        // this => <a data-menu-node="m-1" data-open="admin/index/home.html"><span>后台首页</span></a>
         $.form.href($(this).attr('data-open'), this);
     });
 

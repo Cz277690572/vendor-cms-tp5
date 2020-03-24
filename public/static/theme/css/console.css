@@ -459,15 +459,19 @@ label.think-radio {
   transform: rotate(180deg);
   -ms-transform: rotate(180deg);
 }
-/*.layui-layout.layui-layout-left-hide > .layui-body {
+/**
+.layui-layout.layui-layout-left-hide > .layui-body {
   left: 0 !important;
 }
 .layui-layout.layui-layout-left-hide > .layui-side {
   display: none;
-}*/
-.layui-layout.layui-layout-left-hide [data-target-menu-type] {
-  display: none;
 }
+**/
+.layui-layout.layui-layout-left-hide [data-target-menu-type] {
+  display: block;
+}
+
+
 /* 浏览器DEBUG */
 .version-debug {
   width: 100%;
