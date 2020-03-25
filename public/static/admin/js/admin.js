@@ -336,7 +336,6 @@ $(function () {
             window.onhashchange = function (hash, node) {
                 hash = window.location.hash || '';
                 if (hash.length < 1) return $('[data-menu-node][data-open!="#"]:first').trigger('click');
-
                 $.form.load(hash), that.syncOpenStatus(2);
                 // 菜单选择切换
                 node = that.queryNode(that.getUri());

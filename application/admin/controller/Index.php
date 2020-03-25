@@ -12,11 +12,10 @@ namespace app\admin\controller;
 class Index extends BaseController
 {
     public function index(){
-        $this->title = 'vendor系统管理后台';
-        return $this->fetch();
+        return $this->fetch('index',['title'=>'vendor系统管理后台']);
     }
 
     public function home(){
-        return $this->fetch();
+        return $this->fetch('home',['title'=>'后台首页']);
     }
 }

@@ -8,8 +8,7 @@
 
 namespace app\admin\controller;
 
-
-use think\Controller;
+use library\Controller;
 
 class BaseController extends Controller
 {
