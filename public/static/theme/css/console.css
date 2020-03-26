@@ -396,6 +396,7 @@ label.think-radio {
 .layui-header .layui-nav-item:after {
   display: none !important;
 }
+
 .layui-header .layui-layout-right > li > a {
   border-left: 1px solid rgba(0, 0, 0, 0.15);
   border-right: 1px solid rgba(0, 0, 0, 0);

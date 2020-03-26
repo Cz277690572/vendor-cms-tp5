@@ -758,6 +758,16 @@ $(function () {
         }
     }, true);
 
+    /*! 注册 data-admin-icon 事件行为 */
+    $body.on('mouseenter', '[data-admin-icon]', function () {
+        console.log($(this))
+        if (!$(this).hasClass('layui-show')) {
+            $(this).children('dl').addClass('layui-show')
+        }
+    }).on('mouseleave', '[data-admin-icon]', function () {
+        $(this).children('dl').removeClass('layui-show')
+    });
+
     /*! 初始化事件 */
     $.menu.listen();
     $.vali.listen();
