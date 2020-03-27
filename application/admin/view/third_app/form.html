@@ -1,0 +1,54 @@
+<form class="layui-form layui-card" action="{:request()->url()}" data-auto="true" method="post" autocomplete="off">
+
+    <div class="layui-card-body">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录用户账号</label>
+            <div class="layui-input-block">
+                {if isset($vo) and isset($vo.app_id)}
+                <input disabled value='{$vo.app_id|default=""}' class="layui-input layui-bg-gray">
+                {else}
+                <input name="app_id" value='{$vo.app_id|default=""}' required pattern="^.{4,}$" placeholder="请输入4位及以上字符登录用户账号" class="layui-input">
+                {/if}
+                <p class="help-block">必填，登录账号不能重复，账号创建后不能再次修改</p>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="app_secret" maxlength="32" pattern="^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$).{6,32}$" required placeholder="请输入登录密码" class="layui-input">
+                <p class="help-block">必填，密码必需包含大小写字母、数字、符号的任意两者组合。</p>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">应用程序描述</label>
+            <div class="layui-input-block">
+                <input name="app_description" value='{$vo.app_description|default=""}' placeholder="请输入应用程序描述" class="layui-input">
+                <p class="help-block">可选</p>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限描述</label>
+            <div class="layui-input-block">
+                <input name="scope_description" value='{$vo.scope_description|default=""}' placeholder="请输入权限描述" class="layui-input">
+                <p class="help-block">可选</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='vo.id'}<input type='hidden' value='{$vo.id}' name='id'>{/notempty}
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+
+</form>
+
+{block name='script'}
+{/block}

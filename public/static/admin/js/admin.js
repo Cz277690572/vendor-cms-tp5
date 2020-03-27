@@ -760,7 +760,6 @@ $(function () {
 
     /*! 注册 data-admin-icon 事件行为 */
     $body.on('mouseenter', '[data-admin-icon]', function () {
-        console.log($(this))
         if (!$(this).hasClass('layui-show')) {
             $(this).children('dl').addClass('layui-show')
         }
