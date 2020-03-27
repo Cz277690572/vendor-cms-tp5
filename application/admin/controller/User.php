@@ -11,10 +11,18 @@ namespace app\admin\controller;
 
 class User extends BaseController
 {
-    protected $dbQuery = 'user';
+    protected $table = 'user';
     public function index()
     {
         $this->title = 'C端用户列表';
-        $this->_page($this->dbQuery);
+        $query = $this->_query($this->table)->like('openid,nickname');
+        $query->dateBetween('update_time')->order('id desc')->page();
+
+
+    }
+
+    public function remove()
+    {
+        $this->_delete($this->table);
     }
 }
