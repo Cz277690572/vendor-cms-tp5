@@ -50,11 +50,11 @@ class Index extends BaseController
                 're_app_secret.confirm'  => '重复密码与登录密码不匹配，请重新输入！',
             ]);
             $thirdApp = Db::name('third_app')->where(['id' => $id])->find();
-            if ($data['old_app_secret'] !== $thirdApp['app_secret']) {
+            if (md5($data['old_app_secret']) !== $thirdApp['app_secret']) {
                 $this->error('旧密码验证失败，请重新输入！');
             }
 
-            if (Data::save('third_app', ['id' => $thirdApp['id'], 'app_secret' => $data['app_secret']])) {
+            if (Data::save('third_app', ['id' => $thirdApp['id'], 'app_secret' => md5($data['app_secret'])])) {
                 $this->success('密码修改成功，下次请使用新密码登录！', '');
             } else {
                 $this->error('密码修改失败，请稍候再试！');

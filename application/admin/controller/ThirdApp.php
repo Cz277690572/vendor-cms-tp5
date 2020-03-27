@@ -39,6 +39,7 @@ class ThirdApp extends BaseController
     protected function _form_filter(&$data)
     {
         if ($this->request->isPost()) {
+            $data['app_secret'] = md5($data['app_secret']);
             // 登录账号重复检查
             if (isset($data['id'])) unset($data['app_id']);
             elseif (Db::name($this->table)->where(['app_id' => $data['app_id'], 'delete_time' => null])->count() > 0) {
