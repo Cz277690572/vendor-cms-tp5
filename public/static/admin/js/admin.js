@@ -186,11 +186,18 @@ $(function () {
         // 异步加载的数据
         this.load = function (url, data, method, callback, loading, tips, time, headers) {
             var index = loading !== false ? $.msg.loading(tips) : 0;
+            headers = headers || {};
             if (typeof data === 'object' && typeof data['_token_'] === 'string') {
-                headers = headers || {};
                 headers['User-Form-Token'] = data['_token_'];
                 delete data['_token_'];
             }
+            // 是否已登录判断
+            if(!window.base.getLocalStorage('token')){
+                window.location.href = 'admin/login/index.html';
+                return;
+            }
+            // 登录标识令牌
+            headers['token'] = window.base.getLocalStorage('token');
             $.ajax({
                 data: data || {}, type: method || 'GET', url: $.menu.parseUri(url), beforeSend: function (xhr) {
                     if (typeof Pace === 'object') Pace.restart();

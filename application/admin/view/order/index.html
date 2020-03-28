@@ -2,7 +2,7 @@
 
 {block name="content"}
 <div class="think-box-shadow">
-    {include file='user/index_search'}
+    {include file='order/index_search'}
     <table class="layui-table margin-top-10" lay-skin="line">
         {notempty name='list'}
         <thead>
@@ -12,8 +12,12 @@
                 <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
             </th>
             <th class='text-left nowrap'>id</th>
-            <th class='text-left nowrap' width="25%">openid</th>
-            <th class='text-left nowrap'>昵称</th>
+            <th class='text-left nowrap' width="25%">订单号</th>
+            <th class='text-left nowrap'>用户id</th>
+            <th class='text-left nowrap'>单品数量</th>
+            <th class='text-left nowrap'>总价格</th>
+            <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'>更新时间</th>
             <th class='text-left nowrap'>创建时间</th>
             <th></th>
         </tr>
@@ -25,11 +29,16 @@
                 <label><input class="list-check-box" value='{$vo.id}' type='checkbox'></label>
             </td>
             <td class='text-left nowrap'>{$vo.id|default=''}</td>
-            <td class='text-left nowrap'>{$vo.openid|default=''}</td>
-            <td class='text-left nowrap'>{$vo.nickname|default='-'}</td>
+            <td class='text-left nowrap'>{$vo.order_no|default=''}</td>
+            <td class='text-left nowrap'>{$vo.user_id|default=''}</td>
+            <td class='text-left nowrap'>{$vo.total_count|default=''}</td>
+            <td class='text-left nowrap'>{$vo.total_price|default=''}</td>
+            <td class='text-left nowrap'>{$vo.status|default=''}</td>
+            <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
             <td class='text-left nowrap'>
-                <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该用户吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
+                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑" data-modal='{:url("detail")}?id={$vo.id}'>编 辑</a>
+                <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该订单吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
             </td>
         </tr>
         {/foreach}

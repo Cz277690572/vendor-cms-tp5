@@ -18,6 +18,7 @@
             <th class='text-left nowrap' width="25%">图片</th>
             <th class='text-left nowrap'>分类名称</th>
             <th class='text-left nowrap'>描述</th>
+            <th class='text-left nowrap'>是否上线</th>
             <th class='text-left nowrap'>更新时间</th>
             <th></th>
         </tr>
@@ -32,6 +33,7 @@
                 <img data-tips-image src="__ROOT__/images{$vo.url}" class="margin-right-5 text-top">
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
+            <td class='text-left nowrap'>{$vo.description|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>

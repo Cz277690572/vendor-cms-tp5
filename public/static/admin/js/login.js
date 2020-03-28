@@ -1,4 +1,26 @@
-$(function(){
+
+// 判断是否已经登录
+if(window.base.getLocalStorage('token')){
+
+    var params = {
+        url: 'token/verify',
+        type: 'post',
+        data:{token:window.base.getLocalStorage('token'),tokenFlag:false},
+        sCallback:function (res) {
+            // 校验令牌是否有效 isValid(Boolean)
+            if (res.isValid){
+                window.location.href = '/admin.html';
+            }
+        },
+        eCallback:function (res) {
+            // 异常处理
+        }
+    }
+    window.base.getData(params);
+}
+
+$(function () {
+
     $(document).on('click','#login',function(){
         var $userName=$('#user-name'),
             $pwd=$('#user-pwd');

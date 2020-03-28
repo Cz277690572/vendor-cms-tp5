@@ -21,6 +21,7 @@
             <th class='text-left nowrap'>价格,单位：分</th>
             <th class='text-left nowrap'>库存量</th>
             <th class='text-left nowrap'>摘要</th>
+            <th class='text-left nowrap'>是否上架</th>
             <th class='text-left nowrap'>创建时间</th>
             <th></th>
         </tr>
@@ -38,6 +39,7 @@
             <td class='text-left nowrap'>{$vo.category_name|default=''}</td>
             <td class='text-left nowrap'>{$vo.price|default=''}</td>
             <td class='text-left nowrap'>{$vo.stock|default=''}</td>
+            <td class='text-left nowrap'>{$vo.summary|default=''}</td>
             <td class='text-left nowrap'>{$vo.summary|default=''}</td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
             <td class='text-left nowrap'>

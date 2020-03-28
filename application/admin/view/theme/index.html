@@ -14,6 +14,7 @@
             <th class='text-left nowrap'>专题列表页，头图</th>
             <th class='text-left nowrap'>专题名称</th>
             <th class='text-left nowrap'>专题描述</th>
+            <th class='text-left nowrap'>是否上线</th>
             <th class='text-left nowrap'>更新时间</th>
             <th></th>
         </tr>
@@ -32,6 +33,7 @@
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>
+            <td class='text-left nowrap'>{$vo.update_time|default=''}</td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>
                 <a data-dbclick class="layui-btn layui-btn-sm layui-btn-normal" data-title="查看" data-modal='{:url("detail")}?id={$vo.id}'>查 看</a>

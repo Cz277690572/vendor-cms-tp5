@@ -15,7 +15,7 @@ use think\Db;
 class Index extends BaseController
 {
     public function index(){
-        return $this->fetch('index',['title'=>'vendor系统管理后台']);
+        return $this->fetch('index',['title'=>'系统管理后台 · Vendor']);
     }
 
     public function home(){
