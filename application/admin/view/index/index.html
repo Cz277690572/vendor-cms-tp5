@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=0.4">
-    <link rel="shortcut icon" href="__ROOT__/static/admin/imgs/favicon.ico"/>
+    <link rel="shortcut icon" href="__ROOT__/static/login/imgs/favicon.ico"/>
 
     <!--网页字体图标库-->
     <link rel="stylesheet" href="__ROOT__/static/plugs/awesome/fonts.css">
@@ -66,7 +66,7 @@
                         <dd class="layui-this">
                             <a data-target-tips="后台首页" data-open="admin/index/home.html"
                                     data-menu-node="m-1-1-1"><span
-                                    class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                    class="nav-icon padding-left-5 layui-icon layui-icon-home"></span><span
                                     class="nav-text padding-left-5">后台首页</span></a>
                         </dd>
                     </dl>
@@ -78,11 +78,11 @@
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="订单列表" data-open="admin/order/index.html"
                                data-menu-node="m-1-10-1"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-template-1"></span><span
                                 class="nav-text padding-left-5">订单列表</span></a></dd>
                         <dd><a data-target-tips="C端用户列表" data-open="admin/user/index.html"
                                data-menu-node="m-1-10-2"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-user"></span><span
                                 class="nav-text padding-left-5">C端用户列表</span></a></dd>
                     </dl>
                 </li>
@@ -94,7 +94,7 @@
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="Banner列表" data-open="admin/banner/index"
                                data-menu-node="m-1-20-1"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-link"></span><span
                                 class="nav-text padding-left-5">Banner列表</span></a></dd>
                     </dl>
                 </li>
@@ -106,7 +106,7 @@
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="分类列表" data-open="admin/category/index"
                                data-menu-node="m-1-30-1"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-app"></span><span
                                 class="nav-text padding-left-5">分类列表</span></a></dd>
                     </dl>
                 </li>
@@ -118,7 +118,7 @@
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="商品列表" data-open="admin/product/index"
                                data-menu-node="m-1-40-1"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-component"></span><span
                                 class="nav-text padding-left-5">商品列表</span></a></dd>
                     </dl>
                 </li>
@@ -160,8 +160,9 @@
 </div>
 <script src="__ROOT__/static/plugs/layui/layui.all.js"></script>
 <script src="__ROOT__/static/plugs/require/require.js"></script>
-<script src="__ROOT__/static/admin/js/admin.js"></script>
-<script src="__ROOT__/static/admin/js/common.js"></script>
+<script src="__ROOT__/static/admin.js"></script>
+<!--admin 需要读取本地浏览器缓存起来的token-->
+<script src="__ROOT__/static/login/js/common.js"></script>
 {block name='script'}{/block}
 </body>
 
