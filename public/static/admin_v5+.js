@@ -1,32 +1,27 @@
 // +----------------------------------------------------------------------
-// | framework
+// | ThinkAdmin
 // +----------------------------------------------------------------------
-// | 版权所有 2014~2017 广州楚才信息科技有限公司 [ http://www.cuci.cc ]
+// | 版权所有 2014~2019 广州楚才信息科技有限公司 [ http://www.cuci.cc ]
 // +----------------------------------------------------------------------
-// | 官方网站:http://think.ctolog.com
+// | 官方网站: http://demo.thinkadmin.top
 // +----------------------------------------------------------------------
 // | 开源协议 ( https://mit-license.org )
 // +----------------------------------------------------------------------
-// | github开源项目：https://github.com/zoujingli/framework
+// | gitee 代码仓库：https://gitee.com/zoujingli/ThinkAdmin
+// | github 代码仓库：https://github.com/zoujingli/ThinkAdmin
 // +----------------------------------------------------------------------
-
-// 浏览器兼容提示
-(function (w) {
-    if (!("WebSocket" in w && 2 === w.WebSocket.CLOSING)) {
-        document.body.innerHTML = '<div class="version-debug">您使用的浏览器已经<strong>过时</strong>，建议使用最新版本的谷歌浏览器。<a target="_blank" href="https://pc.qq.com/detail/1/detail_2661.html" class="layui-btn layui-btn-primary">立即下载</a></div>';
-    }
-}(window));
 
 // Layui & jQuery
 if (typeof jQuery === 'undefined') window.$ = window.jQuery = layui.$;
 window.form = layui.form, window.layer = layui.layer, window.laydate = layui.laydate;
 
-// 当前资源URL目录
+// 资源URL目录
 window.baseRoot = (function (src) {
     src = document.scripts[document.scripts.length - 1].src;
     return src.substring(0, src.lastIndexOf("/") + 1);
 })();
 
+console.log(baseRoot)
 // require 配置参数
 require.config({
     waitSeconds: 60,
@@ -34,13 +29,14 @@ require.config({
     map: {'*': {css: baseRoot + 'plugs/require/css.js'}},
     paths: {
         'md5': ['plugs/jquery/md5.min'],
-        'spop': ['plugs/spop/spop.min'],
         'json': ['plugs/jquery/json.min'],
-        'upload': ['plugs/plupload/build'],
+        'michat': ['plugs/michat/michat'],
         'base64': ['plugs/jquery/base64.min'],
+        'upload': [baseRoot + '../?s=admin/api.upload&.js'],
+        'plupload': ['plugs/plupload/plupload.full.min'],
+        'echarts': ['plugs/echarts/echarts.min'],
         'angular': ['plugs/angular/angular.min'],
         'ckeditor': ['plugs/ckeditor/ckeditor'],
-        'plupload': ['plugs/plupload/plupload.full.min'],
         'websocket': ['plugs/socket/websocket'],
         'pcasunzips': ['plugs/jquery/pcasunzips'],
         'jquery.ztree': ['plugs/ztree/ztree.all.min'],
@@ -48,7 +44,6 @@ require.config({
         'jquery.autocompleter': ['plugs/jquery/autocompleter.min'],
     },
     shim: {
-        'spop': {deps: ['css!' + baseRoot + 'plugs/spop/spop.min.css']},
         'websocket': {deps: [baseRoot + 'plugs/socket/swfobject.min.js']},
         'jquery.ztree': {deps: ['jquery', 'css!' + baseRoot + 'plugs/ztree/zTreeStyle/zTreeStyle.css']},
         'jquery.autocompleter': {deps: ['jquery', 'css!' + baseRoot + 'plugs/jquery/autocompleter.css']},
@@ -65,7 +60,7 @@ $(function () {
     /*! 消息组件实例 */
     $.msg = new function (that) {
         that = this;
-        this.indexs = [];
+        this.idx = [];
         this.shade = [0.02, '#000'];
         // 关闭消息框
         this.close = function (index) {
@@ -74,7 +69,7 @@ $(function () {
         // 弹出警告框
         this.alert = function (msg, callback) {
             var index = layer.alert(msg, {end: callback, scrollbar: false});
-            return this.indexs.push(index), index;
+            return this.idx.push(index), index;
         };
         // 确认对话框
         this.confirm = function (msg, ok, no) {
@@ -89,22 +84,22 @@ $(function () {
         // 显示成功类型的消息
         this.success = function (msg, time, callback) {
             var index = layer.msg(msg, {icon: 1, shade: this.shade, scrollbar: false, end: callback, time: (time || 2) * 1000, shadeClose: true});
-            return this.indexs.push(index), index;
+            return this.idx.push(index), index;
         };
         // 显示失败类型的消息
         this.error = function (msg, time, callback) {
             var index = layer.msg(msg, {icon: 2, shade: this.shade, scrollbar: false, time: (time || 3) * 1000, end: callback, shadeClose: true});
-            return this.indexs.push(index), index;
+            return this.idx.push(index), index;
         };
         // 状态消息提示
         this.tips = function (msg, time, callback) {
             var index = layer.msg(msg, {time: (time || 3) * 1000, shade: this.shade, end: callback, shadeClose: true});
-            return this.indexs.push(index), index;
+            return this.idx.push(index), index;
         };
         // 显示正在加载中的提示
         this.loading = function (msg, callback) {
             var index = msg ? layer.msg(msg, {icon: 16, scrollbar: false, shade: this.shade, time: 0, end: callback}) : layer.load(2, {time: 0, scrollbar: false, shade: this.shade, end: callback});
-            return this.indexs.push(index), index;
+            return this.idx.push(index), index;
         };
         // 自动处理显示Think返回的Json数据
         this.auto = function (ret, time) {
@@ -115,8 +110,8 @@ $(function () {
             }
             return (parseInt(ret.code) === 1) ? this.success(msg, time, function () {
                 url ? (window.location.href = url) : $.form.reload();
-                for (var i in that.indexs) layer.close(that.indexs[i]);
-                that.indexs = [];
+                for (var i in that.idx) layer.close(that.idx[i]);
+                that.idx = [];
             }) : this.error(msg, 3, function () {
                 url ? window.location.href = url : '';
             });
@@ -146,7 +141,17 @@ $(function () {
             $dom.find('input[data-date-range]').map(function () {
                 this.setAttribute('autocomplete', 'off');
                 laydate.render({
+                    type: this.getAttribute('data-date-range') || 'date',
                     range: true, elem: this, done: function (value) {
+                        $(this.elem).val(value).trigger('change');
+                    }
+                });
+            });
+            $dom.find('input[data-date-input]').map(function () {
+                this.setAttribute('autocomplete', 'off');
+                laydate.render({
+                    type: this.getAttribute('data-date-input') || 'date',
+                    range: false, elem: this, done: function (value) {
                         $(this.elem).val(value).trigger('change');
                     }
                 });
@@ -154,8 +159,8 @@ $(function () {
             $dom.find('[data-file]:not([data-inited])').map(function (index, elem, $this, field) {
                 $this = $(elem), field = $this.attr('data-field') || 'file';
                 if (!$this.data('input')) $this.data('input', $('[name="' + field + '"]').get(0));
-                $this.uploadFile(function (url) {
-                    $($this.data('input')).val(url).trigger('change');
+                $this.uploadFile(function (url, file) {
+                    $($this.data('input')).data('file', file).val(url).trigger('change');
                 });
             });
         };
@@ -169,8 +174,14 @@ $(function () {
         };
         // 以HASH打开新网页
         this.href = function (url, obj) {
-            if (url !== '#') window.location.href = '#' + $.menu.parseUri(url, obj);
-            else if (obj && obj.getAttribute('data-menu-node')) {
+            if (url !== '#') {
+                // window.location.href = #admin/order/index.html?spm=m-56-57-58
+                window.location.href = '#' + $.menu.parseUri(url, obj);
+            } else if (obj && obj.getAttribute('data-menu-node')) {
+                // URL 的锚部未改变，不会触发onhashchange事件
+                // eg: [data-menu-node^="m-56-57-58-"][data-open!="#"]:first
+                // 选取所有带有以"obj.getAttribute('data-menu-node')-"开头的data-menu-node属性 && data-open属性!="#"的第一个元素
+                // trigger() 方法触发被选元素的指定事件类型
                 $('[data-menu-node^="' + obj.getAttribute('data-menu-node') + '-"][data-open!="#"]:first').trigger('click');
             }
         };
@@ -178,9 +189,9 @@ $(function () {
         this.load = function (url, data, method, callback, loading, tips, time, headers) {
             var index = loading !== false ? $.msg.loading(tips) : 0;
             headers = headers || {};
-            if (typeof data === 'object' && typeof data['_csrf_'] === 'string') {
-                headers['User-Token-Csrf'] = data['_csrf_'];
-                delete data['_csrf_'];
+            if (typeof data === 'object' && typeof data['_token_'] === 'string') {
+                headers['User-Form-Token'] = data['_token_'];
+                delete data['_token_'];
             }
             // 是否已登录判断
             if(!window.base.getLocalStorage('token')){
@@ -194,8 +205,24 @@ $(function () {
                     if (typeof Pace === 'object') Pace.restart();
                     if (typeof headers === 'object') for (var i in headers) xhr.setRequestHeader(i, headers[i]);
                 }, error: function (XMLHttpRequest) {
-                    if (parseInt(XMLHttpRequest.status) === 200) this.success(XMLHttpRequest.responseText);
-                    else $.msg.tips('E' + XMLHttpRequest.status + ' - 服务器繁忙，请稍候再试！');
+                    if (XMLHttpRequest.responseText.indexOf('exception') > -1) layer.open({
+                        title: XMLHttpRequest.status + ' - ' + XMLHttpRequest.statusText, type: 2,
+                        area: '800px', content: 'javascript:void(0)', success: function ($element, index) {
+                            try {
+                                layer.full(index);
+                                $element.find('iframe')[0].contentWindow.document.write(XMLHttpRequest.responseText);
+                                $element.find('.layui-layer-setwin').css({right: '35px', top: '28px'}).find('a').css({marginLeft: 0});
+                                $element.find('.layui-layer-title').css({color: 'red', height: '70px', lineHeight: '70px', fontSize: '22px', textAlign: 'center', fontWeight: 700});
+                            } catch (e) {
+                                layer.close(index);
+                            }
+                        }
+                    });
+                    if (parseInt(XMLHttpRequest.status) === 200) {
+                        this.success(XMLHttpRequest.responseText);
+                    } else {
+                        $.msg.tips('E' + XMLHttpRequest.status + ' - 服务器繁忙，请稍候再试！');
+                    }
                 }, success: function (ret) {
                     if (typeof callback === 'function' && callback.call(that, ret) === false) return false;
                     return typeof ret === 'object' ? $.msg.auto(ret, time || ret.wait || undefined) : that.show(ret);
@@ -216,9 +243,9 @@ $(function () {
         };
         // 加载HTML到弹出层
         this.modal = function (url, data, title, callback, loading, tips) {
-            this.load(url, data, 'GET', function (res) {
+            this.load(url, data, 'GET', function (res, index) {
                 if (typeof (res) === 'object') return $.msg.auto(res), false;
-                var index = layer.open({
+                index = layer.open({
                     type: 1, btn: false, area: "800px", content: res, title: title || '', success: function (dom, index) {
                         $(dom).find('[data-close]').off('click').on('click', function () {
                             if ($(this).attr('data-confirm')) return $.msg.confirm($(this).attr('data-confirm'), function (_index) {
@@ -229,7 +256,7 @@ $(function () {
                         $.form.reInit($(dom));
                     }
                 });
-                $.msg.indexs.push(index);
+                $.msg.idx.push(index);
                 return (typeof callback === 'function') && callback.call(that);
             }, loading, tips);
         };
@@ -245,8 +272,8 @@ $(function () {
             return (uri.indexOf('#') > -1 ? uri.split('#')[1] : uri).split('?')[0];
         };
         // 通过URI查询最有可能的菜单NODE
-        this.queryNode = function (url) {
-            var node = location.href.replace(/.*spm=([\d\-m]+).*/ig, '$1');
+        this.queryNode = function (url, node) {
+            node = node || location.href.replace(/.*spm=([\d\-m]+).*/ig, '$1');
             if (!/^m-/.test(node)) {
                 var $menu = $('[data-menu-node][data-open*="' + url.replace(/\.html$/ig, '') + '"]');
                 return $menu.size() ? $menu.get(0).getAttribute('data-menu-node') : '';
@@ -260,14 +287,20 @@ $(function () {
                 var attrs = uri.split('?')[1].split('&');
                 for (var i in attrs) if (attrs[i].indexOf('=') > -1) {
                     var tmp = attrs[i].split('=').slice();
-                    params[tmp[0]] = decodeURIComponent(tmp[1].replace(/%2B/ig, '%20'));
+                    if (typeof tmp[0] === 'string' && tmp[0].length > 0) {
+                        params[tmp[0]] = decodeURIComponent(tmp[1].replace(/%2B/ig, '%20'));
+                    }
                 }
             }
-            delete params[""];
             uri = this.getUri(uri);
-            params.spm = obj && obj.getAttribute('data-menu-node') || this.queryNode(uri);
-            if (params.spm === '' || typeof params.spm !== 'string') delete params.spm;
-            var query = '?' + $.param(params);
+            if (typeof params.spm !== 'string') {
+                params.spm = obj && obj.getAttribute('data-menu-node') || this.queryNode(uri);
+            }
+            if (typeof params.spm !== 'string' || params.spm.length < 1) delete params.spm;
+            // 生成新的 URL 参数
+            var attrs = [];
+            for (var i in params) attrs.push([i, params[i]].join('='));
+            var query = '?' + attrs.join('&');
             return uri + (query === '?' ? '' : query);
         };
         // 后台菜单动作初始化
@@ -275,17 +308,23 @@ $(function () {
             // 菜单模式切换
             (function ($menu, miniClass) {
                 // Mini 菜单模式切换及显示
-                if (layui.data('menu')['type-min']) $menu.addClass(miniClass);
+                if (layui.data('admin-menu-type')['type-min']) $menu.addClass(miniClass);
                 $body.on('click', '[data-target-menu-type]', function () {
                     $menu.toggleClass(miniClass);
-                    layui.data('menu', {key: 'type-min', value: $menu.hasClass(miniClass)});
+                    layui.data('admin-menu-type', {key: 'type-min', value: $menu.hasClass(miniClass)});
                 }).on('resize', function () {
-                    var isMini = $('.layui-layout-left-mini').size() > 0;
-                    $body.width() > 1000 ? isMini && $menu.toggleClass(miniClass) : isMini || $menu.toggleClass(miniClass);
+                    if ($body.width() > 1000) {
+                        layui.data('admin-menu-type')['type-min'] ? $menu.addClass(miniClass) : $menu.removeClass(miniClass);
+                    } else {
+                        $menu.addClass(miniClass);
+                    }
+                    //初始化时自动触发resize事件
                 }).trigger('resize');
                 //  Mini 菜单模式时TIPS文字显示
                 $('[data-target-tips]').mouseenter(function () {
-                    if ($menu.hasClass(miniClass)) $(this).attr('index', layer.tips($(this).attr('data-target-tips') || '', this));
+                    if ($menu.hasClass(miniClass)) {
+                        $(this).attr('index', layer.tips($(this).attr('data-target-tips') || '', this));
+                    }
                 }).mouseleave(function () {
                     layer.close($(this).attr('index'));
                 });
@@ -296,18 +335,19 @@ $(function () {
             });
             // 同步二级菜单展示状态
             this.syncOpenStatus = function (mode) {
-                $('[data-submenu-layout]').map(function () {
-                    var node = $(this).attr('data-submenu-layout');
+                $('[data-submenu-layout]').map(function (node) {
+                    node = $(this).attr('data-submenu-layout');
                     if (mode === 1) layui.data('menu', {key: node, value: $(this).hasClass('layui-nav-itemed') ? 2 : 1});
                     else if ((layui.data('menu')[node] || 2) === 2) $(this).addClass('layui-nav-itemed');
                 });
             };
-            window.onhashchange = function () {
-                var hash = window.location.hash || '';
+            //onhashchange 事件在当前 URL 的锚部分(以 '#' 号为开始) 发生改变时触发 。
+            window.onhashchange = function (hash, node) {
+                hash = window.location.hash || '';
                 if (hash.length < 1) return $('[data-menu-node][data-open!="#"]:first').trigger('click');
                 $.form.load(hash), that.syncOpenStatus(2);
                 // 菜单选择切换
-                var node = that.queryNode(that.getUri());
+                node = that.queryNode(that.getUri());
                 if (/^m-/.test(node)) {
                     var $all = $('a[data-menu-node]').parent(), tmp = node.split('-'), tmpNode = tmp.shift();
                     while (tmp.length > 0) {
@@ -487,61 +527,52 @@ $(function () {
         var that = this, mode = $(this).attr('data-file') || 'one';
         this.attr('data-inited', true).attr('data-multiple', (mode !== 'btn' && mode !== 'one') ? 1 : 0);
         require(['upload'], function (apply) {
-            apply(that, null, callback);
+            apply.call(this, that, callback);
         });
     };
 
-    /*! 上传单个图片 */
+    /*! 上传单张图片 */
     $.fn.uploadOneImage = function () {
-        var name = $(this).attr('name') || 'image', type = $(this).data('type') || 'png,jpg,gif';
-        var $tpl = $('<a data-file="btn" class="uploadimage"></a>').attr('data-field', name).attr('data-type', type);
-        $(this).attr('name', name).after($tpl.data('input', this)).on('change', function () {
-            if (this.value) $tpl.css('backgroundImage', 'url(' + this.value + ')');
-        }).trigger('change');
+        return this.each(function (input, template) {
+            input = $(this), template = $('<a data-file="one" class="uploadimage"><span class="layui-icon">&#x1006;</span></a>');
+            template.attr('data-type', input.data('type') || 'png,jpg,gif');
+            template.attr('data-field', input.attr('name') || 'image').data('input', this);
+            template.find('span').on('click', function (event) {
+                event.stopPropagation(), template.attr('style', ''), input.val('');
+            });
+            input.attr('name', template.attr('data-field')).after(template).on('change', function () {
+                if (this.value) template.css('backgroundImage', 'url(' + encodeURI(this.value) + ')');
+            }).trigger('change');
+        }), this;
     };
 
-    /*! 上传多个图片 */
+    /*! 上传多张图片 */
     $.fn.uploadMultipleImage = function () {
-        var type = $(this).data('type') || 'png,jpg,gif', name = $(this).attr('name') || 'umt-image';
-        var $tpl = $('<a class="uploadimage"></a>').attr('data-file', 'mul').attr('data-field', name).attr('data-type', type);
-        $(this).attr('name', name).after($tpl.data('input', this)).on('change', function () {
-            var input = this;
-            this.setImageData = function () {
-                input.value = input.getImageData().join('|');
-            };
-            this.getImageData = function () {
-                var values = [];
-                $(input).prevAll('.uploadimage').map(function () {
-                    values.push($(this).attr('data-tips-image'));
+        return this.each(function () {
+            var $button = $('<a class="uploadimage"></a>'), images = this.value ? this.value.split('|') : [];
+            var $input = $(this), name = $input.attr('name') || 'umt-image', type = $input.data('type') || 'png,jpg,gif';
+            $button.attr('data-type', type).attr('data-field', name).attr('data-file', 'mut').data('input', this);
+            $input.attr('name', name).after($button), $button.uploadFile(function (src) {
+                images.push(src), $input.val(images.join('|')), showImageContainer([src]);
+            });
+            if (images.length > 0) showImageContainer(images);
+
+            function showImageContainer(srcs) {
+                $(srcs).each(function (idx, src, $image) {
+                    $image = $('<div class="uploadimage uploadimagemtl"><a class="layui-icon margin-right-5">&#xe602;</a><a class="layui-icon margin-right-5">&#x1006;</a><a class="layui-icon margin-right-5">&#xe603;</a></div>');
+                    $image.attr('data-tips-image', encodeURI(src)).css('backgroundImage', 'url(' + encodeURI(src) + ')').on('click', 'a', function (event, index, prevs, $item) {
+                        event.stopPropagation(), $item = $(this).parent(), index = $(this).index(), prevs = $button.prevAll('div.uploadimage').length;
+                        if (index === 0 && $item.index() !== prevs) $item.next().after($item);
+                        else if (index === 2 && $item.index() > 1) $item.prev().before($item);
+                        else if (index === 1) $item.remove();
+                        images = [], $button.prevAll('.uploadimage').map(function () {
+                            images.push($(this).attr('data-tips-image'));
+                        });
+                        images.reverse(), $input.val(images.join('|'));
+                    }), $button.before($image);
                 });
-                return values.reverse(), values;
             };
-            var urls = this.getImageData(), srcs = this.value.split('|');
-            for (var i in srcs) if (srcs[i]) urls.push(srcs[i]);
-            $(this).prevAll('.uploadimage').remove();
-            this.value = urls.join('|');
-            for (var i in urls) {
-                var tpl = '<div class="uploadimage uploadimagemtl"><a class="layui-icon margin-right-5">&#xe602;</a><a class="layui-icon margin-right-5">&#x1006;</a><a class="layui-icon margin-right-5">&#xe603;</a></div>';
-                var $tpl = $(tpl).attr('data-tips-image', urls[i]).css('backgroundImage', 'url(' + urls[i] + ')').on('click', 'a', function (e) {
-                    e.stopPropagation();
-                    var $cur = $(this).parent();
-                    switch ($(this).index()) {
-                        case 1:// remove
-                            return $.msg.confirm('确定要移除这张图片吗？', function (index) {
-                                $cur.remove(), input.setImageData(), $.msg.close(index);
-                            });
-                        case 0: // right
-                            var lenght = $cur.siblings('div.uploadimagemtl').length;
-                            if ($cur.index() !== lenght) $cur.next().after($cur);
-                            return input.setImageData();
-                        case 2: // left
-                            if ($cur.index() !== 0) $cur.prev().before($cur);
-                            return input.setImageData();
-                    }
-                });
-                $(this).before($tpl);
-            }
-        }).trigger('change');
+        }), this;
     };
 
     /*! 注册 data-load 事件行为 */
@@ -557,7 +588,11 @@ $(function () {
     $body.on('submit', 'form.form-search', function () {
         var url = $(this).attr('action').replace(/&?page=\d+/g, ''), split = url.indexOf('?') === -1 ? '?' : '&';
         if ((this.method || 'get').toLowerCase() === 'get') {
-            return window.location.href = '#' + $.menu.parseUri(url + split + $(this).serialize());
+            if (location.href.indexOf('spm=') > -1) {
+                return window.location.href = '#' + $.menu.parseUri(url + split + $(this).serialize());
+            } else {
+                return window.location.href = $.menu.parseUri(url + split + $(this).serialize());
+            }
         }
         $.form.load(url, this, 'post');
     });
@@ -569,6 +604,8 @@ $(function () {
 
     /*! 注册 data-open 事件行为 */
     $body.on('click', '[data-open]', function () {
+        // url  => $(this).attr('data-open')
+        // this => <a data-menu-node="m-1" data-open="admin/index/home.html"><span>后台首页</span></a>
         $.form.href($(this).attr('data-open'), this);
     });
 
@@ -607,7 +644,7 @@ $(function () {
             if (rules[i].length < 2) return $.msg.tips('异常的数据操作规则，请修改规则！');
             data[rules[i].split('#')[0]] = rules[i].split('#')[1];
         }
-        data['_csrf_'] = $this.attr('data-token') || $this.attr('data-csrf') || '--';
+        data['_token_'] = $this.attr('data-token') || $this.attr('data-csrf') || '--';
         var load = loading !== 'false', tips = typeof loading === 'string' ? loading : undefined;
         if (!$this.attr('data-confirm')) $.form.load(action, data, method, false, load, tips, time);
         else $.msg.confirm($this.attr('data-confirm'), function () {
@@ -630,7 +667,7 @@ $(function () {
             $this.css('border', (ret && ret.code) ? '1px solid #e6e6e6' : '1px solid red');
             return false;
         };
-        data['_csrf_'] = $this.attr('data-token') || $this.attr('data-csrf') || '--';
+        data['_token_'] = $this.attr('data-token') || $this.attr('data-csrf') || '--';
         if (!confirm) return $.form.load(action, data, method, that.callback, load, tips, time);
         $.msg.confirm(confirm, function () {
             $.form.load(action, data, method, that.callback, load, tips, time);
@@ -638,21 +675,21 @@ $(function () {
     });
 
     /*! 注册 data-href 事件行为 */
-    $body.on('click', '[data-href]', function () {
-        var href = $(this).attr('data-href');
+    $body.on('click', '[data-href]', function (href) {
+        href = $(this).attr('data-href');
         if (href && href.indexOf('#') !== 0) window.location.href = href;
     });
 
     /*! 注册 data-iframe 事件行为 */
-    $body.on('click', '[data-iframe]', function () {
-        var index = $.form.iframe($(this).attr('data-iframe'), $(this).attr('data-title') || '窗口');
+    $body.on('click', '[data-iframe]', function (index, href) {
+        index = $.form.iframe($(this).attr('data-iframe'), $(this).attr('data-title') || '窗口', $(this).attr('data-area') || undefined);
         $(this).attr('data-index', index);
     });
 
     /*! 注册 data-icon 事件行为 */
-    $body.on('click', '[data-icon]', function () {
-        var field = $(this).attr('data-icon') || $(this).attr('data-field') || 'icon';
-        var location = window.ROOT_URL + '?s=admin/api.plugs/icon.html&field=' + field;
+    $body.on('click', '[data-icon]', function (field, location) {
+        field = $(this).attr('data-icon') || $(this).attr('data-field') || 'icon';
+        location = window.ROOT_URL + '?s=admin/api.plugs/icon.html&field=' + field;
         $.form.iframe(location, '图标选择');
     });
 
@@ -660,8 +697,8 @@ $(function () {
     $body.on('click', '[data-copy]', function () {
         $.copyToClipboard(this.getAttribute('data-copy'));
     });
-    $.copyToClipboard = function (content) {
-        var input = document.createElement('textarea');
+    $.copyToClipboard = function (content, input) {
+        input = document.createElement('textarea');
         input.style.position = 'absolute', input.style.left = '-100000px';
         input.style.width = '1px', input.style.height = '1px', input.innerText = content;
         document.body.appendChild(input), input.select(), setTimeout(function () {
@@ -708,8 +745,8 @@ $(function () {
     };
 
     /*! 表单编辑返回操作 */
-    $body.on('click', '[data-history-back]', function () {
-        var title = this.getAttribute('data-history-back') || '确定要返回上一页吗？';
+    $body.on('click', '[data-history-back]', function (title) {
+        title = this.getAttribute('data-history-back') || '确定要返回上一页吗？';
         $.msg.confirm(title, function (index) {
             history.back();
             $.msg.close(index);
@@ -717,20 +754,9 @@ $(function () {
     });
 
     /*! 表单元素失去焦点处理 */
-    $body.on('blur', '[data-blur-number]', function () {
-        var fiexd = this.getAttribute('data-blur-number') || 0;
+    $body.on('blur', '[data-blur-number]', function (fiexd) {
+        fiexd = this.getAttribute('data-blur-number') || 0;
         this.value = (parseFloat(this.value) || 0).toFixed(fiexd);
-    });
-
-    /*! 后台加密登录处理 */
-    $body.find('[data-login-form]').map(function () {
-        require(["md5"], function (md5) {
-            $("form").vali(function (data) {
-                data['password'] = md5.hash(md5.hash(data['password']) + data['skey']);
-                if (data['skey']) delete data['skey'];
-                $.form.load(location.href, data, "post", null, null, null, 'false');
-            });
-        });
     });
 
     /*! 图片加载异常处理 */

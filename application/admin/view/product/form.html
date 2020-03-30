@@ -1,4 +1,4 @@
-{extend name='admin@main'}
+{extend name='main'}
 
 {block name="content"}
 
@@ -35,10 +35,7 @@
                 </tr>
                 </thead>
             </table>
-            <script>
-                $('[name="logo"]').uploadOneImage(),
-                $('[name="image"]').uploadMultipleImage()
-            </script>
+            <script>$('[name="logo"]').uploadOneImage(), $('[name="image"]').uploadMultipleImage()</script>
         </div>
 
         <div class="layui-form-item block">
@@ -57,6 +54,8 @@
 {/block}
 
 {block name='script'}
+<!--<textarea class="layui-hide" id="goods-specs">{$vo.specs|raw|default=''}</textarea>-->
+<!--<textarea class="layui-hide" id="goods-value">{$defaultValues|raw|default=''}</textarea>-->
 <script>
     window.form.render();
     require(['ckeditor', 'angular'], function () {

@@ -21,23 +21,15 @@ class Product extends BaseController
         $this->_form($this->table, 'form');
     }
 
+    /**
+     * 编辑商品信息
+     * @return mixed
+     */
     public function edit()
     {
+        $this->title = '编辑商品信息';
         $this->isAddMode = '0';
-        $this->_form($this->table, 'form');
-    }
-
-    /**
-     * 表单数据处理
-     * @param array $data
-     * @throws \think\Exception
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     * @throws \think\exception\PDOException
-     */
-    protected function _form_filter(&$data)
-    {
+        return $this->_form($this->table, 'form');
     }
 
     public function remove()

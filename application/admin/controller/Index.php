@@ -47,7 +47,7 @@ class Index extends BaseController
                 'app_secret.require'    => '登录密码不能为空！',
                 'app_secret.min'        => '登录密码长度不能少于4位有效字符！',
                 're_app_secret.require'  => '重复密码不能为空！',
-                're_app_secret.confirm'  => '重复密码与登录密码不匹配，请重新输入！',
+                're_app_secret.confirm'  => '重复密码与新的登录密码不匹配，请重新输入！',
             ]);
             $thirdApp = Db::name('third_app')->where(['id' => $id])->find();
             if (md5($data['old_app_secret']) !== $thirdApp['app_secret']) {
