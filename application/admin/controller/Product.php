@@ -17,7 +17,7 @@ class Product extends BaseController
 
     public function edit()
     {
-
+        $this->_form($this->table, 'form');
     }
 
     public function remove()
