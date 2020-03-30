@@ -10,6 +10,10 @@
             <th class='list-table-check-td think-checkbox'>
                 <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
             </th>
+            <th class='list-table-sort-td'>
+                <button type="button" data-reload class="layui-btn layui-btn-xs">刷新排序</button>
+            </th>
+            <th class='text-left nowrap'>id</th>
             <th class='text-left nowrap' width="25%">主题图</th>
             <th class='text-left nowrap'>专题列表页，头图</th>
             <th class='text-left nowrap'>专题名称</th>
@@ -25,6 +29,10 @@
             <td class='list-table-check-td think-checkbox'>
                 <label><input class="list-check-box" value='{$vo.id}' type='checkbox'></label>
             </td>
+            <td class='list-table-sort-td'>
+                <input data-action-blur="{:request()->url()}" data-value="id#{$vo.id};action#sort;sort#{value}" data-loading="false" value="{$vo.sort}" class="list-sort-input">
+            </td>
+            <td class='text-left nowrap'>{$vo.id|default=''}</td>
             <td class='text-left nowrap'>
                 <img data-tips-image src="__ROOT__/images{$vo.topic_img}" class="margin-right-5 text-top">
             </td>

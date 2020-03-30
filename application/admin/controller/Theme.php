@@ -13,7 +13,7 @@ class Theme extends BaseController
     {
         $this->title = '主题列表';
         $query = $this->_query($this->table)->like('name');
-        $query->dateBetween('update_time')->order('id desc')->page();
+        $query->dateBetween('update_time')->order('sort desc, id desc')->page();
     }
 
     /**

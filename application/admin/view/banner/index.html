@@ -10,6 +10,7 @@
             <th class='list-table-check-td think-checkbox'>
                 <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
             </th>
+            <th class='text-left nowrap'>id</th>
             <th class='text-left nowrap' width="25%">名称(通常作为标识)</th>
             <th class='text-left nowrap'>描述</th>
             <th class='text-left nowrap'>更新时间</th>
@@ -22,6 +23,7 @@
             <td class='list-table-check-td think-checkbox'>
                 <label><input class="list-check-box" value='{$vo.id}' type='checkbox'></label>
             </td>
+            <th class='text-left nowrap'>{$vo.id|default=''}</th>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>

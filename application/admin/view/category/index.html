@@ -15,6 +15,10 @@
             <th class='list-table-check-td think-checkbox'>
                 <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
             </th>
+            <th class='list-table-sort-td'>
+                <button type="button" data-reload class="layui-btn layui-btn-xs">刷新排序</button>
+            </th>
+            <th class='text-left nowrap'>id</th>
             <th class='text-left nowrap' width="25%">图片</th>
             <th class='text-left nowrap'>分类名称</th>
             <th class='text-left nowrap'>描述</th>
@@ -29,15 +33,19 @@
             <td class='list-table-check-td think-checkbox'>
                 <label><input class="list-check-box" value='{$vo.id}' type='checkbox'></label>
             </td>
+            <td class='list-table-sort-td'>
+                <input data-action-blur="{:request()->url()}" data-value="id#{$vo.id};action#sort;sort#{value}" data-loading="false" value="{$vo.sort}" class="list-sort-input">
+            </td>
+            <td class='text-left nowrap'>{$vo.id|default=''}</td>
             <td class='text-left nowrap'>
-                <img data-tips-image src="__ROOT__/images{$vo.url}" class="margin-right-5 text-top">
+                <img data-tips-image src="__ROOT__/images{$vo.topic_img_url}" class="margin-right-5 text-top">
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>
-            <td class='text-left nowrap'>{$vo.description|default=''}</td>
+            <td class='text-left nowrap'>{eq name='vo.status' value='0'}<span class="layui-badge">下线</span>{else name='vo.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>
-                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑" data-modal='{:url("detail")}?id={$vo.id}'>编 辑</a>
+                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑" data-modal='{:url("edit")}?id={$vo.id}'>编 辑</a>
 
                 <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该Banner吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
             </td>
