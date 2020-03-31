@@ -1,6 +1,6 @@
 <?php
 /**
- * 自定义配置文件(非框架自带)
+ * 安全敏感较高的配置参数
  */
 return [
 	'token_salt' => 'SADFGHJKL',

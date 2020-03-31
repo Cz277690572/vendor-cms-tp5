@@ -1,7 +1,5 @@
 <?php
-/**
- * 自定义配置文件(非框架自带)
- */
+
 return [
 	// 小程序app_id
 	'app_id' => 'wxcbba84a3171a22ca',
