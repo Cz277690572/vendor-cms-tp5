@@ -41,7 +41,7 @@ class Product extends BaseController
     public function add()
     {
         $this->isAddMode = '1';
-        $this->_form($this->table, 'form');
+        return $this->_form($this->table, 'form');
     }
 
     /**
@@ -146,7 +146,8 @@ class Product extends BaseController
 
             if(!empty($data['main_img_url'])){
                 $mainImgData = array();
-                $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],'/upload')+7);
+                $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
+                $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
                 $mainImgData['from'] = 1;
                 $mainImgData['update_time'] = $time;
                 $mainImgId = Db::name('image')->insertGetId($mainImgData);
@@ -167,7 +168,7 @@ class Product extends BaseController
                 $images = explode('|',$data['detail_image']);
                 $productImageData = array();
                 foreach ($images as $k => $img){
-                    $imageData['url']         = substr($img, strpos($img,'/upload')+7);;
+                    $imageData['url']         = substr($img, strpos($img,config('setting.upload_path'))+7);;
                     $imageData['from']        = 1;
                     $imageData['update_time'] = $time;
                     $imageId = Db::name('image')->insertGetId($imageData);
@@ -204,6 +205,21 @@ class Product extends BaseController
             unset($data['product_property']);
         }
     }
+
+    /**
+     * 表单结果处理
+     * @param boolean $result
+     */
+    protected function _form_result($result)
+    {
+        if ($this->request->isPost()) {
+            $this->success('商品编辑成功！', 'javascript:history.back()');
+        }
+//        if ($result && $this->request->isPost()) {
+//            $this->success('商品编辑成功！', 'javascript:history.back()');
+//        }
+    }
+
 
     public function remove()
     {
