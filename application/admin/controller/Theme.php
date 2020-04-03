@@ -29,10 +29,10 @@ class Theme extends BaseController
         foreach ($data as &$vo) {
             foreach ($this->ilist as $image){
                 if ($image['id'] === $vo['topic_img_id']){
-                    $vo['topic_img'] = $image['url'];
+                    $vo['topic_img'] = config('setting.img_prefix').$image['url'];
                 }
                 if ($image['id'] === $vo['head_img_id']){
-                    $vo['head_img'] = $image['url'];
+                    $vo['head_img'] = config('setting.img_prefix').$image['url'];
                 }
             }
         }

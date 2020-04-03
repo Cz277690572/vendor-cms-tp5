@@ -69,10 +69,9 @@ class Product extends BaseController
         $time = time();
         // 生成商品ID
         if (empty($data['id'])){
-            $data['id'] = Data::uniqidNumberCode(9);
+            $data['id'] = Data::uniqidNumberCode();
             $data['create_time'] = $time;
         }
-//        var_dump($data['id']);exit();
         if ($this->request->isGet())
         {
             $images = Db::name('product_image')->alias('p')->join('image i','p.img_id = i.id')->field('p.*,i.url')
