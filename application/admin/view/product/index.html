@@ -1,7 +1,7 @@
 {extend name='main'}
 
 {block name="button"}
-<button data-modal='{:url("add")}' data-title="添加分类" class='layui-btn layui-btn-sm layui-btn-primary'>添加商品</button>
+<button data-open='{:url("add")}' data-title="添加商品" class='layui-btn layui-btn-sm layui-btn-primary'>添加商品</button>
 {/block}
 
 {block name="content"}
@@ -24,7 +24,7 @@
             <th class='text-left nowrap'>所属分类</th>
             <th class='text-left nowrap'>价格,单位：分</th>
             <th class='text-left nowrap'>库存量</th>
-            <th class='text-left nowrap'>摘要</th>
+            <th class='text-left nowrap'>描述</th>
             <th class='text-left nowrap'>是否上架</th>
             <th class='text-left nowrap'>创建时间</th>
             <th></th>
@@ -41,18 +41,17 @@
             </td>
             <td class='text-left nowrap'>{$vo.id|default=''}</td>
             <td class='text-left nowrap'>
-                <img data-tips-image src="__ROOT__/images{$vo.main_img_url}" class="margin-right-5 text-top">
+                <img data-tips-image src="{$vo.main_img_url}" class="margin-right-5 text-top">
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.category_name|default=''}</td>
             <td class='text-left nowrap'>{$vo.price|default=''}</td>
             <td class='text-left nowrap'>{$vo.stock|default=''}</td>
             <td class='text-left nowrap'>{$vo.summary|default=''}</td>
-            <td class='text-left nowrap'>{$vo.summary|default=''}</td>
+            <td class='text-left nowrap'>{eq name='vo.status' value='0'}<span class="layui-badge">下线</span>{else name='vo.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
             <td class='text-left nowrap'>
-                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑" data-open='{:url("edit")}?id={$vo.id}'>编 辑</a>
-
+                <a data-dbclick class="layui-btn layui-btn-sm" data-open='{:url("edit")}?id={$vo.id}'>编 辑</a>
                 <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该商品吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
             </td>
         </tr>

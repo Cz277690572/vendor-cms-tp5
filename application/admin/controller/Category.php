@@ -100,6 +100,10 @@ class Category extends BaseController
 
     public function remove()
     {
-        $this->_save($this->table, ['delete_time' => time()]);
+        $id    = $this->request->post('id');
+        $image = Db::table($this->table)->field('topic_img_id')->where('id', $id)->find();
+        $time  = time();
+        Db::name('image')->where('id',$image['topic_img_id'])->update(['delete_time' => $time]);
+        $this->_save($this->table, ['delete_time' => $time]);
     }
 }
