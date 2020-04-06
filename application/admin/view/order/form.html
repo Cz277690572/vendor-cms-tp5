@@ -1,0 +1,36 @@
+{block name="style"}
+{/block}
+<form onsubmit="return false;" action='{:url("edit")}?id={$info.id}' data-auto="true" method="post" class='layui-form layui-card' autocomplete="off" id="orderForm">
+
+    <div class="layui-card-body padding-bottom-40">
+
+        <div class="layui-row margin-bottom-15">
+            <label class="layui-col-xs2 think-form-label">发货状态</label>
+            <label class="layui-col-xs10">
+                <select name="status" class="layui-select" required>
+                    {foreach $status as $k=>$v}
+                    {if $k eq $info.status}11
+                    <option selected value="{$k}">{$v}</option>
+                    {else}
+                    <option value="{$k}">{$v}</option>
+                    {/if}
+                    {/foreach}
+                </select>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    <div class="layui-form-item text-center">
+        {notempty name='info.id'}<input type='hidden' value='{$vo.id}' name='id'>{/notempty}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</form>
+
+{block name='script'}
+<script>
+    form.render();
+</script>
+{/block}
