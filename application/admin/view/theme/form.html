@@ -1,0 +1,88 @@
+{extend name='main'}
+
+{block name="content"}
+
+<form onsubmit="return false;" id="ThemeForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
+
+    <div class="layui-card-body think-box-shadow padding-left-40">
+
+        <div class="layui-form-item layui-row layui-col-space15">
+            <label class="layui-col-xs6 relative">
+                <span class="color-green">专题名称</span>
+                <input name="name" required class="layui-input" placeholder="请输入专题名称" value="{$vo.name|default=''}">
+            </label>
+        </div>
+
+        <div class="layui-form-item layui-row layui-col-space15">
+            <label class="layui-col-xs6 relative">
+                <span class="color-green">是否上线</span>
+                <div class="layui-form-item" required>
+                    <!--{if(isset($vo.status) and ($vo.status eq '0'))}-->
+                    <input type="radio" name="status" value="1" title="上线" lay-filter="status">
+                    <input type="radio" name="status" value="0" title="下线" checked lay-filter="status">
+                    <!--{else}-->
+                    <input type="radio" name="status" value="1" title="上线" checked lay-filter="status">
+                    <input type="radio" name="status" value="0" title="下线" lay-filter="status">
+                    <!--{/if}-->
+                </div>
+            </label>
+        </div>
+
+        <div class="layui-form-item">
+            <span class="color-green label-required-prev">专题主题图及专题列表页头图</span>
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th class="text-center">专题主题图(480px * 480px)</th>
+                    <th class="text-left">专题列表页头图(480px * 256px)</th>
+                </tr>
+                <tr>
+                    <td width="90px" class="text-center"><input name="topic_img_url" type="hidden" value="{$vo.topic_img_url|default=''}"></td>
+                    <td width="90px" class="text-center"><input name="head_img_url" type="hidden" value="{$vo.head_img_url|default=''}"></td>
+                </tr>
+                </thead>
+            </table>
+            <script>$('[name="topic_img_url"]').uploadOneImage(), $('[name="head_img_url"]').uploadOneImage()</script>
+        </div>
+
+        <div class="layui-form-item block">
+            <span>专题描述</span>
+            <textarea class="layui-textarea" name="description">{$vo.description|default=''|raw}</textarea>
+        </div>
+
+        <div class="layui-form-item text-center">
+            {notempty name='vo.id'}<input type="hidden" name="id" value="{$vo.id}">{/notempty}
+            {notempty name='vo.topic_img_id'}<input type="hidden" name="topic_img_id" value="{$vo.topic_img_id}">{/notempty}
+            {notempty name='vo.head_img_id'}<input type="hidden" name="head_img_id" value="{$vo.head_img_id}">{/notempty}
+            <button class="layui-btn layui-btn-danger" ng-click="hsitoryBack()" type="button">取 消</button>
+            <button class="layui-btn" type="submit">保 存</button>
+        </div>
+    </div>
+</form>
+{include file='theme/products'}
+{/block}
+
+{block name='script'}
+<script>
+    window.form.render();
+    require(['ckeditor', 'angular'], function () {
+        var app = angular.module("ThemeForm", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            $rootScope.isAddMode = parseInt('{$isAddMode|default=0}');
+            // 返回专题列表
+            $rootScope.hsitoryBack = function () {
+                $.msg.confirm('确定要取消编辑吗？', function (index) {
+                    history.back(), $.msg.close(index);
+                });
+            };
+        }
+    })
+
+    //监听上/下线按钮
+    window.form.on('radio(status)', function(data){
+        $("input[name='status']").val(data.value);
+    });
+</script>
+{/block}

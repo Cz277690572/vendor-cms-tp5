@@ -749,6 +749,12 @@ $(function () {
     }).on('mouseleave', '[data-admin-icon]', function () {
         $(this).children('dl').removeClass('layui-show')
     });
+    /*! 注册 data-product-add 商品添加行为 */
+    $body.on('submit', 'form.form-product-add', function () {
+        var url = $(this).attr('action').replace(/&?page=\d+/g, ''), split = url.indexOf('?') === -1 ? '?' : '&';
+        console.log(url)
+        $.form.load(url, this, 'post');
+    });
 
     /*! 初始化事件 */
     $.menu.listen();

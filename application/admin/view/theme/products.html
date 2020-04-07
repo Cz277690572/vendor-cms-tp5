@@ -1,0 +1,68 @@
+<div class="think-box-shadow">
+    <div class="layui-card-header notselect" style="padding:0 0;"><span
+            class="layui-icon layui-icon-next font-s10 color-desc margin-right-5"></span>专题下的商品
+        <div class="pull-right"></div>
+    </div>
+    <table class="layui-table margin-top-10 margin-bottom-40" lay-skin="line">
+        {notempty name='products'}
+        <thead>
+        <tr>
+        <tr>
+            <th class='list-table-sort-td'>
+                <button type="button" data-reload class="layui-btn layui-btn-xs">刷新排序</button>
+            </th>
+            <th class='text-left nowrap'>id</th>
+            <th class='text-left nowrap' width="25%">主图</th>
+            <th class='text-left nowrap'>商品名称</th>
+            <th class='text-left nowrap'>价格,单位：分</th>
+            <th class='text-left nowrap'>库存量</th>
+            <th class='text-left nowrap'>描述</th>
+            <th class='text-left nowrap'>是否上架</th>
+            <th class='text-left nowrap'>创建时间</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $products as $key=>$vo}
+        <tr data-dbclick>
+            <td class='list-table-sort-td'>
+                <input data-action-blur="{:request()->url()}" data-value="id#{$vo.id};action#sort;sort#{value}"
+                       data-loading="false" value="{$vo.sort}" class="list-sort-input">
+            </td>
+            <td class='text-left nowrap'>{$vo.id|default=''}</td>
+            <td class='text-left nowrap'>
+                <img data-tips-image src="{$vo.main_img_url}" class="margin-right-5 text-top">
+            </td>
+            <td class='text-left nowrap'>{$vo.name|default=''}</td>
+            <td class='text-left nowrap'>{$vo.price|default=''}</td>
+            <td class='text-left nowrap'>{$vo.stock|default=''}</td>
+            <td class='text-left nowrap'>{$vo.summary|default=''}</td>
+            <td class='text-left nowrap'>{eq name='vo.status' value='0'}<span class="layui-badge">下线</span>{else
+                name='vo.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
+            <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
+            <td class='text-left nowrap'>
+                <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定在专题中移除该商品吗？"
+                   data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+        {/notempty}
+    </table>
+
+    {empty name='products'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+
+    <!--<form onsubmit="return false;" id="ProductForm" data-auto="true" method="post" class='layui-form layui-card' style="margin-bottom: 200px" autocomplete="off">-->
+    <form class="layui-form layui-form-pane form-product-add" style="margin-bottom: 200px" action="/admin/theme/addProduct?spm=m-1-50-1" onsubmit="return false" method="POST" autocomplete="off">
+        <div class="layui-form-item">
+            <label class="layui-col-xs6 relative margin-right-10">
+                <select class="layui-select" name="product_id" lay-search>
+                    {foreach $products as $product}
+                    <option value="{$product.id}">{$product.id} - {$product.name|default=''}</option>
+                    {/foreach}
+                </select>
+            </label>
+            <button class="layui-btn" type="submit">添 加</button>
+        </div>
+    </form>
+</div>
