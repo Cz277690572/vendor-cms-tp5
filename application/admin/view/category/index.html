@@ -38,7 +38,7 @@
             </td>
             <td class='text-left nowrap'>{$vo.id|default=''}</td>
             <td class='text-left nowrap'>
-                <img data-tips-image src="{$vo.topic_img_url}" class="margin-right-5 text-top">
+                <img data-tips-image src="{$vo.topic_img_url|default=''}" class="margin-right-5 text-top">
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>

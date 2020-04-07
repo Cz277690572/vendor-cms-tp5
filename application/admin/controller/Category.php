@@ -46,7 +46,7 @@ class Category extends BaseController
         foreach ($data as &$vo) {
             foreach ($this->imglist as $img){
                 if ($img['id'] === $vo['topic_img_id']){
-                    $vo['topic_img_url'] = config('setting.img_prefix').$img['url'];
+                    $vo['topic_img_url'] = empty($img['url']) ? '' : config('setting.img_prefix').$img['url'];
                 }
             }
         }

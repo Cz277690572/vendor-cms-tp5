@@ -752,8 +752,9 @@ $(function () {
     /*! 注册 data-product-add 商品添加行为 */
     $body.on('submit', 'form.form-product-add', function () {
         var url = $(this).attr('action').replace(/&?page=\d+/g, ''), split = url.indexOf('?') === -1 ? '?' : '&';
-        console.log(url)
-        $.form.load(url, this, 'post');
+        if ((this.method || 'get').toLowerCase() === 'get') {
+            return window.location.href = '#' + $.menu.parseUri(url + split + $(this).serialize());
+        }
     });
 
     /*! 初始化事件 */

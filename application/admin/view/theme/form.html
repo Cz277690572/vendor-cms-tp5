@@ -1,5 +1,14 @@
 {extend name='main'}
 
+
+{block name="style"}
+<style>
+    .uploadimage{
+        width: 179px;
+        height: 179px;
+    }
+</style>
+{/block}
 {block name="content"}
 
 <form onsubmit="return false;" id="ThemeForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
@@ -33,8 +42,8 @@
             <table class="layui-table">
                 <thead>
                 <tr>
-                    <th class="text-center">专题主题图(480px * 480px)</th>
-                    <th class="text-left">专题列表页头图(480px * 256px)</th>
+                    <th class="text-center">专题主题图(专题一:750*400,专题二三:375*375)</th>
+                    <th class="text-left">专题列表页头图(750px * 400px)</th>
                 </tr>
                 <tr>
                     <td width="90px" class="text-center"><input name="topic_img_url" type="hidden" value="{$vo.topic_img_url|default=''}"></td>

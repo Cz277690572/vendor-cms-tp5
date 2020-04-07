@@ -66,10 +66,10 @@ class Theme extends BaseController
         {
             // 主题主图
             $topicImgUrl = Db::table('image')->where('id', $data['topic_img_id'])->value('url');
-            $data['topic_img_url'] = isset($topicImgUrl) ? $topicImgUrl : config('setting.img_prefix').$topicImgUrl;
+            $data['topic_img_url'] = empty($topicImgUrl) ? '' : config('setting.img_prefix').$topicImgUrl;
             // 主题列表头图
             $headImgUrl = Db::table('image')->where('id', $data['head_img_id'])->value('url');
-            $data['head_img_url'] = isset($headImgUrl) ? $headImgUrl : config('setting.img_prefix').$headImgUrl;
+            $data['head_img_url'] = empty($headImgUrl) ? '' : config('setting.img_prefix').$headImgUrl;
 
             // 主题下的商品
             $this->products = Db::table('theme_product')->alias('t')
@@ -77,15 +77,90 @@ class Theme extends BaseController
                 ->field('t.*,p.*')
                 ->where(['t.theme_id' => $data['id'],'p.delete_time' => null])
                 ->order('p.sort desc, p.id desc')
-                ->select();;
+                ->select();
+            if(!empty($this->products)){
+                foreach ($this->products as $pk => $pv){
+                    $this->products[$pk]['main_img_url'] = config('setting.img_prefix').$pv['main_img_url'];
+                }
+            }
         }
         elseif ($this->request->isPost())
         {
+            $this->_input([
+                'name' => $this->request->post('name'),
+                'topic_img_url' => $this->request->post('topic_img_url'),
+                'head_img_url' => $this->request->post('head_img_url'),
+            ], [
+                'name' => 'require',
+                'topic_img_url' => 'require',
+                'head_img_url' => 'require',
+            ], [
+                'name.require' => '专题名称必须填写！',
+                'topic_img_url.require' => '专题主题图必须上传！',
+                'head_img_url.require' => '专题列表页头图必须上传！',
+            ]);
 
+            $data['update_time'] = time();
+            if($this->isAddMode == 0){
+                $topicImgData['id']   = $data['topic_img_id'];
+                $topicImgData['url']  = substr($data['topic_img_url'], strpos($data['topic_img_url'],config('setting.upload_path'))+7);
+                $topicImgData['from'] = 1;
+                $topicImgData['update_time'] = time();
+                Db::name('image')->where('id',$topicImgData['id'])->update($topicImgData);
+
+                $headImgData['id']   = $data['head_img_id'];
+                $headImgData['url']  = substr($data['head_img_url'], strpos($data['head_img_url'],config('setting.upload_path'))+7);
+                $headImgData['from'] = 1;
+                $headImgData['update_time'] = time();
+                Db::name('image')->where('id',$headImgData['id'])->update($headImgData);
+                unset($data['topic_img_url']);
+                unset($data['head_img_url']);
+            }
         }
     }
 
     public function remove()
+    {
+        $data = $this->request->get();
+        $this->_input([
+            'product_id' => $this->request->get('product_id')
+        ], [
+            'product_id' => 'require'
+        ], [
+            'product_id.require' => '必须选择商品！'
+        ]);
+
+        $themeProduct['product_id'] = $this->request->get('product_id');
+        $themeProduct['theme_id'] = $this->request->get('product_id');
+        $res = Db::table('theme_product')->save($themeProduct);
+       if($res){
+           $this->success('添加成功');
+       }else{
+           $this->error('添加失败');
+       }
+
+    }
+
+    public function addProduct()
+    {
+        $this->_input([
+            'product_id' => $this->request->get('product_id')
+        ], [
+            'product_id' => 'require'
+        ], [
+            'product_id.require' => '必须选择商品！'
+        ]);
+        $themeProduct['product_id'] = $this->request->get('product_id');
+        $themeProduct['theme_id'] = $this->request->get('product_id');
+        $res = Db::table('theme_product')->insert($themeProduct);
+        if($res){
+            $this->success('添加成功');
+        }else{
+            $this->error('添加失败');
+        }
+    }
+
+    public function delProduct()
     {
 
     }
