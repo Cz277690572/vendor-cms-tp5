@@ -13,7 +13,7 @@ class Theme extends BaseController
     {
         $this->title = '主题列表';
         $query = $this->_query($this->table)->like('name');
-        $query->dateBetween('update_time')->order('sort desc, id desc')->page();
+        $query->dateBetween('update_time')->where(['delete_time' => null])->order('sort desc, id desc')->page();
     }
 
     /**
@@ -70,7 +70,6 @@ class Theme extends BaseController
             // 主题列表头图
             $headImgUrl = Db::table('image')->where('id', $data['head_img_id'])->value('url');
             $data['head_img_url'] = empty($headImgUrl) ? '' : config('setting.img_prefix').$headImgUrl;
-
             // 主题下的商品
             $this->products = Db::table('theme_product')->alias('t')
                 ->join('product p','p.id = t.product_id')
@@ -83,6 +82,14 @@ class Theme extends BaseController
                     $this->products[$pk]['main_img_url'] = config('setting.img_prefix').$pv['main_img_url'];
                 }
             }
+            // 主题下可添加的商品
+            $themeProductIds = !empty($this->products) ? array_column($this->products,'product_id') : [0];
+            $themeProductIdsStr = join(',', $themeProductIds);
+            $this->validAddProducts = Db::table('product')
+                ->whereNotIn('id',$themeProductIdsStr)
+                ->where(['delete_time' => null])
+                ->order('sort desc,id desc')
+                ->select();
         }
         elseif ($this->request->isPost())
         {
@@ -121,47 +128,67 @@ class Theme extends BaseController
 
     public function remove()
     {
-        $data = $this->request->get();
-        $this->_input([
-            'product_id' => $this->request->get('product_id')
-        ], [
-            'product_id' => 'require'
-        ], [
-            'product_id.require' => '必须选择商品！'
-        ]);
-
-        $themeProduct['product_id'] = $this->request->get('product_id');
-        $themeProduct['theme_id'] = $this->request->get('product_id');
-        $res = Db::table('theme_product')->save($themeProduct);
-       if($res){
-           $this->success('添加成功');
-       }else{
-           $this->error('添加失败');
-       }
+        $id    = $this->request->post('id');
+        $theme = Db::table($this->table)->field('topic_img_id,head_img_id')->where('id', $id)->find();
+        $time  = time();
+        Db::name('image')
+            ->where('id', 'in',"{$theme['topic_img_id']},{$theme['head_img_id']}")
+            ->update(['delete_time' => $time,'update_time' => $time]);
+        $this->_save($this->table, ['delete_time' => $time, 'status' => 0]);
 
     }
 
     public function addProduct()
     {
-        $this->_input([
-            'product_id' => $this->request->get('product_id')
-        ], [
-            'product_id' => 'require'
-        ], [
-            'product_id.require' => '必须选择商品！'
-        ]);
-        $themeProduct['product_id'] = $this->request->get('product_id');
-        $themeProduct['theme_id'] = $this->request->get('product_id');
-        $res = Db::table('theme_product')->insert($themeProduct);
-        if($res){
-            $this->success('添加成功');
-        }else{
-            $this->error('添加失败');
+        if($this->request->isGet())
+        {
+            $this->theme_id = $this->request->get('theme_id');
+            // 主题下的商品
+            $this->products = Db::table('theme_product')->alias('t')
+                ->join('product p','p.id = t.product_id')
+                ->field('t.*,p.*')
+                ->where(['t.theme_id' => $this->theme_id,'p.delete_time' => null])
+                ->order('p.sort desc, p.id desc')
+                ->select();
+            // 主题下可添加的商品
+            $themeProductIds = !empty($this->products) ? array_column($this->products,'product_id') : [0];
+            $themeProductIdsStr = join(',', $themeProductIds);
+            $this->validAddProducts = Db::table('product')
+                ->whereNotIn('id',$themeProductIdsStr)
+                ->where(['delete_time' => null])
+                ->order('sort desc,id desc')
+                ->select();
+            $this->fetch();
+        }
+        elseif ($this->request->isPost())
+        {
+            $this->_input([
+                'product_id' => $this->request->post('product_id')
+            ], [
+                'product_id' => 'require'
+            ], [
+                'product_id.require' => '必须选择商品！'
+            ]);
+            $themeProduct['product_id'] = $this->request->post('product_id');
+            $themeProduct['theme_id'] = $this->request->post('theme_id');
+            $res = Db::table('theme_product')->insert($themeProduct);
+            if($res){
+                $this->success('添加成功');
+            }else{
+                $this->error('添加失败');
+            }
         }
     }
 
     public function delProduct()
     {
-
+        $product_id = $this->request->post('product_id');
+        $theme_id = $this->request->post('theme_id');
+        $res = Db::table('theme_product')->delete(['product_id'=>$product_id,'theme_id'=>$theme_id]);
+        if($res){
+            $this->success('移除商品成功');
+        }else{
+            $this->error('移除商品失败');
+        }
     }
 }

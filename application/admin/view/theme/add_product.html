@@ -1,0 +1,26 @@
+<form class="layui-form layui-card" action="{:request()->url()}" data-auto="true" method="post" autocomplete="off">
+    <div class="layui-card-body" style="padding-bottom: 300px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">关联商品</label>
+            <div class="layui-input-block">
+                <select class="layui-select" required name="product_id" lay-search>
+                    {foreach $validAddProducts as $product}
+                    <option value="{$product.id}">{$product.id} - {$product.name|default=''}</option>
+                    {/foreach}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='theme_id'}<input type="hidden" name="theme_id" value="{$theme_id}">{/notempty}
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消吗？" data-close>取消</button>
+    </div>
+</form>
+{block name='script'}
+<script>
+    window.form.render();
+</script>
+{/block}
