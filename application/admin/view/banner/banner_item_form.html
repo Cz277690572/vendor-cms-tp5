@@ -1,0 +1,74 @@
+{block name="style"}
+<style>
+    .uploadimage{
+        width: 179px;
+        height: 179px;
+    }
+</style>
+{/block}
+<form onsubmit="return false;" action="{:request()->url()}" data-auto="true" method="post" class='layui-form layui-card'
+      autocomplete="off">
+
+    <div class="layui-card-body">
+
+        <div class="layui-row margin-bottom-15">
+            <label class="layui-col-xs2 think-form-label">关键字</label>
+            <label class="layui-col-xs10">
+                <input name="sort" required value='{$bannerItem.key_word|default=""}' placeholder="请输入关键字" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-15">
+            <label class="layui-col-xs2 think-form-label">类型</label>
+            <label class="layui-col-xs10">
+                <select class="layui-select" required name="type">
+                    {notempty name='$types'}
+                    {foreach $types as $type}
+                    {if isset($type.value) and $bannerItem.type eq $type.value}
+                    <option selected value="{$type.value}">{$type.name|default=''}</option>
+                    {else}
+                    <option value="{$type.value}">{$type.name|default=''}</option>
+                    {/if}
+                    {/foreach}
+                    {/notempty}
+                </select>
+            </label>
+        </div>
+
+        <div class="layui-row layui-col-space15 margin-bottom-15">
+            <label class="layui-col-xs2 think-form-label">是否上线</label>
+            <label class="layui-col-xs10 relative">
+                <div class="layui-form-item" required>
+                    <!--{if(isset($vo.status) and ($vo.status eq '0'))}-->
+                    <input type="radio" name="status" value="1" title="上线" lay-filter="status">
+                    <input type="radio" name="status" value="0" title="下线" checked lay-filter="status">
+                    <!--{else}-->
+                    <input type="radio" name="status" value="1" title="上线" checked lay-filter="status">
+                    <input type="radio" name="status" value="0" title="下线" lay-filter="status">
+                    <!--{/if}-->
+                </div>
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-15">
+            <label class="layui-col-xs2 think-form-label">图片<br>(520px*200px)</label>
+            <label class="layui-col-xs10">
+                <input required name="img_url" type="hidden" value="{$bannerItem.img_url|default=''}">
+            </label>
+            <script>$('[name="img_url"]').uploadOneImage()</script>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    <div class="layui-form-item text-center">
+        {notempty name='bannerItem.id'}<input type='hidden' value='{$bannerItem.id}' name='id'>{/notempty}
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</form>
+
+{block name='script'}
+<script>
+    window.form.render();
+</script>
+{/block}

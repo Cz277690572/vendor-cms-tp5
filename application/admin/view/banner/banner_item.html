@@ -1,0 +1,55 @@
+<div class="think-box-shadow">
+    {notempty name='$vo'}
+    <div class="layui-card-header notselect" style="padding:0 0;"><span
+            class="layui-icon layui-icon-next font-s10 color-desc margin-right-5"></span>Banner-Item列表
+        <div class="pull-right">
+            <button data-modal='{:url("addBannerItem")}?banner_id={$vo.id}' data-title="添加Banner-Item" class='layui-btn layui-btn-sm layui-btn-primary'>添加Banner-Item</button>
+        </div>
+    </div>
+    <table class="layui-table margin-top-10 margin-bottom-40" lay-skin="line">
+        {notempty name='bannerItem'}
+        <thead>
+        <tr>
+        <tr>
+            <th class='text-left nowrap'>id</th>
+            <th class='text-left nowrap' width="25%">图片</th>
+            <th class='text-left nowrap'>关键字</th>
+            <th class='text-left nowrap'>类型</th>
+            <th class='text-left nowrap'>是否上线</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $bannerItem as $key=>$vop}
+        <tr data-dbclick>
+            <td class='text-left nowrap'>{$vop.id|default=''}</td>
+            <td class='text-left nowrap'>
+                <img data-tips-image src="{$vop.img_url}" class="margin-right-5 text-top">
+            </td>
+            <td class='text-left nowrap'>{$vop.key_word|default=''}</td>
+            <td class='text-left nowrap'>
+                {eq name='vop.type' value='0'}
+                <span>无导向</span>
+                {elseif $vop.type eq 1}
+                <span>导向商品</span>
+                {elseif $vop.type eq 3}
+                <span>导向专题</span>
+                {/eq}
+            </td>
+            <td class='text-left nowrap'>{eq name='vop.status' value='0'}<span class="layui-badge">下线</span>{else
+                name='vop.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
+            <td class='text-left nowrap'>
+                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑Banner-Item" data-modal='{:url("editBannerItem")}?id={$vop.id}'>编 辑</a>
+                <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定在Banner列表中移除该Item吗？"
+                   data-action="{:url('delBannerItem')}" data-value="banner_item_id#{$vop.id};banner_id#{$vo.id}" data-csrf="{:systoken('delBannerItem')}">删 除</a>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+        {/notempty}
+    </table>
+
+    {empty name='bannerItem'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+    {/notempty}
+    {empty name='$vo'}<span class="notdata">还没有BannerItem数据哦</span>{/empty}
+</div>
