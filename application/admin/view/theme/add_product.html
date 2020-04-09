@@ -4,9 +4,11 @@
             <label class="layui-form-label">关联商品</label>
             <div class="layui-input-block">
                 <select class="layui-select" required name="product_id" lay-search>
+                    {notempty name='validAddProducts'}
                     {foreach $validAddProducts as $product}
                     <option value="{$product.id}">{$product.id} - {$product.name|default=''}</option>
                     {/foreach}
+                    {/notempty}
                 </select>
             </div>
         </div>

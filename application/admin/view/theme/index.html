@@ -41,7 +41,7 @@
             </td>
             <td class='text-left nowrap'>{$vo.name|default=''}</td>
             <td class='text-left nowrap'>{$vo.description|default=''}</td>
-            <td class='text-left nowrap'>{$vo.update_time|default=''}</td>
+            <td class='text-left nowrap'>{eq name='vo.status' value='0'}<span class="layui-badge">下线</span>{else name='vo.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>
                 <a data-dbclick class="layui-btn layui-btn-sm layui-btn-normal" data-title="查看" data-open='{:url("edit")}?id={$vo.id}'>查 看</a>

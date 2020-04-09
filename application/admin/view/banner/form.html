@@ -1,0 +1,47 @@
+{extend name='main'}
+
+{block name="content"}
+<form onsubmit="return false;" id="BannerForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
+
+    <div class="layui-card-body think-box-shadow padding-left-40">
+        <div class="layui-form-item layui-row layui-col-space15">
+            <label class="layui-col-xs6 relative">
+                <span class="color-green">Banner名称</span>
+                <input name="name" required class="layui-input" placeholder="请输入Banner名称" value="{$vo.name|default=''}">
+            </label>
+        </div>
+
+        <div class="layui-form-item block">
+            <span>专题描述</span>
+            <textarea class="layui-textarea" name="description">{$vo.description|default=''|raw}</textarea>
+        </div>
+
+        <div class="layui-form-item text-center">
+            {notempty name='vo.id'}<input type="hidden" name="id" value="{$vo.id}">{/notempty}
+            <button class="layui-btn layui-btn-danger" ng-click="hsitoryBack()" type="button">取 消</button>
+            <button class="layui-btn" type="submit">保 存</button>
+        </div>
+    </div>
+</form>
+{include file='banner/item'}
+{/block}
+
+{block name='script'}
+<script>
+    window.form.render();
+    require(['ckeditor', 'angular'], function () {
+        var app = angular.module("BannerForm", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            $rootScope.isAddMode = parseInt('{$isAddMode|default=0}');
+            // 返回Banner列表
+            $rootScope.hsitoryBack = function () {
+                $.msg.confirm('确定要取消编辑吗？', function (index) {
+                    history.back(), $.msg.close(index);
+                });
+            };
+        }
+    })
+</script>
+{/block}

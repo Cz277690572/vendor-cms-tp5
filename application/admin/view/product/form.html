@@ -11,6 +11,7 @@
             <label class="layui-col-xs6 relative">
                 <span class="color-green">商品分类</span>
                 <select class="layui-select" required name="category_id" lay-search>
+                    {notempty name='cates'}
                     {foreach $cates as $cate}
                     {if isset($vo.category_id) and $vo.category_id eq $cate.id}
                     <option selected value="{$cate.id}">{$cate.id} - {$cate.name|default=''}</option>
@@ -18,6 +19,7 @@
                     <option value="{$cate.id}">{$cate.id} - {$cate.name|default=''}</option>
                     {/if}
                     {/foreach}
+                    {/notempty}
                 </select>
             </label>
         </div>
