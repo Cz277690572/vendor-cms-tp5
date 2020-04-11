@@ -27,6 +27,7 @@ class Product extends BaseModel
 	public static function getMostRecent($count)
 	{
 		$products = self::limit($count)
+            ->where(['delete_time'=>null,'status'=>1])
 			->order('create_time desc')
 			->select();
 		return $products;
@@ -35,6 +36,7 @@ class Product extends BaseModel
 	public static function getProductsByCategoryID($categoryID)
 	{
 		$products = self::where('category_id', '=', $categoryID)
+            ->where(['delete_time'=>null,'status'=>1])
 			->select();
 		return $products;	
 	}
@@ -48,6 +50,7 @@ class Product extends BaseModel
 				}
 			])
 			->with(['properties'])
+            ->where(['delete_time'=>null,'status'=>1])
 			->find($id);
 		return $product;
 	}

@@ -16,12 +16,13 @@ class Theme extends BaseModel
 
     public function products()
     {
-    	return $this->belongsToMany('Product', 'theme_product', 'product_id', 'theme_id');
+    	return $this->belongsToMany('Product', 'theme_product', 'product_id', 'theme_id')->where(['delete_time'=>null,'status'=>1]);
     }
 
     public static function getThemeWithProducts($id)
     {
     	$theme = self::with('products,topicImg,headImg')
+            ->where(['delete_time'=>null,'status'=>1])
     		->find($id);
     	return $theme;
     }

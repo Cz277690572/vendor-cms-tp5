@@ -11,13 +11,15 @@ class Banner extends BaseModel
 	protected $hidden = ['delete_time','update_time'];
 
 	public function items(){
-		return $this->hasMany('BannerItem','banner_id','id');
+		return $this->hasMany('BannerItem','banner_id','id')->where(['status'=>1,'delete_time'=>null]);
 	}
 
 	public static function getBannerByID($id){
 		$banner = self::with(['items','items.img'])
-			->find($id);
+            ->where(['id'=>$id,'delete_time'=>null])
+			->find();
 		return $banner;
+
 		// sql语句写法
 		// $result = Db::query('select * from banner_item where img_id=?',[1]);
 		// 表达式写法

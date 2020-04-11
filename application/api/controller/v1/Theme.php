@@ -15,6 +15,7 @@ class Theme
 		(new IDCollection())->goCheck();
 		$ids = explode(',', $ids);
 		$result = ThemeModel::with('topicImg,headImg')
+            ->where(['delete_time'=>null,'status'=>1])
 			->select($ids);
 		if($result->isEmpty()){
 			throw new ThemeException();

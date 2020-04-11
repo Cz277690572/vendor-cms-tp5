@@ -27,16 +27,16 @@
 
         <div class="layui-row margin-bottom-15">
             <label class="layui-col-xs2 think-form-label">是否上线</label>
-            <label class="layui-col-xs10">
-                <label class="think-radio">
+            <label class="layui-col-xs10" relative>
+                <div class="layui-form-item" required>
                     <!--{if(isset($vo.status) and ($vo.status eq '0'))}-->
-                    <input type="radio" name="status" value="1">上线&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" checked name="status" value="0">下线
+                    <input type="radio" name="status" value="1" title="上线" lay-filter="status">
+                    <input type="radio" checked name="status" title="下线" value="0" lay-filter="status">
                     <!--{else}-->
-                    <input type="radio" checked name="status" value="1">上线&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="status" value="0">下线
+                    <input type="radio" checked name="status" value="1" title="上线"  lay-filter="status">
+                    <input type="radio" name="status" value="0" title="下线" lay-filter="status">
                     <!--{/if}-->
-                </label>
+                </div>
             </label>
         </div>
 
@@ -66,4 +66,11 @@
 </form>
 
 {block name='script'}
+<script>
+    window.form.render();
+    //监听上/下线按钮
+    window.form.on('radio(status)', function(data){
+    $("input[name='status']").val(data.value);
+    });
+</script>
 {/block}
