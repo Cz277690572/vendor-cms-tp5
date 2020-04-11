@@ -44,9 +44,9 @@ class Address extends BaseController
 		{
 			throw new UserException();
 		}
-
+        $data = input('post.');
 		$dataArray = $validate->getDataByRule(input('post.'));
-
+        $dataArray['update_time'] = time();
 		$userAddress = $user->address;
 
 		if (!$userAddress)

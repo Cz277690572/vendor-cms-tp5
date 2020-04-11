@@ -63,7 +63,6 @@ class Order extends BaseController
 		(new OrderPlace())->gocheck();
 		$oProducts = input('post.products/a');
 		$uid = TokenService::getCurrentUid();
-
 		$order = new OrderService();
 		$status = $order->place($uid, $oProducts);
 		return $status;

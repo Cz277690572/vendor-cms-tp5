@@ -76,7 +76,6 @@ class BaseValidate extends Validate
 				]);
 		}
 
-		$newArray = [];
 		foreach ($this->rule as $key => $value)
 		{
 			$newArray[$key] = $arrays[$key];

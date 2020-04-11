@@ -8,6 +8,8 @@ use app\lib\exception\TokenException;
 use app\lib\enum\OrderStatusEnum; 
 use think\Exception;
 use think\facade\Env;
+use think\facade\Log;
+
 require_once (Env::get('root_path').'extend/WxPay/WxPayData.php');
 class Pay
 {
@@ -63,7 +65,6 @@ class Pay
 	private function getPaySignature($wxOrderData)
 	{
 		$wxOrder = \WxPay\WxPayApi::unifiedOrder($wxOrderData);
-		
 		if ($wxOrder['return_code'] != 'SUCCESS' ||
 			$wxOrder['result_code'] != 'SUCCESS') 
 		{
