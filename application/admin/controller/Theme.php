@@ -111,13 +111,13 @@ class Theme extends BaseController
             if($this->isAddMode == 0){
                 $topicImgData['id']   = $data['topic_img_id'];
                 $topicImgData['url']  = substr($data['topic_img_url'], strpos($data['topic_img_url'],config('setting.upload_path'))+7);
-                $topicImgData['from'] = 1;
+                $topicImgData['from'] = config('setting.img_form_local');
                 $topicImgData['update_time'] = time();
                 Db::name('image')->where('id',$topicImgData['id'])->update($topicImgData);
 
                 $headImgData['id']   = $data['head_img_id'];
                 $headImgData['url']  = substr($data['head_img_url'], strpos($data['head_img_url'],config('setting.upload_path'))+7);
-                $headImgData['from'] = 1;
+                $headImgData['from'] = config('setting.img_form_local');
                 $headImgData['update_time'] = time();
                 Db::name('image')->where('id',$headImgData['id'])->update($headImgData);
                 unset($data['topic_img_url']);

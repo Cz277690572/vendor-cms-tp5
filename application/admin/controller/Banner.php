@@ -4,6 +4,7 @@
 namespace app\admin\controller;
 
 
+use library\tools\Data;
 use think\Db;
 
 class Banner extends BaseController
@@ -44,7 +45,7 @@ class Banner extends BaseController
         {
             // Banner-Item列表
             $id = $this->request->get('id');
-            $this->bannerItem = Db::table('banner_item')->alias('bi')
+            $this->bannerItem = Db::name('banner_item')->alias('bi')
                 ->field('bi.*,i.url')
                 ->join('image i','i.id = bi.img_id')
                 ->where(['bi.delete_time' => null, 'bi.banner_id' => $id])
@@ -76,7 +77,56 @@ class Banner extends BaseController
 
     public function addBannerItem()
     {
-        return $this->fetch('banner_item_form');
+        if($this->request->isGet())
+        {
+            $bannerId = $this->request->get('banner_id');
+            $id = Data::uniqidNumberCode();
+            $this->bannerItem = ['id'=>$id,'banner_id' => $bannerId];
+            $this->types = [['value'=>0,'name'=>'无导向'],['value'=>1,'name'=>'导向商品'],['value'=>2,'name'=>'导向专题']];
+            return $this->fetch('banner_item_form');
+        }
+        elseif ($this->request->isPost())
+        {
+            $this->_input([
+                'key_word' => $this->request->post('key_word'),
+                'type'     => $this->request->post('type'),
+                'status'   => $this->request->post('status'),
+                'img_url'  => $this->request->post('img_url'),
+                'banner_id'  => $this->request->post('banner_id'),
+            ], [
+                'key_word' => 'require',
+                'type' => 'require',
+                'status' => 'require',
+                'img_url' => 'require',
+                'banner_id' => 'require'
+            ], [
+                'key_word.require' => '关键字必须填写！',
+                'type.require' => '类型必须选择！',
+                'status.require' => '是否上线必须选择！',
+                'img_url.require' => '图片必须上传！',
+                'banner_id.require' => 'banner_id参数错误！',
+            ]);
+            $data = $this->request->post();
+            if($data['type'] == 1 && !is_numeric($data['key_word'])){
+                $this->error('类型导向商品,关键字必须是商品id！');
+            }
+
+            $time = time();
+            $imageData['url']  = substr($data['img_url'], strpos($data['img_url'],config('setting.upload_path'))+7);
+            $imageData['from'] = config('setting.img_form_local');
+            $imageData['update_time'] = $time;
+            $imageId = Db::name('image')->insertGetId($imageData);
+
+            unset($data['img_url']);
+            $data['img_id'] = $imageId;
+            $data['update_time'] = $time;
+            $res = Db::name('banner_item')->insert($data);
+            if($res){
+                $this->success('保存成功！');
+            }else{
+                $this->error('保存失败！');
+            }
+        }
     }
 
     public function editBannerItem()
@@ -84,7 +134,7 @@ class Banner extends BaseController
         if ($this->request->isGet())
         {
             $id = $this->request->get('id');
-            $this->bannerItem = Db::table('banner_item')->alias('bi')
+            $this->bannerItem = Db::name('banner_item')->alias('bi')
                 ->field('bi.*,i.url')
                 ->join('image i', 'bi.img_id = i.id')
                 ->where(['bi.id' => $id])
@@ -95,7 +145,50 @@ class Banner extends BaseController
         }
         elseif ($this->request->isPost())
         {
+            $this->_input([
+                'key_word'  => $this->request->post('key_word'),
+                'type'      => $this->request->post('type'),
+                'status'    => $this->request->post('status'),
+                'img_url'   => $this->request->post('img_url'),
+                'banner_id' => $this->request->post('banner_id'),
+                'img_id'  => $this->request->post('img_id'),
+                'id'  => $this->request->post('id'),
+            ], [
+                'key_word' => 'require',
+                'type' => 'require',
+                'status' => 'require',
+                'img_url' => 'require',
+                'banner_id' => 'require',
+                'img_id' => 'require',
+                'id' => 'require'
+            ], [
+                'key_word.require' => '关键字必须填写！',
+                'type.require' => '类型必须选择！',
+                'status.require' => '是否上线必须选择！',
+                'img_url.require' => '图片必须上传！',
+                'banner_id.require' => 'banner_id参数错误！',
+                'img_id.require' => 'img_id参数错误！',
+                'id.require' => 'id参数错误！'
+            ]);
+            $data = $this->request->post();
+            if($data['type'] == 1 && !is_numeric($data['key_word'])){
+                $this->error('类型导向商品,关键字必须是商品id！');
+            }
 
+            $time = time();
+            $imageData['id']   = $data['img_id'];
+            $imageData['url']  = substr($data['img_url'], strpos($data['img_url'],config('setting.upload_path'))+7);
+            $imageData['from'] = config('setting.img_form_local');
+            $imageData['update_time'] = $time;
+            Db::name('image')->where('id',$imageData['id'])->update($imageData);
+            unset($data['img_url']);
+            $data['update_time'] = $time;
+            $res = Db::name('banner_item')->where('id',$data['id'])->update($data);
+            if($res){
+                $this->success('保存成功！');
+            }else{
+                $this->error('保存失败！');
+            }
         }
     }
 
@@ -104,7 +197,7 @@ class Banner extends BaseController
         $banner_item_id = $this->request->post('banner_item_id');
         $banner_id = $this->request->post('banner_id');
         $time = time();
-        $res = Db::table('banner_item')->alias('bi')
+        $res = Db::name('banner_item')->alias('bi')
             ->join('image i','bi.img_id = i.id')
             ->where(['bi.banner_id' => $banner_id, 'bi.id' => $banner_item_id])
             ->update(['bi.delete_time'=>$time,'bi.status'=>0,'bi.update_time'=>$time,'i.delete_time'=>$time,'i.update_time'=>$time]);

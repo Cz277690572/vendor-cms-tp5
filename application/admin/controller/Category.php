@@ -82,16 +82,16 @@ class Category extends BaseController
             $data['update_time'] = time();
             if($this->isAddMode){
                 $imageData['url']  = substr($data['topic_img_url'], strpos($data['topic_img_url'],config('setting.upload_path'))+7);
-                $imageData['from'] = 1;
-                $imageData['update_time'] = time();
+                $imageData['from'] = config('setting.img_form_local');;
+                $imageData['update_time'] = $data['update_time'];
                 $imageId = Db::name('image')->insertGetId($imageData);
                 $data['topic_img_id'] = $imageId;
                 unset($data['topic_img_url']);
             }else{
                 $imageData['id']   = $data['topic_img_id'];
                 $imageData['url']  = substr($data['topic_img_url'], strpos($data['topic_img_url'],config('setting.upload_path'))+7);
-                $imageData['from'] = 1;
-                $imageData['update_time'] = time();
+                $imageData['from'] = config('setting.img_form_local');;
+                $imageData['update_time'] = $data['update_time'];
                 Db::name('image')->where('id',$imageData['id'])->update($imageData);
                 unset($data['topic_img_url']);
             }

@@ -148,7 +148,7 @@ class Product extends BaseController
                 $mainImgData = array();
                 $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
                 $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
-                $mainImgData['from'] = 1;
+                $mainImgData['from'] = config('setting.img_form_local');
                 $mainImgData['update_time'] = $time;
                 $mainImgId = Db::name('image')->insertGetId($mainImgData);
                 $data['main_img_url'] = $mainImgData['url'];
@@ -169,7 +169,7 @@ class Product extends BaseController
                 $productImageData = array();
                 foreach ($images as $k => $img){
                     $imageData['url']         = substr($img, strpos($img,config('setting.upload_path'))+7);;
-                    $imageData['from']        = 1;
+                    $imageData['from']        = config('setting.img_form_local');
                     $imageData['update_time'] = $time;
                     $imageId = Db::name('image')->insertGetId($imageData);
 

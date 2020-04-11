@@ -14,7 +14,7 @@
         <div class="layui-row margin-bottom-15">
             <label class="layui-col-xs2 think-form-label">关键字</label>
             <label class="layui-col-xs10">
-                <input name="sort" required value='{$bannerItem.key_word|default=""}' placeholder="请输入关键字" class="layui-input">
+                <input name="key_word" required value='{$bannerItem.key_word|default=""}' placeholder="请输入关键字" class="layui-input">
             </label>
         </div>
 
@@ -24,7 +24,7 @@
                 <select class="layui-select" required name="type">
                     {notempty name='$types'}
                     {foreach $types as $type}
-                    {if isset($type.value) and $bannerItem.type eq $type.value}
+                    {if isset($bannerItem.type) and $bannerItem.type eq $type.value}
                     <option selected value="{$type.value}">{$type.name|default=''}</option>
                     {else}
                     <option value="{$type.value}">{$type.name|default=''}</option>
@@ -51,8 +51,8 @@
         </div>
 
         <div class="layui-row margin-bottom-15">
-            <label class="layui-col-xs2 think-form-label">图片<br>(520px*200px)</label>
-            <label class="layui-col-xs10">
+            <label class="layui-col-xs2 think-form-label">图片<br>(480px*256px)png</label>
+            <label class="layui-col-xs10" style="width: 181px;">
                 <input required name="img_url" type="hidden" value="{$bannerItem.img_url|default=''}">
             </label>
             <script>$('[name="img_url"]').uploadOneImage()</script>
@@ -62,6 +62,8 @@
     <div class="hr-line-dashed"></div>
     <div class="layui-form-item text-center">
         {notempty name='bannerItem.id'}<input type='hidden' value='{$bannerItem.id}' name='id'>{/notempty}
+        {notempty name='bannerItem.banner_id'}<input type='hidden' value='{$bannerItem.banner_id}' name='banner_id'>{/notempty}
+        {notempty name='bannerItem.img_id'}<input type='hidden' value='{$bannerItem.img_id}' name='img_id'>{/notempty}
         <button class="layui-btn" type='submit'>保存数据</button>
         <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
     </div>
@@ -70,5 +72,9 @@
 {block name='script'}
 <script>
     window.form.render();
+    //监听上/下线按钮
+    window.form.on('radio(status)', function(data){
+        $("input[name='status']").val(data.value);
+    });
 </script>
 {/block}
