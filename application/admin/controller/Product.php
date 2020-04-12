@@ -14,7 +14,7 @@ class Product extends BaseController
     {
         $this->title = '商品列表';
         $query = $this->_query($this->table)->like('name')->where(['delete_time' => null]);
-        $query->dateBetween('create_time')->order('sort desc, id desc')->page();
+        $query->timeBetween('create_time')->order('sort desc, id desc')->page();
     }
 
     /**

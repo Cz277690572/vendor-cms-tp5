@@ -33,7 +33,6 @@ class Order
 			$status['order_id'] = -1;
 			return $status;
 		}
-
 		// 开始创建订单
 		$orderSnap = $this->snapOrder($status);
 		$order = $this->createOrder($orderSnap);
@@ -162,8 +161,9 @@ class Order
 
 	private function getProductStatus($oPID, $oCount, $products)
 	{
-		$pIndex = -1;
-
+		$pIndex   = -1;
+        $isDelete = true;
+        $isStatus = false;
 		$pStatus = [
 			'id' => null,
 			'haveStock' => false,
@@ -171,14 +171,25 @@ class Order
 			'price' => 0,
 			'name' => '',
 			'totalPrice' => 0,
-			'main_img_url' => null
+			'main_img_url' => null,
+            'delete_time' => null,
+            'status' => 0
 		];
 
 		for ($i=0; $i < count($products); $i++) 
-		{ 
+		{
+		    // 判断商品是否存在
 			if($oPID == $products[$i]['id'])
 			{
-				$pIndex = $i;
+                $pIndex = $i;
+                // 判断商品是否被删除
+                if(is_null($products[$i]['delete_time'])){
+                    $isDelete = false;
+                }
+			    // 判断商品是否下架
+                if($products[$i]['status'] == 1){
+                    $isStatus = true;
+                }
 			}
 		}
 
@@ -186,9 +197,16 @@ class Order
 		{
 			// 客户端传递的product_id有可能根本不存在
 			throw new OrderException([
-				'msg' => 'id为'.$oPID.'的商品不存在，创建订单失败！'
+				'msg' => 'id为'.$oPID.'的商品不存在！'
 			]);
 		}
+		elseif ($isDelete === true || $isStatus === false)
+        {
+            // 客户端传递的product_id有可能已经删除或者下架
+            throw new OrderException([
+                'msg' => '商品名为'.$products[$pIndex]['name'].'的商品已下架！'
+            ]);
+        }
 		else
 		{
 			$product = $products[$pIndex];
@@ -197,7 +215,9 @@ class Order
 			$pStatus['counts'] = $oCount;
 			$pStatus['price'] = $product['price'];
 			$pStatus['main_img_url'] = $product['main_img_url'];
-			$pStatus['totalPrice'] = $product['price'] * $oCount;
+			$pStatus['totalPrice']  = $product['price'] * $oCount;
+            $pStatus['delete_time'] = $product['delete_time'];
+			$pStatus['status'] = $product['status'];
 			if ($product['stock'] - $oCount >= 0)
 			{
 				$pStatus['haveStock'] = true;
@@ -206,7 +226,7 @@ class Order
 		return $pStatus;
 	}
 
-	// 根据订单信息查找真实的商品信息
+	// 根据订单商品信息查找真实的商品信息
 	private function getProductsByOrder($oProducts)
 	{
 		$oPIDs = [];
@@ -214,7 +234,7 @@ class Order
 			array_push($oPIDs, $item['product_id']);
 		}
 		$products = Product::all($oPIDs)
-			->visible(['id', 'price', 'stock', 'name', 'main_img_url'])
+			->visible(['id', 'price', 'stock', 'name', 'main_img_url','status','delete_time'])
 			->toArray();
 		return $products;
 	}

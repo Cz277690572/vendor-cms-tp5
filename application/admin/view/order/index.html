@@ -33,12 +33,19 @@
             <td class='text-left nowrap'>{$vo.user_id|default=''}</td>
             <td class='text-left nowrap'>{$vo.total_count|default=''}</td>
             <td class='text-left nowrap'>{$vo.total_price|default=''}</td>
-            <td class='text-left nowrap'>{$vo.status|default=''}</td>
+            <td class='text-left nowrap'>
+                {eq name='vo.status' value='1'}<span class="layui-badge layui-bg-orange">未支付</span>
+                {elseif $vo.status eq 2}<span class="layui-badge layui-bg-green">已支付,待发货</span>
+                {elseif $vo.status eq 3}<span class="layui-badge layui-bg-green">已发货</span>
+                {elseif $vo.status eq 4}<span class="layui-badge layui-bg-green">已支付，但库存不足</span>
+                {/eq}
+                <br>
+            </td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
             <td class='text-left nowrap'>
-                <a data-dbclick class="layui-btn  layui-btn-normal layui-btn-sm" data-title="查看" data-modal='{:url("detail")}?id={$vo.id}'>查 看</a>
-                <a data-dbclick class="layui-btn layui-btn-sm" data-title="编辑" data-modal='{:url("edit")}?id={$vo.id}'>编 辑</a>
+                <a data-dbclick class="layui-btn layui-btn-sm" data-title="发货" data-modal='{:url("delivery")}?id={$vo.id}'>发 货</a>
+                <a data-dbclick class="layui-btn layui-btn-sm layui-btn-normal" data-title="查看" data-open='{:url("edit")}?id={$vo.id}'>查 看</a>
                 <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该订单吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
             </td>
         </tr>

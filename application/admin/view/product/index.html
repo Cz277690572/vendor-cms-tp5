@@ -51,8 +51,8 @@
             <td class='text-left nowrap'>{eq name='vo.status' value='0'}<span class="layui-badge">下线</span>{else name='vo.status' value='1'}<span class="layui-badge layui-bg-green">上线</span>{/eq}<br></td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
             <td class='text-left nowrap'>
-                <a data-dbclick class="layui-btn layui-btn-sm" data-open='{:url("edit")}?id={$vo.id}'>编 辑</a>
-                <a class="layui-btn layui-btn-sm layui-btn-danger" data-confirm="确定要删除该商品吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
+                <a data-dbclick class="layui-btn layui-btn-sm" title="编辑" data-open='{:url("edit")}?id={$vo.id}'>编 辑</a>
+                <a class="layui-btn layui-btn-sm layui-btn-danger" title="删除" data-confirm="确定要删除该商品吗？" data-action="{:url('remove')}" data-value="id#{$vo.id}" data-csrf="{:systoken('remove')}">删 除</a>
             </td>
         </tr>
         {/foreach}

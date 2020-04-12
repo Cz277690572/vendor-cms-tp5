@@ -16,7 +16,7 @@ class User extends BaseController
     {
         $this->title = 'C端用户列表';
         $query = $this->_query($this->table)->like('openid,nickname');
-        $query->dateBetween('update_time')->order('id desc')->page();
+        $query->timeBetween('update_time')->order('id desc')->page();
 
 
     }

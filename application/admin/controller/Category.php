@@ -17,7 +17,7 @@ class Category extends BaseController
     {
         $this->title = '分类列表';
         $query = $this->_query($this->table)->like('name,update_time')->where(['delete_time' => null]);
-        $query->dateBetween('update_time')->order('sort desc, id desc')->page();
+        $query->timeBetween('update_time')->order('sort desc, id desc')->page();
     }
 
     public function edit()

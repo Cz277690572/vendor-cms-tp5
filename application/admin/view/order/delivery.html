@@ -1,0 +1,90 @@
+<form class="layui-form layui-card" action="{:request()->url()}" data-auto="true" method="post" autocomplete="off">
+    <div class="layui-card-body" style="padding-left:40px">
+
+        <fieldset>
+            <legend>订单信息</legend>
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">状态</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    {eq name='vo.status' value='1'}<span class="layui-badge layui-bg-orange" style="height: 38px;line-height: 38px;">未支付</span>
+                    {elseif $vo.status eq 2}<span class="layui-badge layui-bg-green" style="height: 38px;line-height: 38px;">已支付,待发货</span>
+                    {elseif $vo.status eq 3}<span class="layui-badge layui-bg-green" style="height: 38px;line-height: 38px;">已发货</span>
+                    {elseif $vo.status eq 4}<span class="layui-badge layui-bg-green" style="height: 38px;line-height: 38px;">已支付，但库存不足</span>
+                    {/eq}
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">收货姓名</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <input disabled name="snap_address_name" required value='{$vo.snap_address.name|default=""}' placeholder="请输入收货姓名" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">收货手机</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <input disabled name="snap_address_mobile" required value='{$vo.snap_address.mobile|default=""}' placeholder="请输入收货手机" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label label-required">收货区域</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <div class="color-blue" style="line-height:38px;">
+                        {$vo.snap_address.province|default='--'}
+                        {$vo.snap_address.city|default=''}
+                        {$vo.snap_address.country|default=''}
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">收货地址</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <input disabled name="snap_address_detail" required value='{$vo.snap_address.detail|default=""}' placeholder="请输入收货地址" class="layui-input">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="margin-top-20">
+            <legend>快递信息</legend>
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">快递公司</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <select class="layui-select" name="express_company_code" lay-search>
+                        {foreach $expressList as $express}
+                        {if $vo.express_company_code eq $express.express_code}
+                        <option selected value="{$express.express_code}">{$express.express_title}</option>
+                        {else}
+                        <option value="{$express.express_code}">{$express.express_title}</option>
+                        {/if}
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label style='width:50px' class="layui-form-label">快递单号</label>
+                <div class="layui-input-block" style="margin-left:80px">
+                    <input name="express_send_no" value='{$vo.express_send_no|default=""}' placeholder="请输入快递单号" class="layui-input">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+
+    <div class="layui-form-item text-center">
+        <!--{notempty name='vo.id'}-->
+        <input type='hidden' value='{$vo.id}' name='id'>
+        <!--{/notempty}-->
+        <button class="layui-btn" type='submit'>发 货</button>
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+    </div>
+</form>
+{block name='script'}
+<script>
+    window.form.render();
+</script>
+{/block}

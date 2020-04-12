@@ -1,36 +1,159 @@
-{block name="style"}
-{/block}
-<form onsubmit="return false;" action='{:url("edit")}?id={$info.id}' data-auto="true" method="post" class='layui-form layui-card' autocomplete="off" id="orderForm">
+{extend name='main'}
 
-    <div class="layui-card-body padding-bottom-40">
+{block name="content"}
+<form onsubmit="return false;" id="OrderForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
 
-        <div class="layui-row margin-bottom-15">
-            <label class="layui-col-xs2 think-form-label">发货状态</label>
-            <label class="layui-col-xs10">
-                <select name="status" class="layui-select" required>
-                    {foreach $status as $k=>$v}
-                    {if $k eq $info.status}11
-                    <option selected value="{$k}">{$v}</option>
+    <div class="layui-card-body">
+        <div class="layui-row margin-bottom-30 margin-top-15">
+            <label class="layui-col-xs1 think-form-label">订单号</label>
+            <label class="layui-col-xs6">
+                <input disabled name="order_no" value="{$vo.order_no|default=''}" placeholder="请输入订单号" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">图片</label>
+            <label class="layui-col-xs6">
+                <img data-tips-image src="{$vo.snap_img|default=''}" width="100" height="100">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">标题</label>
+            <label class="layui-col-xs6">
+                <input disabled name="snap_name" value="{$vo.snap_name|default=''}" placeholder="请输入标题" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">预付编号</label>
+            <label class="layui-col-xs6">
+                <input disabled name="prepay_id" value="{$vo.prepay_id|default='无'}" placeholder="请输入预付编号" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">总价格</label>
+            <label class="layui-col-xs6">
+                <input disabled name="total_price" value="{$vo.total_price|default=''}" placeholder="请输入总价格" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">总数量</label>
+            <label class="layui-col-xs6">
+                <input disabled name="total_count" value="{$vo.total_count|default=''}" placeholder="请输入总数量" class="layui-input">
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">状态</label>
+            <label class="layui-col-xs6">
+                <select disabled class="layui-select" name="status">
+                    {notempty name='$orderStatus'}
+                    {foreach $orderStatus as $status}
+                    {if isset($vo.status) and $vo.status eq $status.value}
+                    <option selected value="{$status.value}">{$status.name|default=''}</option>
                     {else}
-                    <option value="{$k}">{$v}</option>
+                    <option value="{$status.value}">{$status.name|default=''}</option>
                     {/if}
                     {/foreach}
+                    {/notempty}
                 </select>
             </label>
         </div>
 
-    </div>
+        <div class="layui-row">
+            <label class="layui-col-xs1 think-form-label">地址</label>
+            <label class="layui-col-xs6 think-form-label" style="text-align: left; font-weight: bold;">
+                <span class="margin-right-30">
+                    {$vo.snap_address.name|default=''}
+                </span>
+                <span>
+                    {$vo.snap_address.mobile|default=''}
+                </span>
+            </label>
+        </div>
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label"></label>
+            <label class="layui-col-xs6 think-form-label" style="text-align: left;">
+                <span>
+                    {$vo.snap_address.province|default=''}
+                    {$vo.snap_address.city|default=''}
+                    {$vo.snap_address.country|default=''}
+                    {$vo.snap_address.detail|default=''}
+                </span>
+            </label>
+        </div>
 
-    <div class="hr-line-dashed"></div>
-    <div class="layui-form-item text-center">
-        {notempty name='info.id'}<input type='hidden' value='{$vo.id}' name='id'>{/notempty}
-        <button class="layui-btn" type='submit'>保存数据</button>
-        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+        <div class="layui-row margin-bottom-30 margin-top-15">
+            <label class="layui-col-xs1 think-form-label">创建时间</label>
+            <label class="layui-col-xs6 think-form-label" style="text-align: left;">
+                <span>{$vo.create_time|format_datetime}</span>
+            </label>
+        </div>
+
+        <div class="layui-row margin-bottom-30">
+            <label class="layui-col-xs1 think-form-label">详情</label>
+            <label class="layui-col-xs6">
+                    {notempty name='vo.snap_items_list'}
+                    <table class="layui-table" lay-skin="line">
+                        <thead>
+                        <tr>
+                            <th class='text-left nowrap'>id</th>
+                            <th class='text-left nowrap'>图片</th>
+                            <th class='text-left nowrap'>标题</th>
+                            <th class='text-left nowrap'>单价</th>
+                            <th class='text-left nowrap'>数量</th>
+                            <th class='text-left nowrap'>库存</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $vo.snap_items_list as $key=>$item}
+                        <tr data-dbclick>
+                            <td class='text-left nowrap'>{$item.id|default=''}</td>
+                            <td class='text-left nowrap'>
+                                <img data-tips-image src="{$item.main_img_url|default=''}" width="100" height="100">
+                            </td>
+                            <td class='text-left nowrap'>{$item.name|default=''}</td>
+                            <td class='text-left nowrap'>{$item.price|default=''}</td>
+                            <td class='text-left nowrap'>{$item.counts|default=''}</td>
+                            <td class='text-left nowrap'>
+                                {eq name='item.haveStock' value='0'}<span class="layui-badge layui-bg-orange">库存不足,缺货</span>{/eq}
+                                {eq name='item.haveStock' value='1'}<span class="layui-badge layui-bg-green">库存充足</span>{/eq}
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    {/notempty}
+                    {empty name='vo.snap_items_list'}<span class="notdata">没有记录哦</span>{/empty}
+            </label>
+        </div>
+
+
+        <div class="layui-form-item text-center">
+            {notempty name='vo.id'}<input type="hidden" name="id" value="{$vo.id}">{/notempty}
+            <button class="layui-btn layui-btn-normal" ng-click="hsitoryBack()" type="button">返 回</button>
+        </div>
     </div>
 </form>
+{/block}
 
 {block name='script'}
 <script>
-    form.render();
+    window.form.render();
+    require(['ckeditor', 'angular'], function () {
+        var app = angular.module("OrderForm", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+
+        function callback($rootScope) {
+            $rootScope.isAddMode = parseInt('{$isAddMode|default=0}');
+            // 返回商品列表
+            $rootScope.hsitoryBack = function () {
+                history.back(), $.msg.close(index);
+            };
+        }
+    })
 </script>
 {/block}

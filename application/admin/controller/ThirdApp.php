@@ -23,7 +23,7 @@ class ThirdApp extends BaseController
     {
         $this->title = '第三方账号管理';
         $query = $this->_query($this->table)->like('app_id');
-        $query->dateBetween('update_time')->order('id desc')->page();
+        $query->timeBetween('update_time')->order('id desc')->page();
     }
 
     public function add()
