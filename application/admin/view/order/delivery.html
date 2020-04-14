@@ -35,7 +35,7 @@
                     <div class="layui-row">
                         <div class="layui-col-xs4"><select class="layui-select block full-width" lay-ignore name="form_province"></select></div>
                         <div class="layui-col-xs4"><select class="layui-select block full-width" lay-ignore name="form_city"></select></div>
-                        <div class="layui-col-xs4"><select class="layui-select block full-width" lay-ignore name="form_area"></select></div>
+                        <div class="layui-col-xs4"><select class="layui-select block full-width" lay-ignore name="form_country"></select></div>
                     </div>
                 </div>
             </div>
@@ -54,6 +54,7 @@
                 <label style='width:50px' class="layui-form-label">快递公司</label>
                 <div class="layui-input-block" style="margin-left:80px">
                     <select class="layui-select" name="express_company_code" lay-search>
+                        <option value="">请选择</option>
                         {foreach $expressList as $express}
                         {if $vo.express_company_code eq $express.express_code}
                         <option selected value="{$express.express_code}">{$express.express_title}</option>
@@ -80,16 +81,16 @@
         <!--{notempty name='vo.id'}-->
         <input type='hidden' value='{$vo.id}' name='id'>
         <!--{/notempty}-->
-        <button class="layui-btn" type='submit'>发 货</button>
-        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消编辑</button>
+        {eq name='vo.status' value='2'}<button class="layui-btn" type='submit'>发 货</button>{/eq}
+        {eq name='vo.status' value='4'}<button class="layui-btn" type='submit'>发 货</button>{/eq}
+        <button class="layui-btn layui-btn-danger" type='button' data-confirm="确定要取消编辑吗？" data-close>取消</button>
     </div>
 </form>
 {block name='script'}
 <script>
     require(['pcasunzips'], function () {
-        new PCAS("form_province", "form_city", "form_area", '{$vo.snap_address.province|default=""}', '{$vo.snap_address.city|default=""}', '{$vo.snap_address.country|default=""}');
+        new PCAS("form_province", "form_city", "form_country", '{$vo.snap_address.province|default=""}', '{$vo.snap_address.city|default=""}', '{$vo.snap_address.country|default=""}');
     });
-
     window.form.render();
 </script>
 {/block}
