@@ -18,6 +18,20 @@ class Order extends BaseController
             ->order('id desc')->page();
     }
 
+    /**
+     * 订单列表处理
+     * @param array $data
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    protected function _index_page_filter(array &$data)
+    {
+        foreach ($data as &$vo) {
+            $vo['snap_address'] = json_decode($vo['snap_address'], true);
+        }
+    }
+
     public function edit() {
         $this->title = '订单详情';
         $this->isAddMode = '0';
@@ -57,7 +71,21 @@ class Order extends BaseController
         $this->_save($this->table, ['delete_time' => $time]);
     }
 
-    //发货
+    /**
+     * 快递追踪查询
+     */
+    public function expressQuery()
+    {
+        list($code, $no) = [input('code', ''), input('no', '')];
+        if (empty($no)) $this->error('快递编号不能为空！');
+        if (empty($code)) $this->error('快递公司编码不能为空！');
+        $this->result = \library\tools\Express::query($code, $no);
+        $this->fetch();
+    }
+
+    /**
+     * 发货
+     */
     public function delivery()
     {
         $this->_form($this->table);
@@ -74,9 +102,14 @@ class Order extends BaseController
             $where = ['delete_time' => null, 'status' => '1'];
             $this->expressList = Db::name('express_company')->where($where)->order('sort asc,id desc')->select();
         }
-        elseif($this->request->isPost()) {
+        elseif($this->request->isPost())
+        {
             if(empty($vo)){
                 $this->error('订单不存在，请检查ID');
+            }
+
+            if($vo['status'] == OrderStatusEnum::DELIVERED) {
+                $this->error('已经发货了，不能再发了！');
             }
 
             if($vo['status'] != OrderStatusEnum::PAID && $vo['status'] != OrderStatusEnum::PAID_BUT_OUT_OF) {
@@ -84,13 +117,15 @@ class Order extends BaseController
             }
 
             $this->_input([
-                'snap_address_name'       => $this->request->post('snap_address_name'),
-                'snap_address_mobile'     => $this->request->post('snap_address_mobile'),
-                'form_province'           => $this->request->post('form_province'),
-                'form_city'               => $this->request->post('form_city'),
-                'form_country'            => $this->request->post('form_country'),
-                'snap_address_detail'     => $this->request->post('snap_address_detail')
+                'id'                  => $this->request->post('id'),
+                'snap_address_name'   => $this->request->post('snap_address_name'),
+                'snap_address_mobile' => $this->request->post('snap_address_mobile'),
+                'form_province'       => $this->request->post('form_province'),
+                'form_city'           => $this->request->post('form_city'),
+                'form_country'        => $this->request->post('form_country'),
+                'snap_address_detail' => $this->request->post('snap_address_detail')
             ], [
+                'id' => 'require',
                 'snap_address_name' => 'require',
                 'snap_address_mobile' => 'require',
                 'form_province' => 'require',
@@ -98,6 +133,7 @@ class Order extends BaseController
                 'form_country' => 'require',
                 'snap_address_detail' => 'require',
             ], [
+                'id.require' => 'ID参数错误！',
                 'snap_address_name.require' => '收货姓名不能为空！',
                 'snap_address_mobile.require' => '收货手机不能为空！',
                 'form_province.require' => '收货省份不能为空！',
@@ -107,6 +143,11 @@ class Order extends BaseController
             ]);
 
             $data = $this->request->post();
+
+            if((!empty($data['express_send_no']) && empty($data['express_company_code'])) || (empty($data['express_send_no']) && !empty($data['express_company_code']))){
+                $this->error('请选择快递公司或者填写快递单号！');
+            }
+
             $snap_address['name']     = $data['snap_address_name'];
             $snap_address['mobile']   = $data['snap_address_mobile'];
             $snap_address['province'] = $data['form_province'];
@@ -115,11 +156,17 @@ class Order extends BaseController
             $snap_address['detail']   = $data['snap_address_detail'];
             $snap_address['update_time'] = $time;
 
+            $order['id'] = $data['id'];
             $order['snap_address'] = json_encode($snap_address);
             $order['status']       = OrderStatusEnum::DELIVERED;
-            $order['express_company_code']  = !empty($data['express_company_code']) ? $data['express_company_code'] : null;
-            $order['express_company_title'] = !empty($data['express_company_title']) ? $data['express_company_title'] : null;
-            $order['express_send_no']   = !empty($data['express_send_no']) ? $data['express_send_no'] : null;
+            if(!empty($data['express_company_code'])){
+                $order['express_company_code']  = $data['express_company_code'];
+                $express_company = Db::name('express_company')->field('express_title')
+                        ->where(['express_code' => $order['express_company_code']])
+                        ->find();
+                $order['express_company_title'] = !empty($express_company['express_title']) ? $express_company['express_title'] : null;
+                $order['express_send_no']   = !empty($data['express_send_no']) ? $data['express_send_no'] : null;
+            }
             $order['express_send_time'] = $time;
             $order['update_time']       = $time;
             $res = Db::name('order')->update($order);

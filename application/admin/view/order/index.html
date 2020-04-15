@@ -17,6 +17,7 @@
             <th class='text-left nowrap'>单品数量</th>
             <th class='text-left nowrap'>总价格</th>
             <th class='text-left nowrap'>状态</th>
+            <th class='text-left nowrap'>发货信息</th>
             <th class='text-left nowrap'>更新时间</th>
             <th class='text-left nowrap'>创建时间</th>
             <th></th>
@@ -34,12 +35,25 @@
             <td class='text-left nowrap'>{$vo.total_count|default=''}</td>
             <td class='text-left nowrap'>{$vo.total_price|default=''}</td>
             <td class='text-left nowrap'>
-                {eq name='vo.status' value='1'}<span class="layui-badge layui-bg-orange">未支付</span>
-                {elseif $vo.status eq 2}<span class="layui-badge layui-bg-green">已支付,待发货</span>
+                {eq name='vo.status' value='1'}<span class="layui-badge layui-bg-gray">未支付</span>
+                {elseif $vo.status eq 2}<span class="layui-badge layui-bg-orange">已支付,待发货</span>
                 {elseif $vo.status eq 3}<span class="layui-badge layui-bg-green">已发货</span>
-                {elseif $vo.status eq 4}<span class="layui-badge layui-bg-green">已支付，但库存不足</span>
+                {elseif $vo.status eq 4}<span class="layui-badge layui-bg-orange">已支付，但库存不足</span>
                 {/eq}
                 <br>
+            </td>
+            <td class='text-left nowrap'>
+                收货信息：{$vo.snap_address.name|default='--'}<span class="margin-left-5 color-blue">{$vo.snap_address.mobile|default='--'}</span><br>
+                收货地址：{$vo.snap_address.province|default='--'}{$vo.snap_address.city|default='--'}{$vo.snap_address.country|default='--'}{$vo.snap_address.detail|default='--'}<br>
+                物流信息：
+                {eq name='vo.status' value='3'}
+                <span class="layui-badge layui-bg-blue">{$vo.express_company_title|default=''}</span>
+                <a data-title="{$vo.express_company_title}（{$vo.express_send_no}）" data-tips-text="快递追踪查询"
+                   data-modal="{:url('expressQuery')}?code={$vo.express_company_code}&no={$vo.express_send_no}"
+                   class="layui-badge layui-bg-gray margin-left-5">{$vo.express_send_no|default=''}</a>
+                {/eq}
+                <br>
+                发货时间：{$vo.express_send_time|format_datetime}<br>
             </td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>
