@@ -1,64 +1,1 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Armin
- * Date: 2020/3/18
- * Time: 19:44
- */
-
-namespace app\admin\controller;
-
-
-use library\tools\Data;
-use think\Db;
-
-class Index extends BaseController
-{
-    public function index(){
-        return $this->fetch('index',['title'=>'系统管理后台 · Vendor']);
-    }
-
-    public function home(){
-        return $this->fetch('home',['title'=>'后台首页']);
-    }
-
-    /**
-     * 修改密码
-     */
-    public function pass($id)
-    {
-//        if (intval($id) !== intval(session('admin_user.id'))) {
-//            $this->error('只能修改当前用户的密码！');
-//        }
-        if ($this->request->isGet()) {
-            $this->verify = true;
-            $this->_form('third_app', 'admin@third_app/pass', 'id', [], ['id' => $id]);
-        } else {
-            $data = $this->_input([
-                'app_secret'    => $this->request->post('app_secret'),
-                're_app_secret'  => $this->request->post('re_app_secret'),
-                'old_app_secret' => $this->request->post('old_app_secret'),
-            ], [
-                'old_app_secret' => 'require',
-                'app_secret'    => 'require|min:4',
-                're_app_secret'  => 'require|confirm:app_secret',
-            ], [
-                'old_app_secret.require' => '旧密码不能为空！',
-                'app_secret.require'    => '登录密码不能为空！',
-                'app_secret.min'        => '登录密码长度不能少于4位有效字符！',
-                're_app_secret.require'  => '重复密码不能为空！',
-                're_app_secret.confirm'  => '重复密码与新的登录密码不匹配，请重新输入！',
-            ]);
-            $thirdApp = Db::name('third_app')->where(['id' => $id])->find();
-            if (md5($data['old_app_secret']) !== $thirdApp['app_secret']) {
-                $this->error('旧密码验证失败，请重新输入！');
-            }
-
-            if (Data::save('third_app', ['id' => $thirdApp['id'], 'app_secret' => md5($data['app_secret'])])) {
-                $this->success('密码修改成功，下次请使用新密码登录！', '');
-            } else {
-                $this->error('密码修改失败，请稍候再试！');
-            }
-        }
-    }
-}
+<?php/** * Created by PhpStorm. * User: Armin * Date: 2020/3/18 * Time: 19:44 */namespace app\admin\controller;use library\tools\Data;use think\Db;class Index extends BaseController{    public function index(){        return $this->fetch('index',['title'=>'系统管理后台 · Vendor']);    }    public function home(){        //商品总量        //用户总量        //已付款订单总数量        //已付款,待发货订单总数量        $productTotal       = Db::name('product')->where(['delete_time' => null])->count();        $userTotal          = Db::name('user')->where(['delete_time' => null])->count();        $paidOrderTotal     = Db::name('order')->where('status','>',1)->count();        $deliveryOrderTotal = Db::name('order')->where('status','in','2,4')->count();        //昨日,销售额        //昨日,支付订单数        //昨日,新增用户数        //昨日,下单用户数        $ydayStartTime = strtotime(date('Y-m-d 00:00:00',time()-86400));        $ydayEndTime   = strtotime(date('Y-m-d 23:59:59', time()-86400));        $ydaySalesVolumeTotal = Db::name('order')->whereBetween('create_time',"{$ydayStartTime},{$ydayEndTime}")            ->where(['delete_time' => null])->sum('total_price');        $ydayPaidOrderTotal   = Db::name('order')->whereBetween('create_time',"{$ydayStartTime},{$ydayEndTime}")            ->where(['delete_time' => null])->where('status','>','1')->sum('total_price');        $ydayNewUserTotal     = Db::name('user')->where(['delete_time' => null])->count();        $ydayPaidUserTotal    = 0;        return $this->fetch('home',['title'=>'后台首页']);    }    /**     * 修改密码     */    public function pass($id)    {//        if (intval($id) !== intval(session('admin_user.id'))) {//            $this->error('只能修改当前用户的密码！');//        }        if ($this->request->isGet()) {            $this->verify = true;            $this->_form('third_app', 'admin@third_app/pass', 'id', [], ['id' => $id]);        } else {            $data = $this->_input([                'app_secret'    => $this->request->post('app_secret'),                're_app_secret'  => $this->request->post('re_app_secret'),                'old_app_secret' => $this->request->post('old_app_secret'),            ], [                'old_app_secret' => 'require',                'app_secret'    => 'require|min:4',                're_app_secret'  => 'require|confirm:app_secret',            ], [                'old_app_secret.require' => '旧密码不能为空！',                'app_secret.require'    => '登录密码不能为空！',                'app_secret.min'        => '登录密码长度不能少于4位有效字符！',                're_app_secret.require'  => '重复密码不能为空！',                're_app_secret.confirm'  => '重复密码与新的登录密码不匹配，请重新输入！',            ]);            $thirdApp = Db::name('third_app')->where(['id' => $id])->find();            if (md5($data['old_app_secret']) !== $thirdApp['app_secret']) {                $this->error('旧密码验证失败，请重新输入！');            }            if (Data::save('third_app', ['id' => $thirdApp['id'], 'app_secret' => md5($data['app_secret'])])) {                $this->success('密码修改成功，下次请使用新密码登录！', '');            } else {                $this->error('密码修改失败，请稍候再试！');            }        }    }}
