@@ -165,7 +165,7 @@ class Order extends BaseController
                         ->where(['express_code' => $order['express_company_code']])
                         ->find();
                 $order['express_company_title'] = !empty($express_company['express_title']) ? $express_company['express_title'] : null;
-                $order['express_send_no']   = !empty($data['express_send_no']) ? $data['express_send_no'] : null;
+                $order['express_send_no']       = !empty($data['express_send_no']) ? $data['express_send_no'] : null;
             }
             $order['express_send_time'] = $time;
             $order['update_time']       = $time;

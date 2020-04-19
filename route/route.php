@@ -22,6 +22,11 @@
     /*小程序接口开始*/
     // 获取轮播图信息
     Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner');
+    // 获取快递服务信息
+    Route::get('api/:version/express/service_info', 'api/:version.Express/getServiceInfo');
+    // 获取快递物流信息
+    Route::get('api/:version/express/logistics_info', 'api/:version.Express/getLogisticsInfo');
+
     // 获取专栏信息
     Route::get('api/:version/theme/by/ids','api/:version.Theme/getSimpleList');
     // 获取专栏里的商品

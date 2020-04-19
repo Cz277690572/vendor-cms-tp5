@@ -50,6 +50,8 @@ class Order
 			$order->user_id = $this->uid;
 			$order->order_no = $orderNo;
 			$order->total_price = $snap['orderPrice'];
+			$order->express_price = $snap['expressPrice'];
+			$order->pay_price = $snap['payPrice'];
 			$order->total_count = $snap['totalCount'];
 			$order->snap_img = $snap['snapImg'];
 			$order->snap_name = $snap['snapName'];
@@ -98,6 +100,8 @@ class Order
 			'snapImg' => ''
 		];
 
+        $snap['expressPrice'] = config('setting.express_full_price') - $status['orderPrice'] > 0 ? config('setting.express_price') : 0;
+        $snap['payPrice']     = $status['orderPrice'] + $snap['expressPrice'];
 		$snap['orderPrice']  = $status['orderPrice'];
 		$snap['totalCount']  = $status['totalCount'];
 		$snap['pStatus']     = $status['pStatusArray'];
@@ -140,6 +144,8 @@ class Order
 		$status = [
 			'pass' => true,
 			'orderPrice' => 0,
+            'expressPrice' => 0,
+            'payPrice' => 0,
 			'totalCount' => 0,
 			'pStatusArray' => []
 		];
@@ -156,6 +162,8 @@ class Order
 			$status['totalCount'] += $pStatus['counts'];
 			array_push($status['pStatusArray'], $pStatus);
 		}
+        $status['expressPrice'] = config('setting.express_full_price') - $status['orderPrice'] > 0 ? config('setting.express_price') : 0;
+        $status['payPrice']     = $status['orderPrice'] + $status['expressPrice'];
 		return $status;
 	}
 

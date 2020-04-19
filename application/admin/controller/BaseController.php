@@ -20,6 +20,7 @@ class BaseController extends Controller
         // token登录令牌校验
         $token = Request::instance()->header('token');
         $url   = Request::instance()->url();
+
         if($url !== '/admin.html'){ // admin.html页面不进行令牌校验
             if(!$token){
                 $this->error('无效令牌,请重新登录!', url('@admin/login'));

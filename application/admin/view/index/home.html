@@ -39,7 +39,7 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="store-total-item nowrap" style="background:linear-gradient(-125deg,#57bdbf,#2f9de2)">
                 <div>商品总量</div>
-                <div>63</div>
+                <div>{$data.product_total}</div>
                 <div>当前商品总数量</div>
             </div>
             <i class="store-total-icon layui-icon layui-icon-template-1"></i>
@@ -47,7 +47,7 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="store-total-item nowrap" style="background:linear-gradient(-125deg,#ff7d7d,#fb2c95)">
                 <div>用户总量</div>
-                <div>1,634</div>
+                <div>{$data.user_total}</div>
                 <div>当前用户总数量</div>
             </div>
             <i class="store-total-icon layui-icon layui-icon-user"></i>
@@ -55,7 +55,7 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="store-total-item nowrap" style="background:linear-gradient(-113deg,#c543d8,#925cc3)">
                 <div>订单总量</div>
-                <div>148</div>
+                <div>{$data.paid_order_total}</div>
                 <div>已付款订单总数量</div>
             </div>
             <i class="store-total-icon layui-icon layui-icon-read"></i>
@@ -63,7 +63,7 @@
         <div class="layui-col-sm6 layui-col-md3">
             <div class="store-total-item nowrap" style="background:linear-gradient(-141deg,#ecca1b,#f39526)">
                 <div>待处理订单总量</div>
-                <div>0</div>
+                <div>{$data.delivery_order_total}</div>
                 <div>已付款,待发货订单总数量</div>
             </div>
             <i class="store-total-icon layui-icon layui-icon-survey"></i>
@@ -80,14 +80,14 @@
                     <i class="layui-icon color-blue" style="font-size:60px;line-height:72px">&#xe65e;</i>
                 </div>
                 <div class="layui-col-xs4">
-                    <div class="font-s14">销售额（元）</div>
-                    <div class="font-s16">1351.00</div>
-                    <div class="font-s12 color-desc">昨日：974.00</div>
+                    <div class="font-s14">{$data.month}月销售额（元，不含运费）</div>
+                    <div class="font-s16">{$data.month_sales_volume_total}</div>
+                    <div class="font-s12 color-desc">昨日：{$data.yday_sales_volume_total}</div>
                 </div>
                 <div class="layui-col-xs5">
-                    <div class="font-s14">支付订单数</div>
-                    <div class="font-s16">106</div>
-                    <div class="font-s12 color-desc">昨日：76</div>
+                    <div class="font-s14">{$data.month}月支付订单数</div>
+                    <div class="font-s16">{$data.month_paid_order_total}</div>
+                    <div class="font-s12 color-desc">昨日：{$data.yday_paid_order_total}</div>
                 </div>
             </div>
         </div>
@@ -97,14 +97,14 @@
                     <i class="layui-icon color-blue" style="font-size:60px;line-height:72px">&#xe663;</i>
                 </div>
                 <div class="layui-col-xs4">
-                    <div class="font-s14">新增用户数</div>
-                    <div class="font-s16">327</div>
-                    <div class="font-s12 color-desc">昨日：238</div>
+                    <div class="font-s14">{$data.month}月新增用户数</div>
+                    <div class="font-s16">{$data.month_new_user_total}</div>
+                    <div class="font-s12 color-desc">昨日：{$data.yday_new_user_total}</div>
                 </div>
                 <div class="layui-col-xs5">
-                    <div class="font-s14">下单用户数</div>
-                    <div class="font-s16">69</div>
-                    <div class="font-s12 color-desc">昨日：34</div>
+                    <div class="font-s14">{$data.month}月下单用户数</div>
+                    <div class="font-s16">{$data.month_paid_user_total}</div>
+                    <div class="font-s12 color-desc">昨日：{$data.yday_paid_user_total}</div>
                 </div>
             </div>
         </div>

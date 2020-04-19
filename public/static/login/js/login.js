@@ -12,9 +12,7 @@ if(window.base.getLocalStorage('token')){
                 window.location.href = '/admin.html';
             }
         },
-        eCallback:function (res) {
-            // 异常处理
-        }
+        eCallback:function (res) {}
     }
     window.base.getData(params);
 }
@@ -32,6 +30,7 @@ $(function () {
             $pwd.next().show().find('div').text('请输入密码');
             return;
         }
+
         var params={
             url:'token/app',
             type:'post',

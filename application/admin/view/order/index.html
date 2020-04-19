@@ -46,14 +46,16 @@
                 收货信息：{$vo.snap_address.name|default='--'}<span class="margin-left-5 color-blue">{$vo.snap_address.mobile|default='--'}</span><br>
                 收货地址：{$vo.snap_address.province|default='--'}{$vo.snap_address.city|default='--'}{$vo.snap_address.country|default='--'}{$vo.snap_address.detail|default='--'}<br>
                 物流信息：
+                <!--{notempty name='vo.express_send_no'}-->
                 {eq name='vo.status' value='3'}
                 <span class="layui-badge layui-bg-blue">{$vo.express_company_title|default=''}</span>
                 <a data-title="{$vo.express_company_title}（{$vo.express_send_no}）" data-tips-text="快递追踪查询"
                    data-modal="{:url('expressQuery')}?code={$vo.express_company_code}&no={$vo.express_send_no}"
                    class="layui-badge layui-bg-gray margin-left-5">{$vo.express_send_no|default=''}</a>
                 {/eq}
+                <!--{/notempty}-->
                 <br>
-                发货时间：{$vo.express_send_time|format_datetime}<br>
+                发货时间：{$vo.express_send_time|format_datetime}
             </td>
             <td class='text-left nowrap'>{$vo.update_time|format_datetime}</td>
             <td class='text-left nowrap'>{$vo.create_time|format_datetime}</td>

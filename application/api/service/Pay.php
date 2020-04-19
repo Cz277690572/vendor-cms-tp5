@@ -32,17 +32,24 @@ class Pay
 		//订单号确实是存在的，但是，订单号和当前用户是不匹配的
 		//订单有可能已经被支付过了
 		//进行库存量检测
+        //补充由于后台更新商品价格或者邮费满减或者邮费金额，会导致原下单时合算的支付金额与现在合算的支付金额不一致
 		$this->checkOrderValid();
 		$orderService = new OrderService();
 		$status = $orderService->checkOrderStock($this->orderID);
+		$order = OrderModel::find($this->orderID);
+		if($order['pay_price'] != $status['payPrice']){
+            throw new OrderException([
+                'msg' => '商品价格更新了或运费金额更新了！请重新下单！'
+            ]);
+        }
 		if (!$status['pass'])
 		{
 			return $status;
 		}
-		return $this->makeWxPreOrder($status['orderPrice']);
+		return $this->makeWxPreOrder($status['payPrice']);
 	}
 
-	private function makeWxPreOrder($totalPrice)
+	private function makeWxPreOrder($payPrice)
 	{
 		// openid
 		$openid = Token::getCurrentTokenVar('openid');
@@ -53,8 +60,8 @@ class Pay
 		$wxOrderData = new \WxPay\WxPayUnifiedOrder();
 		$wxOrderData->SetOut_trade_no($this->orderNO);
 		$wxOrderData->SetTrade_type('JASPI');
-		$wxOrderData->SetTotal_fee($totalPrice*100);
-		$wxOrderData->SetBody('李白的酒');
+		$wxOrderData->SetTotal_fee($payPrice*100);
+		$wxOrderData->SetBody('日惠优品');
 		$wxOrderData->SetOpenid($openid);
 		$wxOrderData->SetNotify_url(config('secure.pay_back_url'));
 

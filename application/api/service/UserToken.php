@@ -91,7 +91,8 @@ class UserToken extends Token
 
 	private function newUser($openid){
 		$user = UserModel::create([
-				'openid' => $openid
+				'openid' => $openid,
+                'create_time' => time()
 			]);
 		return $user->id;
 	}
