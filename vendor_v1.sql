@@ -11,7 +11,7 @@
  Target Server Version : 100411
  File Encoding         : 65001
 
- Date: 14/04/2020 01:16:57
+ Date: 20/04/2020 00:33:30
 */
 
 SET NAMES utf8mb4;
@@ -215,7 +215,7 @@ CREATE TABLE `image`  (
   `delete_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 187 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '图片总表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 192 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '图片总表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of image
@@ -230,8 +230,8 @@ INSERT INTO `image` VALUES (7, '/category-fry-a.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (8, '/a4d604d4cb305851/b96a161440e4a640.png', 1, NULL, 1585925065);
 INSERT INTO `image` VALUES (9, '/category-rice.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (14, '/product-rice@6.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (16, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1586281467);
-INSERT INTO `image` VALUES (17, '/2@theme.png', 1, NULL, 1586281450);
+INSERT INTO `image` VALUES (16, '/ff75da8d60a412fb/441fcc78976e3a2a.png', 1, NULL, 1587210454);
+INSERT INTO `image` VALUES (17, '/2@theme.png', 1, NULL, 1587210428);
 INSERT INTO `image` VALUES (18, '/3@theme.png', 1, NULL, 1586607589);
 INSERT INTO `image` VALUES (19, '/detail-1@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (20, '/detail-2@1-dryfruit.png', 1, NULL, NULL);
@@ -245,11 +245,8 @@ INSERT INTO `image` VALUES (27, '/detail-9@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (28, '/detail-11@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (29, '/detail-10@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (31, '/product-rice@1.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (32, '/product-tea@1.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (33, '/product-dryfruit@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (36, '/product-dryfruit@3.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (37, '/product-dryfruit@4.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (38, '/product-dryfruit@5.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (39, '/product-dryfruit-a@6.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (41, '/product-rice@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (42, '/product-rice@3.png', 1, NULL, NULL);
@@ -259,8 +256,8 @@ INSERT INTO `image` VALUES (45, '/product-fry@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (46, '/product-fry@3.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (47, '/product-tea@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (48, '/product-tea@3.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (49, '/1@theme-head.png', 1, NULL, 1586281467);
-INSERT INTO `image` VALUES (50, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1586281450);
+INSERT INTO `image` VALUES (49, '/1@theme-head.png', 1, NULL, 1587210454);
+INSERT INTO `image` VALUES (50, '/652cb7a7217aa9b1/9ea7c600f1a323c9.png', 1, NULL, 1587210428);
 INSERT INTO `image` VALUES (51, '/3@theme-head.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (52, '/product-cake@1.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (53, '/product-cake@2.png', 1, NULL, NULL);
@@ -283,15 +280,18 @@ INSERT INTO `image` VALUES (73, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NUL
 INSERT INTO `image` VALUES (74, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585673185);
 INSERT INTO `image` VALUES (75, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585673198);
 INSERT INTO `image` VALUES (139, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, NULL, 1586608508);
-INSERT INTO `image` VALUES (161, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, NULL, 1585937785);
-INSERT INTO `image` VALUES (162, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, NULL, 1585937785);
+INSERT INTO `image` VALUES (161, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 1587210485, 1585937785);
+INSERT INTO `image` VALUES (162, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1587210485, 1585937785);
 INSERT INTO `image` VALUES (166, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, NULL, 1586601606);
 INSERT INTO `image` VALUES (168, '/product-dryfruit@7.png', 1, NULL, 1586607214);
 INSERT INTO `image` VALUES (170, '/product-dryfruit@1.png', 1, NULL, 1586607454);
-INSERT INTO `image` VALUES (174, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, NULL, 1586607786);
-INSERT INTO `image` VALUES (175, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, NULL, 1586607893);
+INSERT INTO `image` VALUES (174, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1587210480, 1586607786);
+INSERT INTO `image` VALUES (175, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1587210476, 1586607893);
 INSERT INTO `image` VALUES (178, '/product-vg@1.png', 1, NULL, 1586669342);
 INSERT INTO `image` VALUES (186, '/product-vg@2.png', 1, NULL, 1586673207);
+INSERT INTO `image` VALUES (187, '/product-dryfruit@2.png', 1, NULL, 1587233948);
+INSERT INTO `image` VALUES (188, '/product-tea@1.png', 1, NULL, 1587235718);
+INSERT INTO `image` VALUES (191, '/product-dryfruit@5.png', 1, NULL, 1587236399);
 
 -- ----------------------------
 -- Table structure for order
@@ -303,8 +303,8 @@ CREATE TABLE `order`  (
   `user_id` int(11) NOT NULL COMMENT '外键，用户id，注意并不是openid',
   `delete_time` int(11) NULL DEFAULT NULL,
   `create_time` int(11) NULL DEFAULT NULL,
-  `total_price` decimal(6, 2) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1:未支付， 2：已支付，3：已发货 , 4: 已支付，但库存不足',
+  `total_price` decimal(20, 2) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1:未支付， 2:已支付，3:已发货 , 4:已支付，但库存不足, 5:已完成, 6:已取消',
   `snap_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单快照图片',
   `snap_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单快照名称',
   `total_count` int(11) NOT NULL DEFAULT 0,
@@ -316,25 +316,41 @@ CREATE TABLE `order`  (
   `express_company_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发货快递公司名称',
   `express_send_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发货单号',
   `express_send_time` int(11) NULL DEFAULT NULL COMMENT '发货时间',
+  `express_price` decimal(20, 2) NULL DEFAULT 0.00 COMMENT '快递费用',
+  `pay_price` decimal(20, 2) NOT NULL DEFAULT 0.00 COMMENT '支付金额',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `order_no`(`order_no`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 550 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 564 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES (539, 'D412238306382049', 58, NULL, 1586623830, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586623830, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (540, 'D412272636757858', 58, NULL, 1586627263, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1586627263, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (541, 'D412277427986625', 58, NULL, 1586627742, 10.00, 1, 'http://vendor.cn/upload/5037bffcdf09bc7c/b5261a08189ea4be.png', '濑尿虾寿司 100给', 1, 1586627742, '[{\"id\":6859225246,\"haveStock\":true,\"counts\":1,\"price\":\"10.00\",\"name\":\"\\u6fd1\\u5c3f\\u867e\\u5bff\\u53f8 100\\u7ed9\",\"totalPrice\":10,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/5037bffcdf09bc7c\\/b5261a08189ea4be.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (542, 'D412282278117526', 58, NULL, 1586628227, 0.01, 1, 'http://vendor.cn/upload/product-fry@3.png', '碧水葵花籽 128克', 1, 1586628227, '[{\"id\":19,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u78a7\\u6c34\\u8475\\u82b1\\u7c7d 128\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@3.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (543, 'D412629597303403', 58, NULL, 1586662959, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662959, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (544, 'D412629695899816', 58, NULL, 1586662969, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662969, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (545, 'D412629727784588', 58, NULL, 1586662972, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662972, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (546, 'D412697938307184', 58, NULL, 1586669793, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586669793, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (547, 'D412710423963905', 58, NULL, 1586671042, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586671042, '[{\"id\":7,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (548, 'D412713217829641', 58, NULL, 1586671321, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1586671321, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `order` VALUES (549, 'D412715756422202', 58, NULL, 1586671575, 0.01, 3, 'http://vendor.cn/upload/product-dryfruit@2.png', '春生龙眼 500克', 1, 1586705504, '[{\"id\":5,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6625\\u751f\\u9f99\\u773c 500\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', '999999999', NULL, NULL, NULL, NULL);
+INSERT INTO `order` VALUES (539, 'D412238306382049', 58, NULL, 1586623830, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586623830, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (540, 'D412272636757858', 58, NULL, 1586627263, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1586627263, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (541, 'D412277427986625', 58, NULL, 1586627742, 10.00, 1, 'http://vendor.cn/upload/5037bffcdf09bc7c/b5261a08189ea4be.png', '濑尿虾寿司 100给', 1, 1586627742, '[{\"id\":6859225246,\"haveStock\":true,\"counts\":1,\"price\":\"10.00\",\"name\":\"\\u6fd1\\u5c3f\\u867e\\u5bff\\u53f8 100\\u7ed9\",\"totalPrice\":10,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/5037bffcdf09bc7c\\/b5261a08189ea4be.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (542, 'D412282278117526', 58, NULL, 1586628227, 0.01, 1, 'http://vendor.cn/upload/product-fry@3.png', '碧水葵花籽 128克', 1, 1586628227, '[{\"id\":19,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u78a7\\u6c34\\u8475\\u82b1\\u7c7d 128\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@3.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (543, 'D412629597303403', 58, NULL, 1586662959, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662959, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (544, 'D412629695899816', 58, NULL, 1586662969, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662969, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (545, 'D412629727784588', 58, NULL, 1586662972, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586662972, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\"}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (546, 'D412697938307184', 58, NULL, 1586669793, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586669793, '[{\"id\":7,\"haveStock\":true,\"counts\":\"1\",\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (547, 'D412710423963905', 58, NULL, 1586671042, 0.01, 1, 'http://vendor.cn/upload/product-vg@2.png', '泥蒿 半斤', 1, 1586671042, '[{\"id\":7,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6ce5\\u84bf \\u534a\\u65a4\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-vg@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (548, 'D412713217829641', 58, NULL, 1586671321, 0.01, 3, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1586967974, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586967974}', NULL, 'zhongtong', '中通速递', '75331105617706', 1586967974, 0.00, 0.00);
+INSERT INTO `order` VALUES (549, 'D412715756422202', 58, NULL, 1586671575, 0.01, 3, 'http://vendor.cn/upload/product-dryfruit@2.png', '春生龙眼 500克', 1, 1586705504, '[{\"id\":5,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6625\\u751f\\u9f99\\u773c 500\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', '999999999', 'zhongtong', '中通速递', '75331105617706', 1586967974, 0.00, 0.00);
+INSERT INTO `order` VALUES (550, 'D419299148239984', 58, NULL, 1587229914, 0.43, 1, 'http://vendor.cn/upload/product-tea@1.png', '红袖枸杞 6克*3袋', 43, 1587229914, '[{\"id\":4,\"haveStock\":true,\"counts\":43,\"price\":\"0.01\",\"name\":\"\\u7ea2\\u8896\\u67b8\\u675e 6\\u514b*3\\u888b\",\"totalPrice\":0.43,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-tea@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 0.00, 0.00);
+INSERT INTO `order` VALUES (551, 'D419315733126051', 58, NULL, 1587231573, 0.03, 1, 'http://vendor.cn/upload/product-dryfruit@2.png', '春生龙眼 500克', 3, 1587231573, '[{\"id\":5,\"haveStock\":true,\"counts\":3,\"price\":\"0.01\",\"name\":\"\\u6625\\u751f\\u9f99\\u773c 500\\u514b\",\"totalPrice\":0.03,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.03);
+INSERT INTO `order` VALUES (552, 'D419347984136208', 58, NULL, 1587234798, 0.10, 1, 'http://vendor.cn/upload/product-dryfruit@2.png', '春生龙眼 500克', 1, 1587234798, '[{\"id\":5,\"haveStock\":true,\"counts\":1,\"price\":\"0.10\",\"name\":\"\\u6625\\u751f\\u9f99\\u773c 500\\u514b\",\"totalPrice\":0.1,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.10);
+INSERT INTO `order` VALUES (553, 'D419348362065799', 58, NULL, 1587234836, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1587234836, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (554, 'D419349665922132', 58, NULL, 1587234966, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1587234966, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (555, 'D419352200962244', 58, NULL, 1587235220, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1587235220, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (556, 'D419352861092919', 58, NULL, 1587235286, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1587235286, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (557, 'D419356411931441', 58, NULL, 1587235641, 0.01, 1, 'http://vendor.cn/upload/product-tea@1.png', '红袖枸杞 6克*3袋', 1, 1587235641, '[{\"id\":4,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7ea2\\u8896\\u67b8\\u675e 6\\u514b*3\\u888b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-tea@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (558, 'D419361798560135', 58, NULL, 1587236179, 0.01, 1, 'http://vendor.cn/upload/product-dryfruit@5.png', '万紫千凤梨 300克', 1, 1587236179, '[{\"id\":10,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u4e07\\u7d2b\\u5343\\u51e4\\u68a8 300\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@5.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (559, 'D419626228617897', 58, NULL, 1587262622, 0.01, 2, 'http://vendor.cn/upload/product-dryfruit@7.png', '珍奇异果 3个', 1, 1587262622, '[{\"id\":12,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u73cd\\u5947\\u5f02\\u679c 3\\u4e2a\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@7.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (560, 'D419948208220863', 58, NULL, 1587294820, 0.08, 1, 'http://vendor.cn/upload/product-cake@2.png', '小红的猪耳朵 120克等', 8, 1587294820, '[{\"id\":8,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u590f\\u65e5\\u8292\\u679c 3\\u4e2a\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@3.png\",\"delete_time\":null,\"status\":1},{\"id\":6,\"haveStock\":true,\"counts\":7,\"price\":\"0.01\",\"name\":\"\\u5c0f\\u7ea2\\u7684\\u732a\\u8033\\u6735 120\\u514b\",\"totalPrice\":0.07,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-cake@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.08);
+INSERT INTO `order` VALUES (561, 'D419036495488626', 58, NULL, 1587303649, 0.01, 1, 'http://vendor.cn/upload/product-dryfruit-a@6.png', '贵妃笑 100克', 1, 1587303649, '[{\"id\":11,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u8d35\\u5983\\u7b11 100\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit-a@6.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (562, 'D419115435859913', 58, NULL, 1587311543, 0.01, 1, 'http://vendor.cn/upload/product-fry@1.png', '油炸花生 300克', 1, 1587311543, '[{\"id\":17,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6cb9\\u70b8\\u82b1\\u751f 300\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (563, 'D419115949299141', 58, NULL, 1587311594, 0.01, 1, 'http://vendor.cn/upload/product-fry@3.png', '碧水葵花籽 128克', 1, 1587311594, '[{\"id\":19,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u78a7\\u6c34\\u8475\\u82b1\\u7c7d 128\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@3.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 
 -- ----------------------------
 -- Table structure for order_product
@@ -354,14 +370,29 @@ CREATE TABLE `order_product`  (
 -- ----------------------------
 INSERT INTO `order_product` VALUES (540, 3, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (548, 3, 1, NULL, NULL);
-INSERT INTO `order_product` VALUES (549, 5, 1, 1586710745, NULL);
+INSERT INTO `order_product` VALUES (553, 3, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (554, 3, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (555, 3, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (556, 3, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (550, 4, 43, NULL, NULL);
+INSERT INTO `order_product` VALUES (557, 4, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (549, 5, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (551, 5, 3, NULL, NULL);
+INSERT INTO `order_product` VALUES (552, 5, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (560, 6, 7, NULL, NULL);
 INSERT INTO `order_product` VALUES (539, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (543, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (544, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (545, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (546, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (547, 7, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (560, 8, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (558, 10, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (561, 11, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (559, 12, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (562, 17, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (542, 19, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (563, 19, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (541, 6859225246, 1, NULL, NULL);
 
 -- ----------------------------
@@ -392,13 +423,13 @@ CREATE TABLE `product`  (
 INSERT INTO `product` VALUES (1, '芹菜 半斤', 0.01, 998, NULL, 3, '/product-vg@1.png', 1, 0, 0, NULL, 1586669342, '', 178);
 INSERT INTO `product` VALUES (2, '梨花带雨 3个', 0.01, 984, NULL, 2, '/product-dryfruit@1.png', 1, 0, 0, NULL, 1586607454, '', 170);
 INSERT INTO `product` VALUES (3, '素米 327克', 0.01, 996, NULL, 7, '/product-rice@1.png', 1, 1, 0, NULL, NULL, NULL, 31);
-INSERT INTO `product` VALUES (4, '红袖枸杞 6克*3袋', 0.01, 998, NULL, 6, '/product-tea@1.png', 1, 1, 0, NULL, NULL, NULL, 32);
-INSERT INTO `product` VALUES (5, '春生龙眼 500克', 0.01, 995, NULL, 2, '/product-dryfruit@2.png', 1, 1, 0, NULL, NULL, NULL, 33);
+INSERT INTO `product` VALUES (4, '红袖枸杞 6克*3袋', 0.01, 998, NULL, 6, '/product-tea@1.png', 1, 0, 0, NULL, 1587235718, '', 188);
+INSERT INTO `product` VALUES (5, '春生龙眼 500克', 0.10, 995, NULL, 2, '/product-dryfruit@2.png', 1, 1, 0, NULL, 1587233948, '', 187);
 INSERT INTO `product` VALUES (6, '小红的猪耳朵 120克', 0.01, 997, NULL, 5, '/product-cake@2.png', 1, 1, 0, NULL, NULL, NULL, 53);
 INSERT INTO `product` VALUES (7, '泥蒿 半斤', 0.01, 998, NULL, 3, '/product-vg@2.png', 1, 0, 0, 1586607454, 1586673207, '', 186);
 INSERT INTO `product` VALUES (8, '夏日芒果 3个', 0.01, 995, NULL, 2, '/product-dryfruit@3.png', 1, 1, 0, NULL, NULL, NULL, 36);
 INSERT INTO `product` VALUES (9, '冬木红枣 500克', 0.01, 996, NULL, 2, '/product-dryfruit@4.png', 1, 1, 0, NULL, NULL, NULL, 37);
-INSERT INTO `product` VALUES (10, '万紫千凤梨 300克', 0.01, 996, NULL, 2, '/product-dryfruit@5.png', 1, 1, 0, NULL, NULL, NULL, 38);
+INSERT INTO `product` VALUES (10, '万紫千凤梨 300克', 0.01, 996, NULL, 2, '/product-dryfruit@5.png', 1, 1, 0, NULL, 1587236399, '', 191);
 INSERT INTO `product` VALUES (11, '贵妃笑 100克', 0.01, 994, NULL, 2, '/product-dryfruit-a@6.png', 1, 1, 0, NULL, NULL, NULL, 39);
 INSERT INTO `product` VALUES (12, '珍奇异果 3个', 0.01, 999, NULL, 2, '/product-dryfruit@7.png', 1, 1, 0, NULL, 1586607214, '', 168);
 INSERT INTO `product` VALUES (13, '绿豆 125克', 0.01, 999, NULL, 7, '/product-rice@2.png', 1, 1, 0, NULL, NULL, NULL, 41);
@@ -421,9 +452,9 @@ INSERT INTO `product` VALUES (30, '八宝莲子 200克', 0.01, 999, NULL, 7, '/p
 INSERT INTO `product` VALUES (31, '深涧木耳 78克', 0.01, 999, NULL, 7, '/product-rice@7.png', 1, 1, 10, NULL, NULL, NULL, 60);
 INSERT INTO `product` VALUES (32, '土豆 半斤', 0.01, 999, NULL, 3, '/product-vg@4.png', 1, 1, 98, NULL, NULL, NULL, 66);
 INSERT INTO `product` VALUES (33, '青椒 半斤', 0.01, 999, NULL, 3, '/product-vg@5.png', 1, 1, 99, NULL, NULL, NULL, 67);
-INSERT INTO `product` VALUES (6859225246, '濑尿虾寿司 100给', 10.00, 99, NULL, 7, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 1, 0, NULL, 1585937785, '描述11', 161);
-INSERT INTO `product` VALUES (6866077592, 'test', 1.00, 1, NULL, 5, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1, 0, NULL, 1586607786, '', 174);
-INSERT INTO `product` VALUES (6866078548, 'test4444', 1.00, 2, NULL, 5, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1, 0, NULL, 1586607893, '', 175);
+INSERT INTO `product` VALUES (6859225246, '濑尿虾寿司 100给', 10.00, 99, 1587210485, 7, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 0, 0, NULL, 1585937785, '描述11', 161);
+INSERT INTO `product` VALUES (6866077592, 'test', 1.00, 1, 1587210480, 5, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 0, 0, NULL, 1586607786, '', 174);
+INSERT INTO `product` VALUES (6866078548, 'test4444', 1.00, 2, 1587210476, 5, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 0, 0, NULL, 1586607893, '', 175);
 
 -- ----------------------------
 -- Table structure for product_image
@@ -454,7 +485,7 @@ INSERT INTO `product_image` VALUES (13, 28, NULL, 11, 11);
 INSERT INTO `product_image` VALUES (14, 29, NULL, 10, 11);
 INSERT INTO `product_image` VALUES (18, 62, NULL, 12, 11);
 INSERT INTO `product_image` VALUES (19, 63, NULL, 13, 11);
-INSERT INTO `product_image` VALUES (54, 162, NULL, 0, 6859225246);
+INSERT INTO `product_image` VALUES (54, 162, 1587210485, 0, 6859225246);
 
 -- ----------------------------
 -- Table structure for product_property
@@ -468,7 +499,7 @@ CREATE TABLE `product_property`  (
   `delete_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 86 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_property
@@ -501,6 +532,9 @@ INSERT INTO `product_property` VALUES (73, '保质期', '12个月', 6866077592, 
 INSERT INTO `product_property` VALUES (74, '1', '2', 6866078548, NULL, 1586607893);
 INSERT INTO `product_property` VALUES (77, '保质期', '3天', 1, NULL, 1586669342);
 INSERT INTO `product_property` VALUES (85, '保质期', '12个月', 7, NULL, 1586673207);
+INSERT INTO `product_property` VALUES (86, '1', '2', 5, NULL, 1587233948);
+INSERT INTO `product_property` VALUES (87, '1', '2', 4, NULL, 1587235718);
+INSERT INTO `product_property` VALUES (90, '1', '2', 10, NULL, 1587236399);
 
 -- ----------------------------
 -- Table structure for system_config
@@ -586,8 +620,8 @@ CREATE TABLE `theme`  (
 -- ----------------------------
 -- Records of theme
 -- ----------------------------
-INSERT INTO `theme` VALUES (1, '专题栏位一', '美味水果世界', 16, 1, 0, NULL, 49, 1586281467);
-INSERT INTO `theme` VALUES (2, '专题栏位二', '新品推荐', 17, 1, 2, NULL, 50, 1586281450);
+INSERT INTO `theme` VALUES (1, '专题栏位一', '美味水果世界', 16, 1, 0, NULL, 49, 1587210454);
+INSERT INTO `theme` VALUES (2, '专题栏位二', '新品推荐', 17, 1, 2, NULL, 50, 1587210428);
 INSERT INTO `theme` VALUES (3, '专题栏位三3', '做个干物女11', 18, 1, 3, NULL, 18, 1586607589);
 
 -- ----------------------------

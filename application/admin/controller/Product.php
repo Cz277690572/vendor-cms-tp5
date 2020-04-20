@@ -13,7 +13,7 @@ class Product extends BaseController
     public function index()
     {
         $this->title = '商品列表';
-        $query = $this->_query($this->table)->like('name')->where(['delete_time' => null]);
+        $query = $this->_query($this->table)->equal('status,category_id')->like('name')->where(['delete_time' => null]);
         $query->timeBetween('create_time')->order('sort desc, id desc')->page();
     }
 

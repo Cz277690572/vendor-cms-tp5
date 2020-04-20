@@ -27,7 +27,7 @@ class DeliveryMessage extends WxMessage
 		$dt = new \DateTime();
 		$data = [
 			'keyword1' => [
-				'value' => '顺丰快递',
+				'value' => !empty($order->express_company_title) ? $order->express_company_title : '已发货',
 			],
 			'keyword2' => [
 				'value' => $order->snap_name,

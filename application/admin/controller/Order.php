@@ -3,6 +3,7 @@
 
 namespace app\admin\controller;
 
+use app\api\service\DeliveryMessage;
 use app\lib\enum\OrderStatusEnum;
 use think\Db;
 
@@ -27,6 +28,14 @@ class Order extends BaseController
      */
     protected function _index_page_filter(array &$data)
     {
+        $this->orderStatus = [
+            ['value'=>OrderStatusEnum::UNPAID, 'name'=>'未支付'],
+            ['value'=>OrderStatusEnum::PAID, 'name'=>'已支付,待发货'],
+            ['value'=>OrderStatusEnum::DELIVERED, 'name'=>'已发货'],
+            ['value'=>OrderStatusEnum::PAID_BUT_OUT_OF, 'name'=>'已支付,但库存不足'],
+            ['value'=>OrderStatusEnum::COMPLETE, 'name'=>'已完成'],
+            ['value'=>OrderStatusEnum::CANCEL, 'name'=>'已取消']
+        ];
         foreach ($data as &$vo) {
             $vo['snap_address'] = json_decode($vo['snap_address'], true);
         }
@@ -52,10 +61,12 @@ class Order extends BaseController
         if ($this->request->isGet())
         {
             $this->orderStatus = [
-                ['value'=>1,'name'=>'未支付'],
-                ['value'=>2,'name'=>'已支付,待发货'],
-                ['value'=>3,'name'=>'已发货'],
-                ['value'=>4,'name'=>'已支付,但库存不足']
+                ['value'=>OrderStatusEnum::UNPAID, 'name'=>'未支付'],
+                ['value'=>OrderStatusEnum::PAID, 'name'=>'已支付,待发货'],
+                ['value'=>OrderStatusEnum::DELIVERED, 'name'=>'已发货'],
+                ['value'=>OrderStatusEnum::PAID_BUT_OUT_OF, 'name'=>'已支付,但库存不足'],
+                ['value'=>OrderStatusEnum::COMPLETE, 'name'=>'已完成'],
+                ['value'=>OrderStatusEnum::CANCEL, 'name'=>'已取消']
             ];
             $data['snap_address'] = json_decode($data['snap_address'], true);
             $data['snap_items_list'] = json_decode($data['snap_items'], true);
@@ -172,6 +183,10 @@ class Order extends BaseController
             $res = Db::name('order')->update($order);
             if($res){
                 // 发送小程序模板消息通知
+                $order = \app\api\model\Order::where('id', '=', $data['id'])
+                    ->find();
+                $message = new DeliveryMessage();
+                $message->sendDeliveryMessage($order, '');
                 $this->success('发货成功！');
             }else{
                 $this->error('发货失败！');

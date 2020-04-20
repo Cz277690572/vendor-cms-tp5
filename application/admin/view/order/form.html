@@ -86,6 +86,30 @@
             </label>
         </div>
 
+        <div class="layui-row">
+            <label class="layui-col-xs1 think-form-label">物流信息</label>
+            <label class="layui-col-xs6 think-form-label" style="text-align: left; font-weight: bold;">
+                {if isset($vo.express_send_no)}
+                    <span class="margin-right-30">
+                        物流公司: {$vo.express_company_title|default='未填写'}
+                    </span>
+                    <a data-title="{$vo.express_company_title}（{$vo.express_send_no}）" data-tips-text="快递追踪查询"
+                                data-modal="{:url('expressQuery')}?code={$vo.express_company_code}&no={$vo.express_send_no}"
+                                class="layui-badge layui-bg-gray margin-left-5">发货单号: {$vo.express_send_no|default=''}</a>
+
+                {else}
+                    <span class="margin-right-30">
+                        无物流信息！
+                    </span>
+                {/if}
+            </label>
+        </div>
+        <div class="layui-row margin-bottom-30 margin-top-15">
+            <label class="layui-col-xs1 think-form-label">快递费用</label>
+            <label class="layui-col-xs6 think-form-label" style="text-align: left;">
+                <span>{$vo.express_price|default=''}元</span>
+            </label>
+        </div>
         <div class="layui-row margin-bottom-30 margin-top-15">
             <label class="layui-col-xs1 think-form-label">创建时间</label>
             <label class="layui-col-xs6 think-form-label" style="text-align: left;">
@@ -120,7 +144,7 @@
                             <td class='text-left nowrap'>{$item.counts|default=''}</td>
                             <td class='text-left nowrap'>
                                 {eq name='item.haveStock' value='0'}<span class="layui-badge layui-bg-orange">库存不足,缺货</span>{/eq}
-                                {eq name='item.haveStock' value='1'}<span class="layui-badge layui-bg-green">库存充足</span>{/eq}
+                                {eq name='item.haveStock' value='1'}<span class="layui-badge layui-bg-green">有货</span>{/eq}
                             </td>
                         </tr>
                         {/foreach}

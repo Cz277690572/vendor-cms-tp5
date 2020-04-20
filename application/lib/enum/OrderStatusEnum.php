@@ -15,4 +15,10 @@ class OrderStatusEnum
 	
 	// 已支付，但库存不足
 	const PAID_BUT_OUT_OF = 4;
+
+	// 已完成
+    const COMPLETE = 5;
+
+	// 已取消
+    const CANCEL = 6;
 }
