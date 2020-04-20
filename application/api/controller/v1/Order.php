@@ -103,4 +103,32 @@ class Order extends BaseController
 		}
 	}
 
+    /**
+     * 定时签收订单
+     * 凌晨1点时, 将已发货七天未签收的订单更新为已完成
+     */
+    public function complete()
+    {
+        $sTime = strtotime(date('Y-m-d 00:00:00', time() - 8*24*60*60));
+        $eTime = strtotime(date('Y-m-d 00:00:00', time() - 7*24*60*60));
+        OrderModel::where('express_send_time','<', $eTime)
+            ->where('express_send_time','>=',$sTime)
+            ->where('status','=',3)
+            ->update(['status' => 5]);
+    }
+
+    /**
+     * 定时关闭订单
+     * 凌晨1点时, 将昨天未支付的订单更新为已取消
+     */
+    public function close()
+    {
+        $sTime = strtotime(date('Y-m-d 00:00:00', time() - 24*60*60));
+        $eTime = strtotime(date('Y-m-d 23:59:59', time() - 24*60*60));
+        OrderModel::where('create_time','<', $eTime)
+            ->where('create_time','>=',$sTime)
+            ->where('status','=',1)
+            ->update(['status' => 6]);
+    }
+
 }

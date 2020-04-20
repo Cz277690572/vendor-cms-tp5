@@ -26,7 +26,6 @@
     Route::get('api/:version/express/service_info', 'api/:version.Express/getServiceInfo');
     // 获取快递物流信息
     Route::get('api/:version/express/logistics_info', 'api/:version.Express/getLogisticsInfo');
-
     // 获取专栏信息
     Route::get('api/:version/theme/by/ids','api/:version.Theme/getSimpleList');
     // 获取专栏里的商品
@@ -58,6 +57,10 @@
     Route::post('api/:version/pay/pre_order', 'api/:version.Pay/getPreOrder');
     // 微信回调api的地址
     Route::post('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
+    // 定时签收订单
+    Route::get('api/:version/order/complete', 'api/:version.Order/complete');
+    // 定时关闭订单
+    Route::get('api/:version/order/close', 'api/:version.Order/close');
     /*小程序接口结束*/
 
     /*cms内容管理开始*/

@@ -13,7 +13,7 @@ class Order extends BaseController
     public function index()
     {
         $this->title = '订单列表';
-        $query = $this->_query($this->table)->like('order_no,user_id');
+        $query = $this->_query($this->table)->equal('status')->like('order_no,user_id');
         $query->timeBetween('create_time,update_time')
             ->where('delete_time', null)
             ->order('id desc')->page();
@@ -193,4 +193,5 @@ class Order extends BaseController
             }
         }
     }
+
 }
