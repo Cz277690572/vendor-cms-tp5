@@ -8,10 +8,8 @@
 
 namespace app\index\controller;
 
-
-use app\admin\controller\BaseController;
-
-class Index extends BaseController
+use think\Controller;
+class Index extends Controller
 {
     public function index()
     {

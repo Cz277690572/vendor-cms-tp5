@@ -10,6 +10,7 @@ namespace app\admin\controller;
 
 
 use library\Controller;
+use think\facade\Cache;
 use think\facade\Request;
 
 /**
