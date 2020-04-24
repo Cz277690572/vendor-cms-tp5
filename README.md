@@ -4,7 +4,7 @@
 
 * 安装MySQL（version： 5.6+）
 
-* 安装PHP环境(version： 7.1+)
+* 安装PHP环境(version： 5.6+)
 
 * ThinkPHP5的运行环境要求PHP5.6以上。
 
