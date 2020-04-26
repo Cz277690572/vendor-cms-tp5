@@ -5,9 +5,10 @@ use app\api\model\Order as OrderModel;
 use app\api\model\Product;
 use app\api\service\Order as OrderService;
 use app\lib\enum\OrderStatusEnum;
-use think\Log;
+
 use think\Db;
 use think\Exception;
+use think\facade\Log;
 
 class WxNotify extends \Wxpay\WxPayNotify
 {
@@ -44,7 +45,7 @@ class WxNotify extends \Wxpay\WxPayNotify
 			catch (Exception $ex)
 			{
 				Db::rollback();
-				Log::error($ex);
+				Log::record($ex,'error');
 				return false;
 			}
 		}

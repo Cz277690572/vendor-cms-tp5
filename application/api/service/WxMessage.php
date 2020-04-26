@@ -2,6 +2,7 @@
 namespace app\api\service;
 
 use think\Exception;
+use think\facade\Log;
 
 class WxMessage
 {
@@ -40,7 +41,7 @@ class WxMessage
 			return true;
 		} else {
 			throw new Exception("E模板信息发送失败, " . $result['errmsg']);
-			
+            Log::record("E模板信息发送失败, " . $result['errmsg'],'error');
 		}
 	}
 }
