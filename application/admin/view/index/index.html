@@ -30,8 +30,8 @@
     <!-- 头部区域 开始 -->
     <div class="layui-header notselect">
         <a href="#"
-           class="layui-logo layui-elip">Vendor<sup
-                class="padding-left-5">v1.0</sup></a>
+           class="layui-logo layui-elip">{$appName|default=''}<sup
+                class="padding-left-5">{$appVersion|default=''}</sup></a>
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item" lay-unselect>
                 <a class="text-center" title="侧边伸缩" data-target-menu-type>
@@ -130,7 +130,7 @@
                     <dl class="layui-nav-child">
                         <dd><a data-target-tips="主题列表" data-open="admin/theme/index"
                                data-menu-node="m-1-50-1"><span
-                                class="nav-icon padding-left-5 layui-icon layui-icon-set"></span><span
+                                class="nav-icon padding-left-5 layui-icon layui-icon-star-fill"></span><span
                                 class="nav-text padding-left-5">主题列表</span></a></dd>
                     </dl>
                 </li>
@@ -140,9 +140,14 @@
                         <span class="nav-icon layui-hide layui-icon layui-icon-triangle-d"></span>
                         <span class="nav-text padding-left-5">系统管理</span><span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a data-target-tips="第三方账号管理" data-open="admin/third_app/index.html" data-menu-node="m-1-60-1">
+                        <dd><a data-target-tips="应用账号管理" data-open="admin/third_app/index.html" data-menu-node="m-1-60-1">
                             <span class="nav-icon padding-left-5 layui-icon layui-icon-username"></span>
-                            <span class="nav-text padding-left-5">第三方账号管理</span></a></dd>
+                            <span class="nav-text padding-left-5">应用账号管理</span></a></dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd><a data-target-tips="关于我们" data-open="admin/about/index.html" data-menu-node="m-1-60-2">
+                            <span class="nav-icon padding-left-5 layui-icon layui-icon-about"></span>
+                            <span class="nav-text padding-left-5">关于我们</span></a></dd>
                     </dl>
                 </li>
                 <span class="layui-nav-bar"></span></ul>

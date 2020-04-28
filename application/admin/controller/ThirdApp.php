@@ -21,7 +21,7 @@ class ThirdApp extends BaseController
     protected $table = 'third_app';
     public function index()
     {
-        $this->title = '第三方账号管理';
+        $this->title = '应用账号管理';
         $query = $this->_query($this->table)->like('app_id');
         $query->timeBetween('update_time')->order('id desc')->page();
     }
