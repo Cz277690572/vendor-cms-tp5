@@ -10,6 +10,7 @@
 namespace app\admin\controller;
 
 
+use app\api\service\Token as TokenService;
 use think\Db;
 
 class ThirdApp extends BaseController
@@ -22,7 +23,7 @@ class ThirdApp extends BaseController
     public function index()
     {
         $this->title = '应用账号管理';
-        $query = $this->_query($this->table)->like('app_id');
+        $query = $this->_query($this->table)->where(['delete_time' => null])->like('app_id');
         $query->timeBetween('update_time')->order('id desc')->page();
     }
 
@@ -53,6 +54,11 @@ class ThirdApp extends BaseController
         if (in_array('1', explode(',', $this->request->post('id')))) {
             $this->error('系统超级账号禁止删除！');
         }
-        $this->_delete($this->table);
+        // 自己不能删除自己
+        $id = TokenService::getCurrentUid();
+        if($id == $this->request->post('id')){
+            $this->error('不能删除自己！');
+        }
+        $this->_save($this->table, ['delete_time' => time()]);
     }
 }
