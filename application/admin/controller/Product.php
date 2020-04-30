@@ -6,7 +6,7 @@ namespace app\admin\controller;
 
 use library\tools\Data;
 use think\Db;
-
+use think\exception;
 class Product extends BaseController
 {
     protected $table = 'product';
@@ -40,7 +40,7 @@ class Product extends BaseController
 
     public function add()
     {
-        $this->isAddMode = '1';
+        $this->isAddMode = 1;
         return $this->_form($this->table, 'form');
     }
 
@@ -51,7 +51,7 @@ class Product extends BaseController
     public function edit()
     {
         $this->title = '编辑商品信息';
-        $this->isAddMode = '0';
+        $this->isAddMode = 0;
         return $this->_form($this->table, 'form');
     }
 
@@ -138,86 +138,85 @@ class Product extends BaseController
                 'main_img_url.require' => '商品主图必须上传！',
             ]);
 
-            $data['update_time'] = $time;
-            // 商品主图先删除后保存
-            if(isset($data['img_id'])){
-                Db::table('image')->where('id','=',$data['img_id'])->delete();
-            }
-
-            if(!empty($data['main_img_url'])){
-                $mainImgData = array();
-                $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
-                $mainImgData['url']  = substr($data['main_img_url'], strpos($data['main_img_url'],config('setting.upload_path'))+7);
-                $mainImgData['from'] = config('setting.img_form_local');
-                $mainImgData['update_time'] = $time;
-                $mainImgId = Db::name('image')->insertGetId($mainImgData);
-                $data['main_img_url'] = $mainImgData['url'];
-                $data['img_id'] = $mainImgId;
-            }
-
-            // 商品详情图片先删除后保存，硬删除不影响前端已购买的商品图片展示
-            $proImglist = Db::table('product_image')->where('product_id', $data['id'])->select();
-            if($proImglist){
-                $delByImgIds = array_column($proImglist,'img_id');
-                Db::table('image')->delete($delByImgIds);
-                Db::table('product_image')->where('product_id','=',$data['id'])->delete();
-                unset($delByImgIds);
-                unset($proImglist);
-            }
-            if(!empty($data['detail_image'])) {
-                $images = explode('|',$data['detail_image']);
-                $productImageData = array();
-                foreach ($images as $k => $img){
-                    $imageData['url']         = substr($img, strpos($img,config('setting.upload_path'))+7);;
-                    $imageData['from']        = config('setting.img_form_local');
-                    $imageData['update_time'] = $time;
-                    $imageId = Db::name('image')->insertGetId($imageData);
-
-                    $productImageData[$k]['img_id']     = $imageId;
-                    $productImageData[$k]['order']      = $k;
-                    $productImageData[$k]['product_id'] = $data['id'];
+            // 启动事务
+            Db::startTrans();
+            try {
+                $data['update_time'] = $time;
+                // 商品主图先删除后保存
+                if (isset($data['img_id'])) {
+                    Db::name('image')->where('id', '=', $data['img_id'])->delete();
                 }
-                Db::name('product_image')->insertAll($productImageData);
-                unset($images);
-                unset($imageData);
-                unset($productImageData);
-            }
 
-            // 商品参数说明先删除后保存，硬删除不影响前端正常展示
-            Db::table('product_property')->where('product_id', '=', $data['id'])->delete();
-            if(!empty($data['product_property'])){
-                $data['product_property'] = rtrim($data['product_property'],';');
-                $properties = explode(';',$data['product_property']);
-                $propertyArr = array();
-                foreach ($properties as $k => $property){
-                    $temp = explode(':',$property);
-                    $propertyArr[$k]['name'] = $temp[0];
-                    $propertyArr[$k]['detail'] = isset($temp[1]) ? $temp[1] : '';
-                    $propertyArr[$k]['product_id'] = $data['id'];
-                    $propertyArr[$k]['update_time'] = $time;
+                if (!empty($data['main_img_url'])) {
+                    $mainImgData = array();
+                    $mainImgData['url'] = substr($data['main_img_url'], strpos($data['main_img_url'], config('setting.upload_path')) + 7);
+                    $mainImgData['url'] = substr($data['main_img_url'], strpos($data['main_img_url'], config('setting.upload_path')) + 7);
+                    $mainImgData['from'] = config('setting.img_form_local');
+                    $mainImgData['update_time'] = $time;
+                    $mainImgId = Db::name('image')->insertGetId($mainImgData);
+                    $data['main_img_url'] = $mainImgData['url'];
+                    $data['img_id'] = $mainImgId;
                 }
-                Db::name('product_property')->insertAll($propertyArr);
-                unset($properties);
-                unset($temp);
-                unset($propertyArr);
-            }
-            unset($data['detail_image']);
-            unset($data['product_property']);
-        }
-    }
 
-    /**
-     * 表单结果处理
-     * @param boolean $result
-     */
-    protected function _form_result($result)
-    {
-        if ($this->request->isPost()) {
-            $this->success('商品编辑成功！', 'javascript:history.back()');
+                // 商品详情图片先删除后保存，硬删除不影响前端已购买的商品图片展示
+                $proImglist = Db::name('product_image')->where('product_id', $data['id'])->select();
+                if ($proImglist) {
+                    $delByImgIds = array_column($proImglist, 'img_id');
+                    Db::name('image')->delete($delByImgIds);
+                    Db::name('product_image')->where('product_id', '=', $data['id'])->delete();
+                    unset($delByImgIds);
+                    unset($proImglist);
+                }
+                if (!empty($data['detail_image'])) {
+                    $images = explode('|', $data['detail_image']);
+                    $productImageData = array();
+                    foreach ($images as $k => $img) {
+                        $imageData['url'] = substr($img, strpos($img, config('setting.upload_path')) + 7);;
+                        $imageData['from'] = config('setting.img_form_local');
+                        $imageData['update_time'] = $time;
+                        $imageId = Db::name('image')->insertGetId($imageData);
+
+                        $productImageData[$k]['img_id'] = $imageId;
+                        $productImageData[$k]['order'] = $k;
+                        $productImageData[$k]['product_id'] = $data['id'];
+                    }
+                    Db::name('product_image')->insertAll($productImageData);
+                    unset($images);
+                    unset($imageData);
+                    unset($productImageData);
+                }
+
+                // 商品参数说明先删除后保存，硬删除不影响前端正常展示
+                Db::table('product_property')->where('product_id', '=', $data['id'])->delete();
+                if (!empty($data['product_property'])) {
+                    $data['product_property'] = rtrim($data['product_property'], ';');
+                    $properties = explode(';', $data['product_property']);
+                    $propertyArr = array();
+                    foreach ($properties as $k => $property) {
+                        $temp = explode(':', $property);
+                        $propertyArr[$k]['name'] = $temp[0];
+                        $propertyArr[$k]['detail'] = isset($temp[1]) ? $temp[1] : '';
+                        $propertyArr[$k]['product_id'] = $data['id'];
+                        $propertyArr[$k]['update_time'] = $time;
+                    }
+                    Db::name('product_property')->insertAll($propertyArr);
+                    unset($properties);
+                    unset($temp);
+                    unset($propertyArr);
+                }
+                unset($data['detail_image']);
+                unset($data['product_property']);
+                Db::name('product')->where('id',$data['id'])->update($data);
+
+                // 提交事务
+                Db::commit();
+                $this->success('保存成功！', 'javascript:history.back()');
+            } catch (exception $e) {
+                // 回滚事务
+                Db::rollback();
+                $this->error('保存失败！');
+            }
         }
-//        if ($result && $this->request->isPost()) {
-//            $this->success('商品编辑成功！', 'javascript:history.back()');
-//        }
     }
 
 

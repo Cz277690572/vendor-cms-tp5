@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>日惠优品</title>
-    <link rel="shortcut icon" href="/static/login/imgs/favicon.ico"/>
+    <title>{$title|default=''}</title>
+    <link rel="shortcut icon" href="{$siteIcon|default=''}"/>
     <link href="/static/login/css/login/login.css" type="text/css" rel="stylesheet"/>
     <script src="/static/login/js/jquery-1.8.2.min.js" type="application/javascript"></script>
     <script src="/static/login/js/common.js" type="application/javascript"></script>
@@ -15,11 +15,11 @@
         <div class="login-box">
             <div class="login-title">
                 <div class="company-name">
-                    <img src="/static/login/imgs/logo.png">
-                    <span>日惠优品</span>
+                    <img src="{$siteLogo|default=''}">
+                    <span>{$title|default=''}</span>
                 </div>
                 <div class="systme-name">
-                    <span>Snack Petty Vendor</span>
+                    <span>{$appName|default=''}{$appVersion|default=''}</span>
                 </div>
             </div>
             <div class="login-form">

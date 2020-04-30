@@ -1,0 +1,116 @@
+{extend name="main"}
+
+{block name="button"}
+<a class="layui-btn layui-btn-sm layui-btn-primary" data-open="{:url('edit')}">修改</a>
+{/block}
+
+{block name="content"}
+
+
+<div class="think-box-shadow padding-40 padding-top-30 padding-bottom-20 margin-bottom-15">
+    <div class="layui-form-item">
+        <div class="color-green font-w7">网站名称 Website</div>
+        <label class="relative block">
+            <input readonly value="{$siteData.site_name|default=''}" class="layui-input layui-bg-gray">
+            <a data-copy="{$siteData.site_name|default=''}" class="fa fa-copy input-right-icon"></a>
+        </label>
+        <div class="help-block">网站名称，将显示在浏览器的标签上</div>
+    </div>
+    <div class="layui-form-item">
+        <div class="color-green font-w7">网站图标 Icon</div>
+        <label class="relative block">
+            <img data-tips-image src="{$siteData.site_icon|default=''}" style="width: 100px;height: 100px;">
+        </label>
+        <div class="help-block">网站图标，将显示在浏览器的标签上</div>
+    </div>
+    <div class="layui-form-item">
+        <div class="color-green font-w7">网站Logo</div>
+        <label class="relative block">
+            <img data-tips-image src="{$siteData.site_logo|default=''}" style="width: 100px;height: 100px;">
+        </label>
+        <div class="help-block">网站Logo，将显示在小程序的关于我们页面</div>
+    </div>
+    <div class="layui-form-item">
+        <div class="color-green font-w7">网站Logo背景图</div>
+        <label class="relative block">
+            <img data-tips-image src="{$siteData.site_logo_bg|default=''}" style="width: 200px;height: 100px;">
+        </label>
+        <div class="help-block">网站Logo背景图，将显示在小程序的关于我们页面</div>
+    </div>
+
+    <div class="layui-form-item">
+        <span class="color-green font-w7">网站简介</span>
+        <label class="relative block">
+            <input readonly value="{$siteData.site_intro|default=''}" placeholder="请输入网站简介" class="layui-input layui-bg-gray">
+            <a data-copy="{$siteData.site_intro|default=''}" class="fa fa-copy input-right-icon"></a>
+        </label>
+        <div class="help-block">网站简介，将显示在小程序的关于我们页面</div>
+    </div>
+
+    <div class="layui-form-item">
+        <span class="color-green font-w7">联系栏位1描述</span>
+        <label class="relative block">
+            <input readonly value="{$siteData.contact_way_a_title|default=''}" placeholder="请输入联系栏位一描述" class="layui-input layui-bg-gray">
+            <a data-copy="{$siteData.contact_way_a_title|default=''}" class="fa fa-copy input-right-icon"></a>
+        </label>
+        <div class="help-block">联系栏位1描述，将显示在小程序的关于我们页面</div>
+    </div>
+
+    <div class="layui-form-item">
+        <span class="color-green font-w7">联系栏位1图片</span>
+        <label class="relative block">
+            <img data-tips-image src="{$siteData.contact_way_a_img|default=''}" style="width: 100px;height: 100px;">
+        </label>
+        <div class="help-block">联系栏位1图片，将显示在小程序的关于我们页面</div>
+    </div>
+
+    <div class="layui-form-item">
+        <span class="color-green font-w7">联系栏位2描述</span>
+        <label class="relative block">
+            <input readonly value="{$siteData.contact_way_b_title|default=''}" placeholder="请输入联系栏位二描述" class="layui-input layui-bg-gray">
+            <a data-copy="{$siteData.contact_way_b_title|default=''}" class="fa fa-copy input-right-icon"></a>
+        </label>
+        <div class="help-block">联系栏位2描述，将显示在小程序的关于我们页面</div>
+    </div>
+    <div class="layui-form-item">
+        <span class="color-green font-w7">联系栏位2图片</span>
+        <label class="relative block">
+            <img data-tips-image src="{$siteData.contact_way_b_img|default=''}" style="width: 100px;height: 100px;">
+        </label>
+        <div class="help-block">联系栏位2图片，将显示在小程序的关于我们页面</div>
+    </div>
+</div>
+
+<div class="think-box-shadow padding-40 padding-top-30 padding-bottom-30">
+    <table class="layui-table" lay-even>
+        <caption class="color-green font-w7 text-left">系统信息 System Information</caption>
+        <tbody>
+        <tr>
+            <td>核心框架</td>
+            <td>ThinkPHP Version {$app->version()}</td>
+        </tr>
+        <tr>
+            <td>管理程序</td>
+            <td>ThinkAdmin Version 5.1.*-dev</td>
+        </tr>
+        <tr>
+            <td>服务器信息</td>
+            <td>{:php_uname()}</td>
+        </tr>
+        <tr>
+            <td>服务器软件</td>
+            <td>{$request->server('SERVER_SOFTWARE',php_sapi_name())}</td>
+        </tr>
+        <tr>
+            <td>PHP 版本</td>
+            <td>PHP Version {$Think.const.PHP_VERSION}</td>
+        </tr>
+        <tr>
+            <td>MySQL 版本</td>
+            <td>MySQL Version 5.7.29</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{/block}

@@ -1,0 +1,129 @@
+{extend name='main'}
+
+{block name="content"}
+<form onsubmit="return false;" id="SiteForm" data-auto="true" method="post" class='layui-form layui-card' autocomplete="off">
+
+    <div class="layui-card-body padding-left-40">
+
+        <div class="layui-form-item layui-row layui-col-space10">
+            <label class="layui-col-xs4 relative block">
+                <span class="color-green font-w7">网站名称 Website</span>
+                <input name="site_name" required placeholder="请输入网站名称" value="{$siteData.site_name|default=''}" class="layui-input">
+                <span class="help-block">网站名称将显示在浏览器的标签上</span>
+            </label>
+            <label class="layui-col-xs4 relative block">
+                <span class="color-green font-w7">管理程序名称 Name</span>
+                <input name="app_name" required placeholder="请输入管理程序名称" value="{$siteData.app_name|default=''}" class="layui-input">
+                <span class="help-block">管理程序名称显示在后台左上标题处</span>
+            </label>
+            <label class="layui-col-xs4 relative block">
+                <span class="color-green font-w7">管理程序版本 Version</span>
+                <input name="app_version" placeholder="请输入程序版本" value="{$siteData.app_version|default=''}" class="layui-input">
+                <span class="help-block">管理程序版本显示在后台左上标题处</span>
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-col-xs2 block">
+                <p class="color-green font-w7">网站图标 Icon</p>
+                <input required name="site_icon" type="hidden" value="{$siteData.site_icon|default=''}">
+                <script>$('[name="site_icon"]').uploadOneImage()</script>
+            </label>
+            <label class="layui-col-xs12 block">
+                <p class="help-block">建议上传 Icon 图标的尺寸为 128x128 <a href="http://www.favicon-icon-generator.com" target="_blank">ICON在线制作</a></p>
+            </label>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-col-xs2 block">
+                <p class="color-green font-w7">网站Logo</p>
+                <input required name="site_logo" type="hidden" value="{$siteData.site_logo|default=''}">
+                <script>$('[name="site_logo"]').uploadOneImage()</script>
+            </label>
+            <label class="layui-col-xs12 block">
+                <p class="help-block">建议上传 Logo 图的尺寸为 128x128</p>
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-col-xs2 block">
+                <p class="color-green font-w7">网站Logo背景图</p>
+                <input required name="site_logo_bg" type="hidden" value="{$siteData.site_logo_bg|default=''}">
+                <script>$('[name="site_logo_bg"]').uploadOneImage()</script>
+            </label>
+            <label class="layui-col-xs12 block">
+                <p class="help-block">建议上传 Logo背景 图的尺寸为 375x100</p>
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <label class="relative block">
+                <span class="color-green font-w7">网站简介 Intro</span>
+                <input name="site_intro" placeholder="请输入公网安备号" value="{$siteData.site_intro|default=''}" class="layui-input">
+            </label>
+            <p class="help-block">网站简介，将显示在小程序的关于我们页面</p>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="relative block">
+                <span class="color-green font-w7">联系栏位1描述</span>
+                <input name="contact_way_a_title" placeholder="请输入联系栏位1描述" value="{$siteData.contact_way_a_title|default=''}" class="layui-input">
+            </label>
+            <p class="help-block">联系栏位1描述，将显示在小程序的关于我们页面</p>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-col-xs2 block">
+                <p class="color-green font-w7">联系栏位1图片</p>
+                <input name="contact_way_a_img" type="hidden" value="{$siteData.contact_way_a_img|default=''}">
+                <script>$('[name="contact_way_a_img"]').uploadOneImage()</script>
+            </label>
+            <label class="layui-col-xs12 block">
+                <p class="help-block">联系栏位1图片，将显示在小程序的关于我们页面</p>
+            </label>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="relative block">
+                <span class="color-green font-w7">联系栏位2描述</span>
+                <input name="contact_way_b_title" placeholder="请输入联系栏位2描述" value="{$siteData.contact_way_b_title|default=''}" class="layui-input">
+            </label>
+            <p class="help-block">联系栏位2描述，将显示在小程序的关于我们页面</p>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-col-xs2 block">
+                <p class="color-green font-w7">联系栏位2图片</p>
+                <input name="contact_way_b_img" type="hidden" value="{$siteData.contact_way_b_img|default=''}">
+                <script>$('[name="contact_way_b_img"]').uploadOneImage()</script>
+            </label>
+            <label class="layui-col-xs12 block">
+                <p class="help-block">联系栏位2图片，将显示在小程序的关于我们页面</p>
+            </label>
+        </div>
+
+        <div class="hr-line-dashed"></div>
+
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" type="submit">保存配置</button>
+            <button class="layui-btn layui-btn-danger" ng-click="hsitoryBack()" type="button">取消修改</button>
+        </div>
+    </div>
+
+</form>
+{/block}
+
+{block name='script'}
+<script>
+    window.form.render();
+    require(['angular'],function () {
+        var app = angular.module("SiteForm", []).run(callback);
+        angular.bootstrap(document.getElementById(app.name), [app.name]);
+        function callback($rootScope) {
+            $rootScope.isAddMode = parseInt('{$isAddMode|default=0}');
+            // 返回商品列表
+            $rootScope.hsitoryBack = function () {
+                $.msg.confirm('确定要取消修改吗？', function (index) {
+                    history.back(), $.msg.close(index);
+                });
+            };
+        }
+    })
+</script>
+{/block}

@@ -1,34 +1,21 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地mysql
+ Source Server         : windows-Localhost
  Source Server Type    : MySQL
- Source Server Version : 100411
+ Source Server Version : 100138
  Source Host           : 127.0.0.1:3306
  Source Schema         : vendor
 
  Target Server Type    : MySQL
- Target Server Version : 100411
+ Target Server Version : 100138
  File Encoding         : 65001
 
- Date: 20/04/2020 00:33:30
+ Date: 30/04/2020 17:23:51
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for system_config
--- ----------------------------
-DROP TABLE IF EXISTS `system_config`;
-CREATE TABLE `system_config`  (
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '分类',
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '配置名',
-  `value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '配置值',
-  INDEX `type`(`type`) USING BTREE,
-  INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-配置';
-
 
 -- ----------------------------
 -- Table structure for banner
@@ -72,7 +59,7 @@ INSERT INTO `banner_item` VALUES (1, 65, '6', 1, 1, 0, NULL, 1, NULL);
 INSERT INTO `banner_item` VALUES (2, 2, '25', 1, 1, 0, NULL, 1, NULL);
 INSERT INTO `banner_item` VALUES (3, 3, '11', 1, 1, 0, NULL, 1, NULL);
 INSERT INTO `banner_item` VALUES (5, 1, '10', 1, 1, 0, NULL, 1, 1586704256);
-INSERT INTO `banner_item` VALUES (6866002306, 166, '17', 1, 0, 0, NULL, 1, 1586601606);
+INSERT INTO `banner_item` VALUES (6866002306, 166, '17', 1, 0, 0, 1588237281, 1, 1588237281);
 
 -- ----------------------------
 -- Table structure for category
@@ -105,7 +92,7 @@ INSERT INTO `category` VALUES (12, 'ffff', 73, 1, 0, 1585673994, 'gggg', 1585673
 INSERT INTO `category` VALUES (13, 'ggg', 74, 1, 1, 1585673985, '', 1585673185);
 INSERT INTO `category` VALUES (14, '111', 75, 1, 0, 1585673990, '', 1585673198);
 INSERT INTO `category` VALUES (15, '頂頂頂頂', 76, 1, 1, 1585755304, '', 1585755181);
-INSERT INTO `category` VALUES (16, 'test111', 139, 0, 11, NULL, 'ddd', 1586608508);
+INSERT INTO `category` VALUES (16, 'test111', 139, 0, 11, 1588237270, 'ddd', 1586608508);
 
 -- ----------------------------
 -- Table structure for express_company
@@ -228,7 +215,7 @@ CREATE TABLE `image`  (
   `delete_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 192 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '图片总表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '图片总表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of image
@@ -243,9 +230,9 @@ INSERT INTO `image` VALUES (7, '/category-fry-a.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (8, '/a4d604d4cb305851/b96a161440e4a640.png', 1, NULL, 1585925065);
 INSERT INTO `image` VALUES (9, '/category-rice.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (14, '/product-rice@6.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (16, '/ff75da8d60a412fb/441fcc78976e3a2a.png', 1, NULL, 1587210454);
-INSERT INTO `image` VALUES (17, '/2@theme.png', 1, NULL, 1587210428);
-INSERT INTO `image` VALUES (18, '/3@theme.png', 1, NULL, 1586607589);
+INSERT INTO `image` VALUES (16, '/ff75da8d60a412fb/441fcc78976e3a2a.png', 1, NULL, 1587953008);
+INSERT INTO `image` VALUES (17, '/2@theme.png', 1, NULL, 1587898328);
+INSERT INTO `image` VALUES (18, '/3@theme.png', 1, NULL, 1588155698);
 INSERT INTO `image` VALUES (19, '/detail-1@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (20, '/detail-2@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (21, '/detail-3@1-dryfruit.png', 1, NULL, NULL);
@@ -269,8 +256,8 @@ INSERT INTO `image` VALUES (45, '/product-fry@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (46, '/product-fry@3.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (47, '/product-tea@2.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (48, '/product-tea@3.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (49, '/1@theme-head.png', 1, NULL, 1587210454);
-INSERT INTO `image` VALUES (50, '/652cb7a7217aa9b1/9ea7c600f1a323c9.png', 1, NULL, 1587210428);
+INSERT INTO `image` VALUES (49, '/1@theme-head.png', 1, NULL, 1587953008);
+INSERT INTO `image` VALUES (50, '/652cb7a7217aa9b1/9ea7c600f1a323c9.png', 1, NULL, 1587898328);
 INSERT INTO `image` VALUES (51, '/3@theme-head.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (52, '/product-cake@1.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (53, '/product-cake@2.png', 1, NULL, NULL);
@@ -286,16 +273,15 @@ INSERT INTO `image` VALUES (63, '/detail-13@1-dryfruit.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (65, '/banner-4a.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (66, '/product-vg@4.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (67, '/product-vg@5.png', 1, NULL, NULL);
-INSERT INTO `image` VALUES (69, '/product-vg@3.png', 1, NULL, NULL);
 INSERT INTO `image` VALUES (71, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585672873);
 INSERT INTO `image` VALUES (72, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585672925);
 INSERT INTO `image` VALUES (73, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585673026);
 INSERT INTO `image` VALUES (74, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585673185);
 INSERT INTO `image` VALUES (75, '/49eacdbb3bbf8383/85e9d9befaf802ba.jpg', 1, NULL, 1585673198);
-INSERT INTO `image` VALUES (139, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, NULL, 1586608508);
+INSERT INTO `image` VALUES (139, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 1588237270, 1586608508);
 INSERT INTO `image` VALUES (161, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 1587210485, 1585937785);
 INSERT INTO `image` VALUES (162, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1587210485, 1585937785);
-INSERT INTO `image` VALUES (166, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, NULL, 1586601606);
+INSERT INTO `image` VALUES (166, '/5037bffcdf09bc7c/b5261a08189ea4be.png', 1, 1588237281, 1588237281);
 INSERT INTO `image` VALUES (168, '/product-dryfruit@7.png', 1, NULL, 1586607214);
 INSERT INTO `image` VALUES (170, '/product-dryfruit@1.png', 1, NULL, 1586607454);
 INSERT INTO `image` VALUES (174, '/92e953fad71f84b6/7c463eeddd5606ee.png', 1, 1587210480, 1586607786);
@@ -305,6 +291,8 @@ INSERT INTO `image` VALUES (186, '/product-vg@2.png', 1, NULL, 1586673207);
 INSERT INTO `image` VALUES (187, '/product-dryfruit@2.png', 1, NULL, 1587233948);
 INSERT INTO `image` VALUES (188, '/product-tea@1.png', 1, NULL, 1587235718);
 INSERT INTO `image` VALUES (191, '/product-dryfruit@5.png', 1, NULL, 1587236399);
+INSERT INTO `image` VALUES (198, '/product-vg@3.png', 1, NULL, 1588153171);
+INSERT INTO `image` VALUES (199, '/43d42e4d0789ac30/7e043290147b7dc6.png', 1, NULL, 1588153171);
 
 -- ----------------------------
 -- Table structure for order
@@ -334,7 +322,7 @@ CREATE TABLE `order`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `order_no`(`order_no`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 564 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 565 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order
@@ -359,11 +347,12 @@ INSERT INTO `order` VALUES (555, 'D419352200962244', 58, NULL, 1587235220, 0.01,
 INSERT INTO `order` VALUES (556, 'D419352861092919', 58, NULL, 1587235286, 0.01, 1, 'http://vendor.cn/upload/product-rice@1.png', '素米 327克', 1, 1587235286, '[{\"id\":3,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7d20\\u7c73 327\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-rice@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 INSERT INTO `order` VALUES (557, 'D419356411931441', 58, NULL, 1587235641, 0.01, 1, 'http://vendor.cn/upload/product-tea@1.png', '红袖枸杞 6克*3袋', 1, 1587235641, '[{\"id\":4,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u7ea2\\u8896\\u67b8\\u675e 6\\u514b*3\\u888b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-tea@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 INSERT INTO `order` VALUES (558, 'D419361798560135', 58, NULL, 1587236179, 0.01, 1, 'http://vendor.cn/upload/product-dryfruit@5.png', '万紫千凤梨 300克', 1, 1587236179, '[{\"id\":10,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u4e07\\u7d2b\\u5343\\u51e4\\u68a8 300\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@5.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
-INSERT INTO `order` VALUES (559, 'D419626228617897', 58, NULL, 1587262622, 0.01, 2, 'http://vendor.cn/upload/product-dryfruit@7.png', '珍奇异果 3个', 1, 1587262622, '[{\"id\":12,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u73cd\\u5947\\u5f02\\u679c 3\\u4e2a\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@7.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (559, 'D419626228617897', 58, NULL, 1587262622, 0.01, 3, 'http://vendor.cn/upload/product-dryfruit@7.png', '珍奇异果 3个', 1, 1587374551, '[{\"id\":12,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u73cd\\u5947\\u5f02\\u679c 3\\u4e2a\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@7.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1587374551}', NULL, 'zhongtong', '中通速递', '111111111111111', 1587374551, 10.00, 10.01);
 INSERT INTO `order` VALUES (560, 'D419948208220863', 58, NULL, 1587294820, 0.08, 1, 'http://vendor.cn/upload/product-cake@2.png', '小红的猪耳朵 120克等', 8, 1587294820, '[{\"id\":8,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u590f\\u65e5\\u8292\\u679c 3\\u4e2a\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@3.png\",\"delete_time\":null,\"status\":1},{\"id\":6,\"haveStock\":true,\"counts\":7,\"price\":\"0.01\",\"name\":\"\\u5c0f\\u7ea2\\u7684\\u732a\\u8033\\u6735 120\\u514b\",\"totalPrice\":0.07,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-cake@2.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.08);
 INSERT INTO `order` VALUES (561, 'D419036495488626', 58, NULL, 1587303649, 0.01, 1, 'http://vendor.cn/upload/product-dryfruit-a@6.png', '贵妃笑 100克', 1, 1587303649, '[{\"id\":11,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u8d35\\u5983\\u7b11 100\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit-a@6.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 INSERT INTO `order` VALUES (562, 'D419115435859913', 58, NULL, 1587311543, 0.01, 1, 'http://vendor.cn/upload/product-fry@1.png', '油炸花生 300克', 1, 1587311543, '[{\"id\":17,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u6cb9\\u70b8\\u82b1\\u751f 300\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@1.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 INSERT INTO `order` VALUES (563, 'D419115949299141', 58, NULL, 1587311594, 0.01, 1, 'http://vendor.cn/upload/product-fry@3.png', '碧水葵花籽 128克', 1, 1587311594, '[{\"id\":19,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u78a7\\u6c34\\u8475\\u82b1\\u7c7d 128\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-fry@3.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
+INSERT INTO `order` VALUES (564, 'D427856715075005', 58, NULL, 1587985671, 0.01, 1, 'http://vendor.cn/upload/product-dryfruit@5.png', '万紫千凤梨 300克', 1, 1587985671, '[{\"id\":10,\"haveStock\":true,\"counts\":1,\"price\":\"0.01\",\"name\":\"\\u4e07\\u7d2b\\u5343\\u51e4\\u68a8 300\\u514b\",\"totalPrice\":0.01,\"main_img_url\":\"http:\\/\\/vendor.cn\\/upload\\/product-dryfruit@5.png\",\"delete_time\":null,\"status\":1}]', '{\"name\":\"levi\",\"mobile\":\"15220501265\",\"province\":\"\\u5e7f\\u4e1c\\u7701\",\"city\":\"\\u6df1\\u5733\\u5e02\",\"country\":\"\\u5b9d\\u5b89\\u533a\",\"detail\":\"\\u65b0\\u5c4b\\u56ed2\\u5df73\\u53f7\",\"update_time\":1586622551}', NULL, NULL, NULL, NULL, NULL, 10.00, 10.01);
 
 -- ----------------------------
 -- Table structure for order_product
@@ -401,6 +390,7 @@ INSERT INTO `order_product` VALUES (546, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (547, 7, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (560, 8, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (558, 10, 1, NULL, NULL);
+INSERT INTO `order_product` VALUES (564, 10, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (561, 11, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (559, 12, 1, NULL, NULL);
 INSERT INTO `order_product` VALUES (562, 17, 1, NULL, NULL);
@@ -448,7 +438,7 @@ INSERT INTO `product` VALUES (12, '珍奇异果 3个', 0.01, 999, NULL, 2, '/pro
 INSERT INTO `product` VALUES (13, '绿豆 125克', 0.01, 999, NULL, 7, '/product-rice@2.png', 1, 1, 0, NULL, NULL, NULL, 41);
 INSERT INTO `product` VALUES (14, '芝麻 50克', 0.01, 999, NULL, 7, '/product-rice@3.png', 1, 1, 0, NULL, NULL, NULL, 42);
 INSERT INTO `product` VALUES (15, '猴头菇 370克', 0.01, 999, NULL, 7, '/product-rice@4.png', 1, 1, 0, NULL, NULL, NULL, 43);
-INSERT INTO `product` VALUES (16, '西红柿 1斤', 0.01, 999, NULL, 3, '/product-vg@3.png', 1, 1, 100, NULL, NULL, NULL, 69);
+INSERT INTO `product` VALUES (16, '西红柿 1斤', 0.01, 999, NULL, 3, '/product-vg@3.png', 1, 1, 100, NULL, 1588153171, '', 198);
 INSERT INTO `product` VALUES (17, '油炸花生 300克', 0.01, 999, NULL, 4, '/product-fry@1.png', 1, 1, 0, NULL, NULL, NULL, 44);
 INSERT INTO `product` VALUES (18, '春泥西瓜子 128克', 0.01, 997, NULL, 4, '/product-fry@2.png', 1, 1, 0, NULL, NULL, NULL, 45);
 INSERT INTO `product` VALUES (19, '碧水葵花籽 128克', 0.01, 999, NULL, 4, '/product-fry@3.png', 1, 1, 0, NULL, NULL, NULL, 46);
@@ -480,7 +470,7 @@ CREATE TABLE `product_image`  (
   `order` int(11) NOT NULL DEFAULT 0 COMMENT '图片排序序号',
   `product_id` bigint(20) NOT NULL COMMENT '商品id，外键',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_image
@@ -499,6 +489,7 @@ INSERT INTO `product_image` VALUES (14, 29, NULL, 10, 11);
 INSERT INTO `product_image` VALUES (18, 62, NULL, 12, 11);
 INSERT INTO `product_image` VALUES (19, 63, NULL, 13, 11);
 INSERT INTO `product_image` VALUES (54, 162, 1587210485, 0, 6859225246);
+INSERT INTO `product_image` VALUES (56, 199, NULL, 0, 16);
 
 -- ----------------------------
 -- Table structure for product_property
@@ -512,7 +503,7 @@ CREATE TABLE `product_property`  (
   `delete_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product_property
@@ -548,6 +539,7 @@ INSERT INTO `product_property` VALUES (85, '保质期', '12个月', 7, NULL, 158
 INSERT INTO `product_property` VALUES (86, '1', '2', 5, NULL, 1587233948);
 INSERT INTO `product_property` VALUES (87, '1', '2', 4, NULL, 1587235718);
 INSERT INTO `product_property` VALUES (90, '1', '2', 10, NULL, 1587236399);
+INSERT INTO `product_property` VALUES (96, '保质期', '3天', 16, NULL, 1588153171);
 
 -- ----------------------------
 -- Table structure for system_config
@@ -564,11 +556,11 @@ CREATE TABLE `system_config`  (
 -- ----------------------------
 -- Records of system_config
 -- ----------------------------
-INSERT INTO `system_config` VALUES ('1', 'app_name', 'ThinkAdmin');
-INSERT INTO `system_config` VALUES ('2', 'site_name', 'ThinkAdmin');
+INSERT INTO `system_config` VALUES ('1', 'app_name', 'SimpleStore');
+INSERT INTO `system_config` VALUES ('2', 'site_name', '日惠优品');
 INSERT INTO `system_config` VALUES ('3', 'app_version', 'v4.1');
-INSERT INTO `system_config` VALUES ('4', 'site_copy', '©版权所有 2014-2018 楚才科技');
-INSERT INTO `system_config` VALUES ('5', 'site_icon', 'http://127.0.0.1:8000/upload/f47b8fe06e38ae99/08e8398da45583b9.png');
+INSERT INTO `system_config` VALUES ('4', 'site_copy', '©版权所有 2019-2020 日惠优品云科技工作室');
+INSERT INTO `system_config` VALUES ('5', 'site_icon', '/f24bcae49c383c6e/83e0d1f1505cca38.png');
 INSERT INTO `system_config` VALUES ('7', 'miitbeian', '粤ICP备16006642号-2');
 INSERT INTO `system_config` VALUES ('8', 'storage_type', 'local');
 INSERT INTO `system_config` VALUES ('9', 'storage_local_exts', 'doc,gif,icon,jpg,mp3,mp4,p12,pem,png,rar');
@@ -612,6 +604,13 @@ INSERT INTO `system_config` VALUES ('70', 'store_title', '测试商城');
 INSERT INTO `system_config` VALUES ('71', 'store_order_wait_time', '0.50');
 INSERT INTO `system_config` VALUES ('72', 'store_order_clear_time', '24.00');
 INSERT INTO `system_config` VALUES ('73', 'store_order_confirm_time', '60.00');
+INSERT INTO `system_config` VALUES ('74', 'site_logo', '/f24bcae49c383c6e/83e0d1f1505cca38.png');
+INSERT INTO `system_config` VALUES ('75', 'site_logo_bg', '/73433d25f9419882/2de149051bf75f3c.png');
+INSERT INTO `system_config` VALUES ('76', 'site_intro', '产品仅作为案例演示，已屏蔽支付系统');
+INSERT INTO `system_config` VALUES ('77', 'contact_way_a_title', '客服咨询微信号：Levi');
+INSERT INTO `system_config` VALUES ('78', 'contact_way_a_img', '/337fe2e699bdd30f/3f8d8affe8c41cad.png');
+INSERT INTO `system_config` VALUES ('79', 'contact_way_b_title', '商务合作微信号：Levi');
+INSERT INTO `system_config` VALUES ('80', 'contact_way_b_img', '/337fe2e699bdd30f/3f8d8affe8c41cad.png');
 
 -- ----------------------------
 -- Table structure for theme
@@ -633,9 +632,9 @@ CREATE TABLE `theme`  (
 -- ----------------------------
 -- Records of theme
 -- ----------------------------
-INSERT INTO `theme` VALUES (1, '专题栏位一', '美味水果世界', 16, 1, 0, NULL, 49, 1587210454);
-INSERT INTO `theme` VALUES (2, '专题栏位二', '新品推荐', 17, 1, 2, NULL, 50, 1587210428);
-INSERT INTO `theme` VALUES (3, '专题栏位三3', '做个干物女11', 18, 1, 3, NULL, 18, 1586607589);
+INSERT INTO `theme` VALUES (1, '专题栏位一', '美味水果世界', 16, 1, 0, NULL, 49, 1587953008);
+INSERT INTO `theme` VALUES (2, '专题栏位二', '新品推荐', 17, 1, 2, NULL, 50, 1587898328);
+INSERT INTO `theme` VALUES (3, '专题栏位三3', '做个干物女11', 18, 1, 3, NULL, 18, 1588155698);
 
 -- ----------------------------
 -- Table structure for theme_product
@@ -679,7 +678,7 @@ CREATE TABLE `third_app`  (
   `app_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '应用app_id',
   `app_secret` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '应用secret',
   `app_description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '应用程序描述',
-  `scope` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '应用权限',
+  `scope` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '32' COMMENT '应用权限',
   `scope_description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限描述',
   `delete_time` int(11) NULL DEFAULT NULL,
   `update_time` int(11) NULL DEFAULT NULL,
@@ -690,7 +689,7 @@ CREATE TABLE `third_app`  (
 -- Records of third_app
 -- ----------------------------
 INSERT INTO `third_app` VALUES (1, 'starcraft', 'e19d5cd5af0378da05f63f891c7467af', 'CMS', '32', 'Super', NULL, NULL);
-INSERT INTO `third_app` VALUES (2, 'test', 'e19d5cd5af0378da05f63f891c7467af', 'abcd1234', '', 'abcd1234', NULL, NULL);
+INSERT INTO `third_app` VALUES (2, 'test', 'e19d5cd5af0378da05f63f891c7467af', 'abcd1234', '32', 'abcd1234', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user
@@ -706,7 +705,7 @@ CREATE TABLE `user`  (
   `update_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `openid`(`openid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user

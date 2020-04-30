@@ -10,7 +10,7 @@ namespace app\admin\controller;
 
 
 use library\Controller;
-use think\facade\Cache;
+use think\Db;
 use think\facade\Request;
 
 /**
@@ -22,7 +22,30 @@ class Login extends Controller
 {
     public function index()
     {
-        return $this->fetch();
+        $siteData   = Db::name('system_config')->where('type','in','1,2,3,5,74')->select();
+        foreach ($siteData as $k => $v){
+            switch ($v['name']){
+                case 'site_name':
+                    $siteName = $v['value'];
+                    break;
+                case 'app_name':
+                    $appName = $v['value'];
+                    break;
+                case 'app_version':
+                    $appVersion = $v['value'];
+                    break;
+                case 'site_icon':
+                    $siteIcon = !empty($v['value']) ? config('setting.img_prefix').$v['value'] : '';
+                    break;
+                case 'site_logo':
+                    $siteLogo = !empty($v['value']) ? config('setting.img_prefix').$v['value'] : '';
+                    break;
+                default:
+                    continue;
+                    break;
+            }
+        }
+        return $this->fetch('index',['title'=>$siteName,'appName'=>$appName,'appVersion'=>$appVersion,'siteIcon'=>$siteIcon,'siteLogo'=>$siteLogo]);
     }
 
     /**

@@ -22,10 +22,6 @@
     /*小程序接口开始*/
     // 获取轮播图信息
     Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner');
-    // 获取快递服务信息
-    Route::get('api/:version/express/service_info', 'api/:version.Express/getServiceInfo');
-    // 获取快递物流信息
-    Route::get('api/:version/express/logistics_info', 'api/:version.Express/getLogisticsInfo');
     // 获取专栏信息
     Route::get('api/:version/theme/by/ids','api/:version.Theme/getSimpleList');
     // 获取专栏里的商品
@@ -61,6 +57,12 @@
     Route::get('api/:version/order/complete', 'api/:version.Order/complete');
     // 定时关闭订单
     Route::get('api/:version/order/close', 'api/:version.Order/close');
+    // 获取快递服务信息
+    Route::get('api/:version/express/service_info', 'api/:version.Express/getServiceInfo');
+    // 获取快递物流信息
+    Route::get('api/:version/express/logistics_info', 'api/:version.Express/getLogisticsInfo');
+    // 获取关于我们信息
+    Route::get('api/:version/config/about_us/type', 'api/:version.Config/getAboutUs');
     /*小程序接口结束*/
 
     /*cms内容管理开始*/
