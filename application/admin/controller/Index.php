@@ -32,7 +32,6 @@ class Index extends BaseController
                     $siteIcon = !empty($vo['value']) ? config('setting.img_prefix').$vo['value'] : '';
                     break;
                 default:
-                    continue;
                     break;
             }
         }

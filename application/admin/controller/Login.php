@@ -40,7 +40,6 @@ class Login extends Controller
                     $siteLogo = !empty($v['value']) ? config('setting.img_prefix').$v['value'] : '';
                     break;
                 default:
-                    continue;
                     break;
             }
         }

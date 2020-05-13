@@ -18,13 +18,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aliyun/aliyun-oss-php-sdk/zipball/053d7ba9e798e4c09b9c5c1edab153d25ea9643a",
                 "reference": "053d7ba9e798e4c09b9c5c1edab153d25ea9643a",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
@@ -65,13 +59,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/d89987163f560ebf9dfa5bb25de9bd9b1a3b2bd8",
                 "reference": "d89987163f560ebf9dfa5bb25de9bd9b1a3b2bd8",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -122,13 +110,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/top-think/framework/zipball/5762858f3d58faafb3a39427f8788884b2927007",
                 "reference": "5762858f3d58faafb3a39427f8788884b2927007",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0",
@@ -179,13 +161,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/top-think/think-installer/zipball/f5400a12c60e513911aef41fe443fa6920952675",
                 "reference": "f5400a12c60e513911aef41fe443fa6920952675",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0"
@@ -226,13 +202,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/zoujingli/ThinkLibrary/zipball/1e9c479645ff1ab6efd4423c7a6903309c2c7097",
                 "reference": "1e9c479645ff1ab6efd4423c7a6903309c2c7097",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "aliyuncs/oss-sdk-php": "^2.3",
@@ -274,5 +244,6 @@
     "platform": {
         "php": ">=5.6.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
