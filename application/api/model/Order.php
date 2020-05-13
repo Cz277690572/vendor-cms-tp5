@@ -6,6 +6,16 @@ class Order extends BaseModel
 	protected $hidden = ['user_id','delete_time','update_time'];
 	protected $autoWriteTimestamp = true;
 
+    // 获取器
+    public function getExpressSendTimeAttr($value)
+    {
+        if (empty($value))
+        {
+            return null;
+        }
+        return date('Y-m-d H:i:s', $value);
+    }
+
 	public function getSnapItemsAttr($value)
 	{
 		if (empty($value)) 
