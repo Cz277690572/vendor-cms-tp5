@@ -119,11 +119,7 @@ class Order extends BaseController
                 $this->error('订单不存在，请检查ID');
             }
 
-            if($vo['status'] == OrderStatusEnum::DELIVERED) {
-                $this->error('已经发货了，不能再发了！');
-            }
-
-            if($vo['status'] != OrderStatusEnum::PAID && $vo['status'] != OrderStatusEnum::PAID_BUT_OUT_OF) {
+            if($vo['status'] != OrderStatusEnum::PAID && $vo['status'] != OrderStatusEnum::DELIVERED) {
                 $this->error('还没付款呢，想干嘛？ 或者你已经更新过订单了，不要再刷了');
             }
 
@@ -176,12 +172,16 @@ class Order extends BaseController
                         ->where(['express_code' => $order['express_company_code']])
                         ->find();
                 $order['express_company_title'] = !empty($express_company['express_title']) ? $express_company['express_title'] : null;
-                $order['express_send_no']       = !empty($data['express_send_no']) ? $data['express_send_no'] : null;
+                $order['express_send_no']       = !empty($data['express_send_no']) ? rtrim($data['express_send_no']) : null;
             }
             $order['express_send_time'] = $time;
             $order['update_time']       = $time;
             $res = Db::name('order')->update($order);
             if($res){
+                // 已经发过货的，不再发送模板消息
+                if($vo['status'] == OrderStatusEnum::DELIVERED) {
+                    $this->success('发货成功！');
+                }
                 // 发送小程序模板消息通知
                 $order = \app\api\model\Order::where('id', '=', $data['id'])
                     ->find();
