@@ -54,6 +54,7 @@ class Order extends BaseController
 		{
 			throw new OrderException();
 		}
+        $orderDetail['express_send_time'] = date('Y-m-d H:i:s',$orderDetail['express_send_time']);
 		return $orderDetail
 			->hidden(['prepay_id']);
 	}
