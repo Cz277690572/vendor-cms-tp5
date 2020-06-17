@@ -43,15 +43,17 @@ class Product extends BaseModel
 
 	public static function getProductDetail($id)
 	{
-		$product = self::with([
+        $product = self::with([
 				'imgs' => function($query){
 					$query->with(['imgUrl'])
 					->order('order','asc');
-				}
+				},
+                'properties' => function($query){
+                    $query->withField('name,detail');
+                },
 			])
-			->with(['properties'])
             ->where(['delete_time'=>null,'status'=>1])
-			->find($id);
-		return $product;
+            ->find($id);
+        return $product;
 	}
 }

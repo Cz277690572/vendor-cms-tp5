@@ -186,8 +186,9 @@ class Order extends BaseController
                 $order = \app\api\model\Order::where('id', '=', $data['id'])
                     ->find();
                 $message = new DeliveryMessage();
-                $message->sendDeliveryMessage($order, '');
-                $this->success('发货成功！');
+                $sendRes = $message->sendDeliveryMessage($order, '');
+                $sendResMsg =  $sendRes ? '小程序模板消息通知成功' : '小程序模板消息通知失败';
+                $this->success('发货成功！'.$sendResMsg);
             }else{
                 $this->error('发货失败！');
             }

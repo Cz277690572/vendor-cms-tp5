@@ -1,5 +1,4 @@
-<?php
-/**
+<?php /**
  * Created by PhpStorm.
  * User: Armin
  * Date: 2020/3/18

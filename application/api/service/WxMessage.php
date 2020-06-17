@@ -40,7 +40,8 @@ class WxMessage
 		if($result['errcode'] == 0) {
 			return true;
 		} else {
-			throw new Exception("E模板信息发送失败, " . $result['errmsg']);
+//			throw new Exception("E模板信息发送失败, " . $result['errmsg']);
+            return false;
             Log::record("E模板信息发送失败, " . $result['errmsg'],'error');
 		}
 	}
