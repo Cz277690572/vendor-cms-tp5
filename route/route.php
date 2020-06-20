@@ -51,8 +51,9 @@
     Route::get('api/:version/order/by_user', 'api/:version.Order/getSummaryByUser');
     // 微信支付预订单
     Route::post('api/:version/pay/pre_order', 'api/:version.Pay/getPreOrder');
-    // 微信回调api的地址
+    // 微信回调api的地址--无效,微信支付回调通知不会进入该接口;无解
     Route::post('api/:version/pay/notify', 'api/:version.Pay/receiveNotify');
+
     // 定时签收订单
     Route::get('api/:version/order/complete', 'api/:version.Order/complete');
     // 定时关闭订单

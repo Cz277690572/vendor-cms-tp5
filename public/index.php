@@ -12,10 +12,13 @@
 // [ 应用入口文件 ]
 namespace think;
 
-// 加载基础文件
+
+use think\facade\Log;
+
 require __DIR__ . '/../thinkphp/base.php';
 
-// 支持事先使用静态方法设置Request对象和Config对象
+$wxData = file_get_contents("php://input");
+Log::record('微信支付回调参数POST'.json_encode($wxData),'error');
 
 // 执行应用并响应
 Container::get('app')->run()->send();

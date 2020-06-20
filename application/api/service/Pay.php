@@ -9,12 +9,13 @@ use app\lib\enum\OrderStatusEnum;
 use think\Exception;
 use think\facade\Env;
 use think\facade\Log;
-
-require_once (Env::get('root_path').'extend/WxPay/WxPayData.php');
+require_once(Env::get('root_path').'extend/WxPay/WxPayData.php');
+require_once(Env::get('root_path').'extend/WxPay/WxPayConfig.php');
 class Pay
 {
 	private $orderID;
 	private $orderNO;
+	private $snapName;
 
 	function __construct($orderID)
 	{
@@ -59,25 +60,25 @@ class Pay
 		}
 		$wxOrderData = new \WxPay\WxPayUnifiedOrder();
 		$wxOrderData->SetOut_trade_no($this->orderNO);
-		$wxOrderData->SetTrade_type('JASPI');
+		$wxOrderData->SetTrade_type('JSAPI');
 		$wxOrderData->SetTotal_fee($payPrice*100);
-		$wxOrderData->SetBody('日惠优品');
+		$wxOrderData->SetBody($this->snapName);
 		$wxOrderData->SetOpenid($openid);
 		$wxOrderData->SetNotify_url(config('secure.pay_back_url'));
-
 		return $this->getPaySignature($wxOrderData);
 	}
 
 	// 发起微信预订单,获取微信服务器返回的参数
 	private function getPaySignature($wxOrderData)
 	{
-		$wxOrder = \WxPay\WxPayApi::unifiedOrder($wxOrderData);
-		if ($wxOrder['return_code'] != 'SUCCESS' ||
-			$wxOrder['result_code'] != 'SUCCESS') 
+        $config = new \WxPay\WxPayConfig();
+        $wxOrder = \WxPay\WxPayApi::unifiedOrder($config, $wxOrderData);
+        $notify_url = $wxOrderData->GetNotify_url();
+        Log::record('获取预支付订单结果:'.'回调地址['.$notify_url.']参数'.json_encode($wxOrder,JSON_UNESCAPED_UNICODE),'wxpay');
+        if ($wxOrder['return_code'] != 'SUCCESS' || $wxOrder['result_code'] != 'SUCCESS')
 		{
-			Log::record($wxOrder,'error');
-			Log::record('获取预支付订单失败','error');
-			throw new OrderException([
+            Log::record("获取预支付订单失败".json_encode($wxOrderData,JSON_UNESCAPED_UNICODE),'wxpay');
+            throw new OrderException([
 				'msg' => "获取预支付订单失败",
 				'code' => 200
 			]);
@@ -92,6 +93,7 @@ class Pay
 	// 生成签名
 	private function sign($wxOrder)
 	{
+        $config       = new \WxPay\WxPayConfig();
 		$jsApiPayData = new \WxPay\WxPayJsApiPay();
 		$jsApiPayData->SetAppid(config('wx.app_id'));
 		$jsApiPayData->SetTimeStamp((string)time());
@@ -102,7 +104,7 @@ class Pay
 		$jsApiPayData->SetPackage('prepay_id='.$wxOrder['prepay_id']);
 		$jsApiPayData->SetSignType('md5');
 
-		$sign = $jsApiPayData->MakeSign();
+		$sign = $jsApiPayData->MakeSign($config);
 		$rawValues = $jsApiPayData->GetValues();
 		$rawValues['paySign'] = $sign;
 
@@ -139,7 +141,8 @@ class Pay
 				'code' => 400
 			]);
 		}
-		$this->orderNO = $order->order_no;
+		$this->orderNO  = $order->order_no;
+		$this->snapName = $order->snap_name;
 		return true;
 	}
 }
