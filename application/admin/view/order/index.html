@@ -32,11 +32,11 @@
             </td>
             <td class='text-left'>{$vo.id|default=''}</td>
             <td class='text-left nowrap'>{$vo.order_no|default=''}</td>
-            <td class='text-left nowrap'>{$vo.user_id|default=''}</td>
-            <td class='text-left nowrap'>{$vo.total_count|default=''}</td>
-            <td class='text-left nowrap'>{$vo.total_price|default=''}</td>
-            <td class='text-left nowrap'>{$vo.express_price|default=''}</td>
-            <td class='text-left nowrap'>{$vo.pay_price|default=''}</td>
+            <td class='text-left'>{$vo.user_id|default=''}</td>
+            <td class='text-left'>{$vo.total_count|default=''}</td>
+            <td class='text-left'>{$vo.total_price|default=''}</td>
+            <td class='text-left'>{$vo.express_price|default=''}</td>
+            <td class='text-left'>{$vo.pay_price|default=''}</td>
             <td class='text-left nowrap'>
                 {eq name='vo.status' value='1'}<span class="layui-badge layui-bg-gray">未支付</span>
                 {elseif $vo.status eq 2}<span class="layui-badge layui-bg-orange">已支付,待发货</span>
@@ -48,9 +48,12 @@
                 <br>
             </td>
             <td class='text-left nowrap'>
-                收货信息：{$vo.snap_address.name|default='--'}<span class="margin-left-5 color-blue">{$vo.snap_address.mobile|default='--'}</span><br>
-                收货地址：{$vo.snap_address.province|default='--'}{$vo.snap_address.city|default='--'}{$vo.snap_address.country|default='--'}<br>{$vo.snap_address.detail|default='--'}<br>
-                物流信息：
+                收货信息:{$vo.snap_address.name|default='--'}<span class="margin-left-5 color-blue">{$vo.snap_address.mobile|default='--'}</span><br>
+                收货地址:{$vo.snap_address.province|default='--'}{$vo.snap_address.city|default='--'}{$vo.snap_address.country|default='--'}<br>
+
+                <Span style=" display :inline-block ;width: 232px;overflow: hidden;textOverflow: ellipsis;whiteSpace: nowrap" title= "{$vo.snap_address.detail|default='--'}" > {$vo.snap_address.detail|default='--'}</Span>
+                <br>
+                物流信息:
                 <!--{notempty name='vo.express_send_no'}-->
                 {eq name='vo.status' value='3'}
                 <span class="layui-badge layui-bg-blue">{$vo.express_company_title|default=''}</span>
@@ -60,11 +63,11 @@
                 {/eq}
                 <!--{/notempty}-->
                 <br>
-                发货时间：{$vo.express_send_time|format_datetime}
+                发货时间:{$vo.express_send_time|format_datetime}
             </td>
             <td class='text-left nowrap'>
-                创建时间：{$vo.update_time|format_datetime}<br>
-                更新时间：{$vo.create_time|format_datetime}
+                创建时间:<br>{$vo.update_time|format_datetime}<br>
+                更新时间:<br>{$vo.create_time|format_datetime}
             </td>
             <td class='text-left nowrap'>
                 <a data-dbclick class="layui-btn layui-btn-sm" data-title="发货" data-modal='{:url("delivery")}?id={$vo.id}'>发 货</a>
