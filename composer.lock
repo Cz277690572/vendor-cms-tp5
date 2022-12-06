@@ -70,12 +70,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Qiniu\\": "src/Qiniu"
-                },
                 "files": [
                     "src/Qiniu/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Qiniu\\": "src/Qiniu"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -100,16 +100,16 @@
         },
         {
             "name": "topthink/framework",
-            "version": "v5.1.39",
+            "version": "v5.1.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/framework.git",
-                "reference": "5762858f3d58faafb3a39427f8788884b2927007"
+                "reference": "ecf1a90d397d821ce2df58f7d47e798c17eba3ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/framework/zipball/5762858f3d58faafb3a39427f8788884b2927007",
-                "reference": "5762858f3d58faafb3a39427f8788884b2927007",
+                "url": "https://api.github.com/repos/top-think/framework/zipball/ecf1a90d397d821ce2df58f7d47e798c17eba3ad",
+                "reference": "ecf1a90d397d821ce2df58f7d47e798c17eba3ad",
                 "shasum": ""
             },
             "require": {
@@ -147,27 +147,27 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2019-11-17T23:22:02+00:00"
+            "time": "2022-10-25T15:04:49+00:00"
         },
         {
             "name": "topthink/think-installer",
-            "version": "v2.0.0",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-installer.git",
-                "reference": "f5400a12c60e513911aef41fe443fa6920952675"
+                "reference": "38ba647706e35d6704b5d370c06f8a160b635f88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-installer/zipball/f5400a12c60e513911aef41fe443fa6920952675",
-                "reference": "f5400a12c60e513911aef41fe443fa6920952675",
+                "url": "https://api.github.com/repos/top-think/think-installer/zipball/38ba647706e35d6704b5d370c06f8a160b635f88",
+                "reference": "38ba647706e35d6704b5d370c06f8a160b635f88",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0"
+                "composer-plugin-api": "^1.0||^2.0"
             },
             "require-dev": {
-                "composer/composer": "1.0.*@dev"
+                "composer/composer": "^1.0||^2.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -188,7 +188,7 @@
                     "email": "448901948@qq.com"
                 }
             ],
-            "time": "2018-05-11T06:45:42+00:00"
+            "time": "2021-01-14T12:12:14+00:00"
         },
         {
             "name": "zoujingli/think-library",
@@ -196,12 +196,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/zoujingli/ThinkLibrary.git",
-                "reference": "1e9c479645ff1ab6efd4423c7a6903309c2c7097"
+                "reference": "6a5c8b7ad40d19664494522dcf9388a48df43447"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zoujingli/ThinkLibrary/zipball/1e9c479645ff1ab6efd4423c7a6903309c2c7097",
-                "reference": "1e9c479645ff1ab6efd4423c7a6903309c2c7097",
+                "url": "https://api.github.com/repos/zoujingli/ThinkLibrary/zipball/6a5c8b7ad40d19664494522dcf9388a48df43447",
+                "reference": "6a5c8b7ad40d19664494522dcf9388a48df43447",
                 "shasum": ""
             },
             "require": {
@@ -211,7 +211,7 @@
                 "ext-iconv": "*",
                 "ext-json": "*",
                 "ext-openssl": "*",
-                "php": ">=5.4",
+                "php": ">=5.5",
                 "qiniu/php-sdk": "^7.2",
                 "topthink/framework": "5.1.*"
             },
@@ -230,7 +230,7 @@
             ],
             "description": "ThinkPHP Basic Development Library",
             "homepage": "http://framework.thinkadmin.top",
-            "time": "2020-04-03T02:39:04+00:00"
+            "time": "2022-04-15T04:04:37+00:00"
         }
     ],
     "packages-dev": [],
